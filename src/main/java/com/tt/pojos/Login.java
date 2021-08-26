@@ -26,18 +26,22 @@ public class Login implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
+    @Size(min = 1, max = 15, message = "{login.full_name.lenErr}")
     private String full_name;
-    @Size(min = 10, max = 50, message = "{login.use_name.lenErr}")
+    @Size(min = 6, max = 15, message = "{login.use_name.lenErr}")
     private String user_name;
-    @Size(min = 10, max = 50, message = "{login.use_password.lenErr}")
+    @Size(min = 6, max = 50, message = "{login.use_password.lenErr}")
     private String user_password;
+    @Size(min = 1, max = 50, message = "{login.email.lenErr}")
     private String email;
     @Size(min = 10, max = 11, message = "{login.phone.lenErr}")
     private String phone;
     @NotNull(message = "{login.user.nullErr}")
-    
     @Transient
+    @Size(min = 1,  message = "{login.file.lenErr}")
     private MultipartFile file;
+    private String image;
+    private String description;
 
     /**
      * @return the Id
@@ -135,5 +139,33 @@ public class Login implements Serializable{
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

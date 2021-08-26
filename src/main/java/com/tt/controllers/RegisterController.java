@@ -4,6 +4,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
 import java.io.IOException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.validation.Valid;
@@ -36,8 +37,10 @@ public class RegisterController {
     public String add(@ModelAttribute(value = "login")@Valid Login login, BindingResult result){
         if(!result.hasErrors()){
         try {
-            this.Cloudinary.uploader().upload(login.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-            
+            Map r  = this.Cloudinary.uploader().upload(login.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            String img= (String) r.get("secure_url");
+            if(img==null)
+                return "register";
             return "redirect:/";
         } catch (IOException ex) {
             System.err.println("==ADD ANH==" + ex.getMessage());
