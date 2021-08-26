@@ -10,7 +10,7 @@
 
     <ul class="navbar-nav">
         <li class="nav-item active">
-            <a class="nav-link" href="/">Trang Chủ</a>
+            <a href="<c:url value="/"/>" class="nav-link" href="/">Trang Chủ</a>
         </li>
         <c:forEach var="cat" items="${logins}">
             <li class="nav-item">

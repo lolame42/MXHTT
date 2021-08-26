@@ -5,6 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="alert alert-success">
+<div class="alert alert-success text-center">
     <strong>MẠNG XÃ HỘI TỪ THIỆN</strong> @ahihi
 </div>

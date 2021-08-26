@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -25,10 +27,14 @@ public class Login implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     private String full_name;
+    @Size(min = 10, max = 50, message = "{login.use_name.lenErr}")
     private String user_name;
+    @Size(min = 10, max = 50, message = "{login.use_password.lenErr}")
     private String user_password;
     private String email;
+    @Size(min = 10, max = 11, message = "{login.phone.lenErr}")
     private String phone;
+    @NotNull(message = "{login.user.nullErr}")
     
     @Transient
     private MultipartFile file;
