@@ -37,8 +37,7 @@ public class Login implements Serializable{
     @Size(min = 10, max = 11, message = "{login.phone.lenErr}")
     private String phone;
     @NotNull(message = "{login.file.lenErr}")
-    @Transient
-    @Size(min = 1,  message = "{login.file.lenErr}")
+    @Transient    
     private MultipartFile file;
     private String image;
     private String description;

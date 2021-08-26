@@ -7,6 +7,10 @@ package com.tt.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.tt.validator.LoginNameValidator;
+import com.tt.validator.WebAppValidator;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,7 +34,12 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.tt.controllers", "com.tt.reponsitory", "com.tt.service"})
+@ComponentScan(basePackages = {
+    "com.tt.controllers",
+    "com.tt.reponsitory",
+    "com.tt.service",
+    "com.tt.validator"
+})
 public class WebApplicationContextConfig implements WebMvcConfigurer {
 
     @Override
@@ -59,6 +68,16 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public Validator getValidator() {
         return validator();
     }
+    @Bean
+    public WebAppValidator loginValidator(){
+        Set<Validator> springValidators= new HashSet<>();
+        springValidators.add(new LoginNameValidator());
+        
+        WebAppValidator v= new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        return v;
+    }
+    
     @Bean
     public LocalValidatorFactoryBean validator(){
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
@@ -90,6 +109,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         ));
         return c;
     }
+    
 
    
 }
