@@ -3,6 +3,7 @@ package com.tt.controllers;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
+import com.tt.service.UserService;
 import com.tt.validator.LoginNameValidator;
 import com.tt.validator.WebAppValidator;
 import java.io.IOException;
@@ -29,33 +30,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RegisterController {
 
     @Autowired
-    private Cloudinary Cloudinary;
+    private WebAppValidator loginValidator;
     @Autowired
-    private WebAppValidator  loginValidator;
-    
+    private UserService userService;
+
     @InitBinder
-    public void initBinder(WebDataBinder binder){
+    public void initBinder(WebDataBinder binder) {
         binder.setValidator(loginValidator);
     }
-    
+
     @GetMapping("register")
-    public String list(Model model){
-    model.addAttribute("login", new Login());
-    
-    return "register";
+    public String list(Model model) {
+        model.addAttribute("login", new Login());
+
+        return "register";
     }
+
     @PostMapping("register")
-    public String add(@ModelAttribute(value = "login")@Valid Login login, BindingResult result){
-        if(!result.hasErrors()){
-        try {
-            Map r  = this.Cloudinary.uploader().upload(login.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-            String img= (String) r.get("secure_url");
-            if(img==null)
-                return "register";
-            return "redirect:/";
-        } catch (IOException ex) {
-            System.err.println("==ADD ANH==" + ex.getMessage());
-        }
+    public String add(Model model, @ModelAttribute(value = "login") @Valid Login login, BindingResult result) {
+        if (result.hasErrors()) {
+        } else {
+            if (this.userService.addOrUpdate(login) == true) {
+                return "redirect:/";
+            } else {
+                model.addAttribute("errMsg", "Đăng ký không thành công");
+            }
         }
         return "register";
     }

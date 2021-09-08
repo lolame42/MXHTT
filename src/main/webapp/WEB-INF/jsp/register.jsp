@@ -12,6 +12,7 @@
 <h1 class="text-center text-danger">Trang upload</h1>
 
 <c:url value="/register" var="action" />
+
 <form:form method="post" action="${action}" modelAttribute="login" enctype="multipart/form-data">
 
     <div class="form-group">

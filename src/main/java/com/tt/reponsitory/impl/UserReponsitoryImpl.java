@@ -58,4 +58,18 @@ public class UserReponsitoryImpl implements UserReponsitory {
         return q.getResultList();
     }
 
+    @Override
+    public boolean addOrUpdate(Login login) {
+        Session session=sessionFactoryBean.getObject().getCurrentSession();
+        try {
+            session.save(login);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Loiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"+e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+        
+    }
+
 }

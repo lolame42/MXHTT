@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "login")
 public class Login implements Serializable{
+    public static final String ADMIN="ROLE_ADMIN";
+    public static final String USER="ROLE_USER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
@@ -41,6 +43,7 @@ public class Login implements Serializable{
     private MultipartFile file;
     private String image;
     private String description;
+    
 
     /**
      * @return the Id
