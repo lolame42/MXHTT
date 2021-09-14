@@ -1,0 +1,101 @@
+body{ background-color: #F5F7F4;}
+.main{
+    margin-bottom: 10%;
+    margin-top: 3%;
+}
+.main {
+border-radius: 4px;
+float: left;
+width: 100%;
+border: 1px solid black;
+background-color: #FFF;
+}
+textarea {
+    width: 100%;
+    height: 142px;
+    color: #000;
+    font-family: Lato;
+    font-size: 20px;
+    padding: 20px;
+    resize:vertical;
+    border: 1px solid #F2F2F2;
+    border: medium none;
+    border-radius: 4px 4px 0 0;
+    background-color: #F5F7F4;
+}
+
+ul {
+float: left;
+list-style: none outside none;
+margin: 0;
+width: auto;
+}
+a{
+    cursor: pointer;
+}
+a:hover {
+background: none repeat scroll 0 0 #606060;
+color: #fff;
+}
+.btn{
+    margin-left: 90%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

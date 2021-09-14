@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-home active">
-                    <a href="<c:url value="/"/>" class="nav-link"><i class="fas fa-home"></i></a>
+                    <a href="<c:url value="/home"/>" class="nav-link"><i class="fas fa-home"></i></a>
                 </li>
                 <li class="nav-au active">
                     <a href="<c:url value="/"/>" class="nav-link"><i class="fas fa-gavel"></i></a>
