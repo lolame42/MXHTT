@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import com.tt.pojos.Login;
-import jdk.nashorn.internal.codegen.types.Type;
 /**
  *
  * @author DAVADO

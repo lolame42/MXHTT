@@ -17,7 +17,9 @@ and open the template in the editor.
      </definition>
      <definition name="login" extends="baseLayout">
          <put-attribute name="title" value="Đăng Nhập"/>
-         <put-attribute name="content" value="/WEB-INF/jsp/login.jsp"/>         
+         <put-attribute name="content" value="/WEB-INF/jsp/login.jsp"/>      
+         <put-attribute name="header" value=""/>
+         <put-attribute name="footer" value=""/>   
      </definition>
      <definition name="finduser" extends="baseLayout">
          <put-attribute name="title" value="Tìm Tài Khoản"/>
@@ -32,6 +34,8 @@ and open the template in the editor.
      <definition name="register" extends="baseLayout">
          <put-attribute name="title" value="Đăng Ký"/>
          <put-attribute name="content" value="/WEB-INF/jsp/register.jsp"/>
+         <put-attribute name="header" value=""/>
+         <put-attribute name="footer" value=""/>
          
      </definition>
      

@@ -26,11 +26,7 @@ public class HomeController {
     @Autowired
     private UserService userService;
     
-    @RequestMapping("/")
-    public String index(Model model){
-        model.addAttribute("logins", this.userService.getUsers());      
-        return "login";
-    }
+    
      @RequestMapping("/home")
     public String home(Model model){
         model.addAttribute("logins", this.userService.getUsers());      

@@ -11,16 +11,6 @@
 
 <!DOCTYPE html>
 <ul>
-    <h1 class="text-center text-danger">Tìm Tài Khoản</h1>
-    <c:url value="/find" var="find"/>
-    <form action="${find}">
-        <div class="row">
-            <div class="col-md-10">
-                <input class="form-control" type="text" name="kw" placeholder="Nhập Tên Muốn Tìm"/>                
-            </div>
-            <div class="col-md-2">
-                <input type="submit" value="Search" class="btn btn-primary"/>
-            </div>
-        </div>
-    </form>       
+
+     
 </ul>

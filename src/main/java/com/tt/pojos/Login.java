@@ -6,6 +6,7 @@
 package com.tt.pojos;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,12 +28,13 @@ public class Login implements Serializable{
     public static final String USER="ROLE_USER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Id")
     private int Id;
     @Size(min = 1, max = 15, message = "{login.full_name.lenErr}")
     private String full_name;
     @Size(min = 6, max = 15, message = "{login.use_name.lenErr}")
     private String user_name;
-    @Size(min = 6, max = 50, message = "{login.use_password.lenErr}")
+    @Size(min = 6, message = "{login.use_password.lenErr}")
     private String user_password;
     @Size(min = 1, max = 50, message = "{login.email.lenErr}")
     private String email;
@@ -43,6 +45,7 @@ public class Login implements Serializable{
     private MultipartFile file;
     private String image;
     private String description;
+    private String userrole;
     
 
     /**
@@ -170,4 +173,23 @@ public class Login implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /**
+     * @return the userrole
+     */
+    public String getUserrole() {
+        return userrole;
+    }
+
+    /**
+     * @param userrole the userrole to set
+     */
+    public void setUserrole(String userrole) {
+        this.userrole = userrole;
+    }
+
+    /**
+     * @return the active
+     */
+    
 }

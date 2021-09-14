@@ -3,6 +3,7 @@ package com.tt.controllers;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
+import com.tt.service.LoginService;
 import com.tt.service.UserService;
 import com.tt.validator.LoginNameValidator;
 import com.tt.validator.WebAppValidator;
@@ -32,11 +33,15 @@ public class RegisterController {
     @Autowired
     private WebAppValidator loginValidator;
     @Autowired
-    private UserService userService;
-
+    private LoginService userDetailsService;
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(loginValidator);
+    }
+    
+    @GetMapping("/")
+    public String login(){
+        return"login";
     }
 
     @GetMapping("register")
@@ -50,7 +55,7 @@ public class RegisterController {
     public String add(Model model, @ModelAttribute(value = "login") @Valid Login login, BindingResult result) {
         if (result.hasErrors()) {
         } else {
-            if (this.userService.addOrUpdate(login) == true) {
+            if (this.userDetailsService.addOrUpdate(login) == true) {
                 return "redirect:/";
             } else {
                 model.addAttribute("errMsg", "Đăng ký không thành công");
