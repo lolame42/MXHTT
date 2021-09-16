@@ -16,5 +16,6 @@ import java.util.List;
 public interface UserService {
     List<Login> getUsers();
     List<Login> getUsers(String kw);
-    
+    List<Login> getUserByUserName(String string);
+   
 }

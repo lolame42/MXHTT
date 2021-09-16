@@ -58,6 +58,25 @@ public class UserReponsitoryImpl implements UserReponsitory {
         return q.getResultList();
     }
 
+    @Override
+    public List<Login> getUserByUserName(String string) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Login> query = builder.createQuery(Login.class);
+        Root root = query.from(Login.class);
+        query = query.select(root);
+        if (!string.isEmpty() && string != null) {
+            Predicate p = builder.like(root.get("user_name").as(String.class),
+                    String.format("%s", string));
+            query=query.where(p);
+
+        }
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+   
     
 
 }

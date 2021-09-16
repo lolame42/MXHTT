@@ -21,8 +21,8 @@
     <div class="image">
         <img src="<c:url value="/images/logo.jpg"/>" alt="logo"/>        
     </div>
-    <div class="container">
-        <h3>MẠNG XÃ HỘI TỪ THIỆN</h3>
+    <div class="formlogin">
+        <h3 class="text-center text-dark"><b>MẠNG XÃ HỘI TỪ THIỆN</b></h3>
         <form method="post" action="${action}">
             <div class="form-group">
                 <label for="user_name"></label>
@@ -33,12 +33,13 @@
                 <input type="password" id="user_password" name="user_password" class="form-control" placeholder="Mật khẩu"/>      
             </div>
             <div class="form-group">
-                <input type="submit" class="login" value="Đăng Nhập"/>
+                <input type="submit" class="login text-white" value="Đăng Nhập"/>
 
             </div>
         </form>
-            
+            <hr />
+            <a href="<c:url value="/register"/>" class="nav-link text-dark text-center">Bạn chưa có tài khoản? <b>Đăng ký ngay!!!</b></a>
          
     </div>
 </div>
-            <a href="<c:url value="/register"/>" class="nav-link text-danger text-center">Bạn chưa có tài khoản, đăng ký ngay !!</a>
+        

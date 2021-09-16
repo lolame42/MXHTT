@@ -36,5 +36,13 @@ public class UserServiceImpl implements UserService{
         return this.userReponsitory.getUsers(kw);
     }
 
+    @Override
+    public List<Login> getUserByUserName(String string) {
+        return this.userReponsitory.getUserByUserName(string);
+    }
+
+    
+    
+
     
 }

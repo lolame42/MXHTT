@@ -30,13 +30,13 @@ public class Login implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
     private int Id;
-    @Size(min = 1, max = 15, message = "{login.full_name.lenErr}")
+    @Size(min = 1, max = 50, message = "{login.full_name.lenErr}")
     private String full_name;
     @Size(min = 6, max = 15, message = "{login.use_name.lenErr}")
     private String user_name;
     @Size(min = 6, message = "{login.use_password.lenErr}")
     private String user_password;
-    @Size(min = 1, max = 50, message = "{login.email.lenErr}")
+    @Size(min = 12, max = 50, message = "{login.email.lenErr}")
     private String email;
     @Size(min = 10, max = 11, message = "{login.phone.lenErr}")
     private String phone;

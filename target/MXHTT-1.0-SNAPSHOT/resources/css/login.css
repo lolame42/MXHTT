@@ -1,5 +1,5 @@
 body{
-    background-color: #F0F8FF;
+    background-color: #F5F7F4;
 }
 .main{
     width:100%;
@@ -7,29 +7,35 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-.container, .image{
-    width: 50%;
-    margin-top:1%;
+.formlogin, .image{
+    width: 44%;
+    margin-left: 2%;
 }
 .image img{
     width: 100%;
+    margin-top: 20%;
 }
-.container{
+.formlogin  {
     background-color: #FFF;
     margin-top: 12%;
+    border: 0.5px black solid;
+    padding:5%;
 }
-h3{
-    text-align: center;
-    color: RED;
-}
-input{
+h3  {font-family: Georgia;}
+.form-control   {
     font-size: 24px;
+    width: 90%;
+    margin-left: 4%;
 }
 .login{
     width: 140px;
     font-size: 22px;
-    margin-left: 35%;
+    margin-left: 33%;
     margin-top: 5%;
-    background-color: blue;
-    color: #FFF;
+    background-color: #86BD3B;
+    opacity: 1;
+}
+.login:hover{
+    opacity: 0.5;
+    background-color: #8FBC8F;
 }
