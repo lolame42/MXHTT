@@ -3,7 +3,6 @@
     Created on : Aug 23, 2021, 5:54:48 PM
     Author     : DAVADO
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -12,11 +11,23 @@
 
 <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
 <div class="main">
-	<form>
-		<textarea placeholder="Hãy viết những gì tuyệt vời nhất ....." ></textarea>
-		<ul>
-                    <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="far fa-image"></i></a></li>
-		</ul>
-		<button type="submit" class="btn btn-primary">Đăng</button>
-	</form>	    
+   <c:url value="/home" var="action" />
+<div class="main">
+    
+    <div class="formregister">
+        <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
+        <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data">
+          
+            <div class="form-group">
+                <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu bản thân"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Đăng" class="btn btn-primary"/>
+            </div>  
+        </form:form>
+    </div>
+</div>
+
+
+
 </div>

@@ -15,5 +15,10 @@ import java.util.List;
 public interface UserReponsitory {
     List<Login> getUsers();
     List<Login> getUsers(String kw);
+    List<Login> getUserByUserName(String string);
+    
+   
+    
+    
     
 }

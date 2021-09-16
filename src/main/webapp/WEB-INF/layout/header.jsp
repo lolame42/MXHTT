@@ -40,8 +40,11 @@
                     </li>
                 </c:if>
                 <c:if test="${pageContext.request.userPrincipal.name!=null}">
+                    
                     <li class="nav-black">
-                        <a href="<c:url value="/home"/>" class="nav-link text-danger">${pageContext.request.userPrincipal.name}</a>
+                         <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
+                        <a href="<c:url value="/home"/>" class="nav-link text-danger"  >${user.full_name}</a>
+                  
                     </li>
                     <li class="nav-item active">
                         <a href="<c:url value="/logout"/>" class="nav-link"><i class="fas fa-sign-out-alt"> Đăng Xuất</i></a>

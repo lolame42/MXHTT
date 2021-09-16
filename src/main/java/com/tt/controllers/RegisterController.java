@@ -3,11 +3,14 @@ package com.tt.controllers;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
+import com.tt.pojos.Status;
 import com.tt.service.LoginService;
 import com.tt.service.UserService;
 import com.tt.validator.LoginNameValidator;
 import com.tt.validator.WebAppValidator;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -34,23 +39,18 @@ public class RegisterController {
     private WebAppValidator loginValidator;
     @Autowired
     private LoginService userDetailsService;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(loginValidator);
-    }
-    
-    @GetMapping("/")
-    public String login(){
-        return"login";
-    }
+    } 
 
     @GetMapping("register")
     public String list(Model model) {
-        model.addAttribute("login", new Login());
-
+        model.addAttribute("login", new Login());      
         return "register";
     }
-
+    
     @PostMapping("register")
     public String add(Model model, @ModelAttribute(value = "login") @Valid Login login, BindingResult result) {
         if (result.hasErrors()) {
