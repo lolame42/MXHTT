@@ -21,6 +21,7 @@
             <div class="form-group">
                 <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu bản thân"/>
             </div>
+            <input type="text" value="Hashtag" data-role="tagsinput" />
             <div class="form-group">
                 <input type="submit" value="Đăng" class="btn btn-primary"/>
             </div>  

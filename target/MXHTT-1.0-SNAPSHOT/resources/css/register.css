@@ -18,7 +18,7 @@ body{
 .formregister  {
     background-color: #FFF;
     margin-top: 7%;
-    border: 0.5px black solid;
+    border-radius: 15px;
     padding:4%;
 }
 h3  {font-family: Georgia;}
@@ -28,6 +28,7 @@ h3  {font-family: Georgia;}
     height: 40px;
     margin-left: 4%;
     margin-top: 2%;
+    border-radius: 20px;
 }
 .alert{
     width: 90%;
@@ -43,8 +44,10 @@ h3  {font-family: Georgia;}
     margin-top: 5%;
     background-color: #86BD3B;
     opacity: 1;
+    border: solid #86BD3B;
 }
 .btn:hover{
     opacity: 0.5;
     background-color: #8FBC8F;
+    border:#86BD3B 1px;
 }

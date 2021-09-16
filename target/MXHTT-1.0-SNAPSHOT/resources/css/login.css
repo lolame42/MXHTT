@@ -18,7 +18,7 @@ body{
 .formlogin  {
     background-color: #FFF;
     margin-top: 12%;
-    border: 0.5px black solid;
+    border-radius: 15px;
     padding:5%;
 }
 h3  {font-family: Georgia;}
@@ -26,14 +26,18 @@ h3  {font-family: Georgia;}
     font-size: 24px;
     width: 90%;
     margin-left: 4%;
+    border-radius: 25px;
 }
 .login{
     width: 140px;
+    height: 40px;
     font-size: 22px;
     margin-left: 33%;
     margin-top: 5%;
     background-color: #86BD3B;
     opacity: 1;
+    border: solid #86BD3B 1px;;
+    border-radius: 5px;
 }
 .login:hover{
     opacity: 0.5;
