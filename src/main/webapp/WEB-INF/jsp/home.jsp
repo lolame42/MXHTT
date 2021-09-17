@@ -22,8 +22,7 @@
                     <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu bản thân"/>
                 </div>
                 <div class="form-group">
-                    <label for="hashtag">hashtag</label>
-                    <form:input type="hashtag" id="hashtag" path="hashtag" cssClass="form-control" placeholder=""/>
+                    <form:input type="hashtag" id="hashtag" path="hashtag" cssClass="form-control" placeholder="Hashtag"/>
                 </div>  
 
                 <div class="form-group">

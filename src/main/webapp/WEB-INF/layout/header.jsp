@@ -14,13 +14,11 @@
         <a class="navbar-brand" href="<c:url value="/home"/>"><i class="fas fa-american-sign-language-interpreting"></i></a>
             <c:url value="/find" var="find"/>
         <form action="${find}">
-            <div class="row">
-                <div class="col-md-10">
-                    <input class="form-control" type="text" name="kw" placeholder="Nhập Tên Muốn Tìm"/>                
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Search" class="btn btn-primary"/>
-                </div>
+            
+            <div class="input-group">
+                <input type="text" class="form-control rounded" name="kw" placeholder="Nhập tên muốn tìm" aria-label="Search"
+                  aria-describedby="search-addon" />
+                <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
             </div>
         </form>      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
