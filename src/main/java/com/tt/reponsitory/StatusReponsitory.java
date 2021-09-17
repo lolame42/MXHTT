@@ -7,6 +7,7 @@ package com.tt.reponsitory;
 
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,7 @@ import com.tt.pojos.Status;
  */
 public interface StatusReponsitory {
     boolean addOrUpdate(Status status);
+    List<Status> getStatus();
+    
+ 
 }

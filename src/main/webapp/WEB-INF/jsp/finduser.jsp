@@ -12,25 +12,31 @@
     <h1 class="text-center text-danger">Những tài khoản gần giống tên bạn tìm</h1>
 
     <div class="row">
-        <c:forEach var="user" items="${user}">
+        <c:forEach var="userfind" items="${userfind}">
             <div class="card col-md-12 bg-info" style="width:400px">
                 <div class="card-body">
-                    <c:if test="${user.image!=null}">
-                        <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>     
+                    <c:if test="${userfind.image!=null}">
+                        <img class="img-fluid" src="<c:url value="${userfind.image}" />"alt="${userfind.full_name}"/>  
+                        <div class="card-body">
+                            <h4 class="card-title">${userfind.full_name}</h4>
+                            <a href="#" class="btn btn-primary">Xem thông tin</a>
+                        </div>
                     </c:if>
-                    <c:if test="${user.image==null}">
-                        <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${user.full_name}"/>         
+                    <c:if test="${userfind.image==null}">
+                        <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${userfind.full_name}"/>     
+                        <div class="card-body">
+                            <h4 class="card-title">${userfind.full_name}</h4>
+                            <a href="#" class="btn btn-primary">Xem thông tin</a>
+                        </div>
                     </c:if>
-                    
+
 
 
                 </div>
-                <div class="card-body">
-                    <h4 class="card-title">${user.full_name}</h4>
-                    <a href="#" class="btn btn-primary">Xem thông tin</a>
-                </div>
+
             </div>
         </c:forEach>
+        <h1>${kw}</h1>
     </div>
 
 

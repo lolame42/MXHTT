@@ -39,8 +39,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
-    public Cloudinary cloudinary(){
+    public Cloudinary cloudinary() {
         Cloudinary c = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "ldb-company",
                 "api_key", "954583823992543",
@@ -61,9 +62,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/")
                 .usernameParameter("user_name")
                 .passwordParameter("user_password");
-        
+
         http.formLogin().defaultSuccessUrl("/home").failureUrl("/?error");
-        
+
         http.logout().logoutSuccessUrl("/");
         http.exceptionHandling()
                 .accessDeniedPage("/?accessDenied");
@@ -74,7 +75,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 .antMatchers("/find")
                 .access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
-               
+                
+
         http.csrf().disable();
     }
 

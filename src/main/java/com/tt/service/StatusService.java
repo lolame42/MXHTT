@@ -6,11 +6,15 @@
 package com.tt.service;
 
 import com.tt.pojos.Status;
+import java.util.List;
 
 /**
  *
  * @author DAVADO
  */
 public interface StatusService {
+
     boolean addOrUpdate(Status status);
+
+    List<Status> getStatus();
 }

@@ -11,24 +11,47 @@
 
 <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
 <div class="main">
-   <c:url value="/home" var="action" />
-<div class="main">
-    
-    <div class="formregister">
-        <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
-        <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data">
-          
-            <div class="form-group">
-                <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu bản thân"/>
-            </div>
-            <input type="text" value="Hashtag" data-role="tagsinput" />
-            <div class="form-group">
-                <input type="submit" value="Đăng" class="btn btn-primary"/>
-            </div>  
-        </form:form>
-    </div>
-</div>
+    <c:url value="/home" var="action" />
+    <div class="main">
 
+        <div class="formregister">
+            <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
+            <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu bản thân"/>
+                </div>
+                <div class="form-group">
+                    <label for="hashtag">hashtag</label>
+                    <form:input type="hashtag" id="hashtag" path="hashtag" cssClass="form-control" placeholder=""/>
+                </div>  
+
+                <div class="form-group">
+                    <input type="submit" value="Đăng" class="btn btn-primary"/>
+                </div>  
+            </form:form>
+            <c:forEach var="allstatus" items="${allstatus}">
+                <div>
+                    <img class="img-fluid" src="<c:url value="${user.image}" />" alt="${user.full_name}"/>  
+                    <div class="card-body">
+                        <h5>${allstatus.content}</h5>
+                        <c:if test="${allstatus.hashtag!=null}">
+                            
+                             <h5>#${allstatus.hashtag}<h5>
+                        </c:if>
+                                                      
+                    </div>  
+                        <button>Thích</button>
+                        <button>Bình Luận</button>
+                            
+                </div>
+            </c:forEach>
+        </div>
+
+    </div>
+
+
+            
 
 
 </div>

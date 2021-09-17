@@ -48,7 +48,8 @@ public class HomeController {
     public String home(Model model, Principal principal) {
         model.addAttribute("status", new Status());
         model.addAttribute("user",userService.getUserByUserName(principal.getName()).get(0));
-
+        model.addAttribute("allstatus",statusService.getStatus());
+       
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //String name = auth.getName(); //get logged in username
         //model.addAttribute("username", name);
@@ -70,10 +71,29 @@ public class HomeController {
         }
         
     }
+    @RequestMapping("/wall/{user_name}")
+    public String wall(Model model, @PathVariable(value = "user_name") String user_name) {
+        Login login;
+        login = userService.getUserByUserName(user_name).get(0);
+        if(login!=null)
+        {
+            model.addAttribute("userwall",userService.getUserByUserName(user_name).get(0));
+            model.addAttribute("check",1);
+        }
+            
+            
+        else
+            model.addAttribute("check",2);
+            
+        
+       
+        return "wall";
+    }
     
     @RequestMapping("/find")
-    public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
-        model.addAttribute("user", this.userService.getUsers(kw));
+    public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw,Principal principal) {
+        model.addAttribute("user",userService.getUserByUserName(principal.getName()).get(0));
+        model.addAttribute("userfind", this.userService.getUsers(kw));
         return "finduser";
     }
     

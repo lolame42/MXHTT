@@ -40,5 +40,10 @@ public class StatusServiceImpl implements StatusService{
         return statusReponsitory.addOrUpdate(status);
          
     }
+
+    @Override
+    public List<Status> getStatus() {
+        return statusReponsitory.getStatus();
+    }
     
 }
