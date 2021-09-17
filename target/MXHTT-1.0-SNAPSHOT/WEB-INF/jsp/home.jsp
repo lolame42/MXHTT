@@ -32,7 +32,7 @@
             </form:form>
             <c:forEach var="allstatus" items="${allstatus}">
                 <div>
-                    <img class="img-fluid" src="<c:url value="${user.image}" />" alt="${user.full_name}"/>  
+                    <a class="otb" href="<c:url value="/individual"/>"><img class="img-fluid" src="<c:url value="${user.image}" />" alt="${user.full_name}"/>  </a>
                     <div class="card-body">
                         <h5>${allstatus.content}</h5>
                         <c:if test="${allstatus.hashtag!=null}">
