@@ -51,6 +51,19 @@ public class Login implements Serializable{
     /**
      * @return the Id
      */
+    public void setLogin(Login a){
+        this.Id=a.Id;
+        this.description = a.description;
+        this.email=a.email;
+        this.full_name=a.full_name;
+        this.image =a.image;
+        this.phone=a.phone;
+        this.user_name = a.user_name;
+        this.user_password=a.user_password;
+        this.userrole= a.userrole;
+        
+        
+    }
     public int getId() {
         return Id;
     }
@@ -186,6 +199,10 @@ public class Login implements Serializable{
      */
     public void setUserrole(String userrole) {
         this.userrole = userrole;
+    }
+
+    public void setLogin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

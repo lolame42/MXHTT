@@ -14,19 +14,24 @@
     <div class="row">
         <c:forEach var="userfind" items="${userfind}">
             <div class="card col-md-12 bg-info" style="width:400px">
+
                 <div class="card-body">
                     <c:if test="${userfind.image!=null}">
                         <img class="img-fluid" src="<c:url value="${userfind.image}" />"alt="${userfind.full_name}"/>  
+                       
                         <div class="card-body">
                             <h4 class="card-title">${userfind.full_name}</h4>
-                            <a href="#" class="btn btn-primary">Xem thông tin</a>
+                            
                         </div>
                     </c:if>
+
                     <c:if test="${userfind.image==null}">
                         <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${userfind.full_name}"/>     
                         <div class="card-body">
                             <h4 class="card-title">${userfind.full_name}</h4>
-                            <a href="#" class="btn btn-primary">Xem thông tin</a>
+
+                        
+
                         </div>
                     </c:if>
 

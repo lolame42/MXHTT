@@ -13,12 +13,13 @@ import java.util.List;
  * @author Tu
  */
 public interface UserReponsitory {
+
     List<Login> getUsers();
+
     List<Login> getUsers(String kw);
+
     List<Login> getUserByUserName(String string);
-    
-   
-    
-    
-    
+
+    List<Login> getUserById(int id);
+
 }

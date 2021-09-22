@@ -29,28 +29,42 @@
                     <input type="submit" value="Đăng" class="btn btn-primary"/>
                 </div>  
             </form:form>
+
             <c:forEach var="allstatus" items="${allstatus}">
                 <div>
-                    <a class="otb" href="<c:url value="/individual"/>"><img class="img-fluid" src="<c:url value="${user.image}" />" alt="${user.full_name}"/>  </a>
+                    
+                    <a class="otb" href="<c:url value="/wall/${allstatus.iduser}"/>"><img class="img-fluid" src="<c:url value="${allstatus.avatar}" />" alt="${allstatus.tenuser}"/>  </a>
+                    <div class="my-date">
+                        <h5>${allstatus.tenuser}</h5>
+                        <i>${allstatus.date}</i>
+                    </div>
+                  
                     <div class="card-body">
                         <h5>${allstatus.content}</h5>
                         <c:if test="${allstatus.hashtag!=null}">
-                            
-                             <h5>#${allstatus.hashtag}<h5>
+                            <h5>#${allstatus.hashtag}</h5>
+
                         </c:if>
-                                                      
-                    </div>  
-                        <button>Thích</button>
-                        <button>Bình Luận</button>
-                            
+
+                    </div>
+                    <button>Thích</button>
+                    <button>Bình Luận</button>
+
                 </div>
             </c:forEach>
+            <script>
+                window.onload = function () {
+                    let dates = document.querySelectorAll(".my-date>i")
+                    for (let i = 0; i < dates.length; i++)
+                    {
+                        let d = dates[i]
+                        d.innerText = moment(d.innerText).fromNow()
+
+                    }
+                }
+
+            </script>
+
         </div>
-
     </div>
-
-
-            
-
-
 </div>

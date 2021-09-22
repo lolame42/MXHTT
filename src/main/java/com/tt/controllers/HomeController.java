@@ -31,88 +31,89 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
-    
+
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private StatusService statusService;
-    
+
     @GetMapping("/")
     public String login(Model model) {
-        
+
         return "login";
     }
-    
+
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
         model.addAttribute("status", new Status());
-        model.addAttribute("user",userService.getUserByUserName(principal.getName()).get(0));
-        model.addAttribute("allstatus",statusService.getStatus());
-       
+        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        model.addAttribute("allstatus", statusService.getStatus());
+        long date = System.currentTimeMillis();
+        model.addAttribute("datenow", date);
+
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //String name = auth.getName(); //get logged in username
         //model.addAttribute("username", name);
         //model.addAttribute("name",principal.getName()) ;
         return "home";
     }
-    
+
     @PostMapping("/home")
     public String addstt(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
-        status.setIduser(userService.getUserByUserName(principal.getName()).get(0).getId());
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        status.setIduser(a.getId());
+        status.setAvatar(a.getImage());
+        status.setTenuser(a.getFull_name());
         Date date = new Date();
         status.setDate(date);
-        
+
         if (this.statusService.addOrUpdate(status) == false) {
             model.addAttribute("errMsg", "Đăng bài không thành công");
             return "home";
         } else {
             return "redirect:/home";
         }
-        
+
     }
+
     @RequestMapping("/wall/{user_name}")
     public String wall(Model model, @PathVariable(value = "user_name") String user_name) {
-        Login login;
-        login = userService.getUserByUserName(user_name).get(0);
-        if(login!=null)
-        {
-            model.addAttribute("userwall",userService.getUserByUserName(user_name).get(0));
-            model.addAttribute("check",1);
+        Login loginwall;
+        loginwall = userService.getUserById(Integer.parseInt(user_name)).get(0);
+
+        if (!loginwall.getUser_name().isEmpty()) {
+            model.addAttribute("userwall", loginwall);
+            return "wall";
+        } else {
+            return "home";
         }
-            
-            
-        else
-            model.addAttribute("check",2);
-            
-        
-       
-        return "wall";
+
     }
-    
+
     @RequestMapping("/find")
-    public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw,Principal principal) {
-        model.addAttribute("user",userService.getUserByUserName(principal.getName()).get(0));
+    public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw, Principal principal) {
+        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
         model.addAttribute("userfind", this.userService.getUsers(kw));
         return "finduser";
     }
-    
+
     @RequestMapping("/hello/{name}")
     public String hello(Model model, @PathVariable(value = "name") String name) {
         model.addAttribute("message", "Anh " + name + "!!!");
         return "hello";
     }
-    
+
     @RequestMapping(path = "/hello-post", method = RequestMethod.POST)
     public String show(Model model, @ModelAttribute(value = "user") User user) {
         model.addAttribute("fullName", user.getFristName() + " " + user.getLastName());
         return "index";
     }
-    
+
     @RequestMapping(path = "/test")
     public String testRedirect(Model model) {
         model.addAttribute("testMg", "Anh Iu Em");
-        
+
         return "forward:/hello/Tu";
     }
 }

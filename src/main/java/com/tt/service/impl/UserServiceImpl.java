@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService{
         return this.userReponsitory.getUserByUserName(string);
     }
 
+    @Override
+    public List<Login> getUserById(int id) {
+        return this.userReponsitory.getUserById(id);
+    }
+
     
     
 

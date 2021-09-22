@@ -15,6 +15,8 @@
     <div class="image">
         <img src="<c:url value="/images/logo.jpg"/>" alt="logo"/>        
     </div>
+  
+
     <div class="formregister">
         <form:form method="post" action="${action}" modelAttribute="login" enctype="multipart/form-data">
             <h3 class="text-center text-dark"><b>Đăng Ký Tài Khoản</b></h3>

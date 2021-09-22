@@ -6,6 +6,7 @@ import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import com.tt.service.LoginService;
 import com.tt.service.UserService;
+import com.tt.service.impl.UserServiceImpl;
 import com.tt.validator.LoginNameValidator;
 import com.tt.validator.WebAppValidator;
 import java.io.IOException;
@@ -39,7 +40,8 @@ public class RegisterController {
     private WebAppValidator loginValidator;
     @Autowired
     private LoginService userDetailsService;
-
+    @Autowired
+    private UserServiceImpl userServiceImpl;
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(loginValidator);
@@ -57,8 +59,13 @@ public class RegisterController {
         } else {
             if (this.userDetailsService.addOrUpdate(login) == true) {
                 return "redirect:/";
-            } else {
-                model.addAttribute("errMsg", "Đăng ký không thành công");
+            } else
+            {
+                if(userServiceImpl.getUserByUserName(login.getUser_name()).isEmpty())
+                    model.addAttribute("errMsg","Tên tài khoản đã tồn tại");
+                else
+                     model.addAttribute("errMsg", "Đăng ký không thành công");
+               
             }
         }
         return "register";
