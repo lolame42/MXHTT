@@ -78,4 +78,9 @@ public class LoginServiceImpl implements LoginService {
         return new org.springframework.security.core.userdetails.User(login.getUser_name(), login.getUser_password(), auth);
     }
 
+    @Override
+    public boolean Update(Login login) {
+        return this.loginReponsitory.Update(login);
+    }
+
 }

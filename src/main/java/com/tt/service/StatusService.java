@@ -14,7 +14,8 @@ import java.util.List;
  */
 public interface StatusService {
 
-    boolean addOrUpdate(Status status);
+    boolean add(Status status, int id);
 
     List<Status> getStatus();
+    List<Status> getStatusByIduser(int id);
 }

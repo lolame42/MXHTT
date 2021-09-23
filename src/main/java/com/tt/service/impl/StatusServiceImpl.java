@@ -33,17 +33,20 @@ public class StatusServiceImpl implements StatusService{
     private UserService userService;
     
 
-    @Override
-    public boolean addOrUpdate(Status status) {
-       
-        
-        return statusReponsitory.addOrUpdate(status);
-         
-    }
 
     @Override
     public List<Status> getStatus() {
         return statusReponsitory.getStatus();
+    }
+
+    @Override
+    public boolean add(Status status, int i) {
+       return statusReponsitory.add(status, i);
+    }
+
+    @Override
+    public List<Status> getStatusByIduser(int i) {
+        return statusReponsitory.getStatusByIduser(i);
     }
     
 }

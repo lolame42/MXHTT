@@ -7,6 +7,7 @@ package com.tt.reponsitory.impl;
 
 import com.tt.pojos.Login;
 import com.tt.reponsitory.LoginReponsitory;
+import com.tt.service.UserService;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,6 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class LoginReponsitoryImpl implements LoginReponsitory{
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<Login> getLogins(String user_name) {
@@ -58,5 +61,21 @@ public class LoginReponsitoryImpl implements LoginReponsitory{
         }
         return false;
         
+    }
+
+    @Override
+    public boolean Update(Login login) {
+        Session session=sessionFactory.getObject().getCurrentSession();
+        if(!userService.getUserById(login.getId()).isEmpty())
+        {
+            Login c = session.get(Login.class,login.getId());
+            c.setLogin(login);
+            session.getTransaction().begin();
+            session.save(c);
+            session.getTransaction().commit();
+            return true;
+            
+        }
+        return false;
     }
 }

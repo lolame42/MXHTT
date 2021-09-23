@@ -33,9 +33,9 @@
             <c:forEach var="allstatus" items="${allstatus}">
                 <div>
                     
-                    <a class="otb" href="<c:url value="/wall/${allstatus.iduser}"/>"><img class="img-fluid" src="<c:url value="${allstatus.avatar}" />" alt="${allstatus.tenuser}"/>  </a>
+                    <a class="otb" href="<c:url value="/wall/${allstatus.login.id}"/>"><img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/>  </a>
                     <div class="my-date">
-                        <h5>${allstatus.tenuser}</h5>
+                        <h5>${allstatus.login.full_name}</h5>
                         <i>${allstatus.date}</i>
                     </div>
                   

@@ -8,6 +8,7 @@ package com.tt.reponsitory.impl;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.StatusReponsitory;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -33,8 +34,14 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public boolean addOrUpdate(Status status) {
+    public boolean add(Status status,int id) {
         Session session = sessionFactory.getObject().getCurrentSession();
+        Login login = session.get(Login.class,id);
+        Date date = new Date();
+        status.setDate(date);
+        status.setLogin(login);
+       
+        
         try {
             session.save(status);
             return true;
@@ -51,6 +58,14 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
         Query q = s.createQuery("From Status");
         return q.getResultList();
 
+    }
+
+    @Override
+    public List<Status> getStatusByIduser(int i) {
+         Session session = sessionFactory.getObject().getCurrentSession();
+         Login login = session.get(Login.class, i);
+         List<Status> test =login.getStatus();
+         return test;
     }
 
    

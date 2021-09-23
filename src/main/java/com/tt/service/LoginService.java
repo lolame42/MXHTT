@@ -18,5 +18,7 @@ public interface LoginService extends UserDetailsService {
     List<Login> getLogins(String user_name);
 
     boolean addOrUpdate(Login login);
+    
+    boolean Update(Login login);
 
 }

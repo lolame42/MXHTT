@@ -7,11 +7,15 @@ package com.tt.pojos;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
@@ -29,8 +33,9 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idStatus")
     private int idStatus;
-    @Column(name = "iduser")
-    private int iduser;
+    @ManyToOne(fetch = FetchType.EAGER,cascade =CascadeType.REMOVE )
+    @JoinColumn(name = "iduser")
+    private Login login;
     @Column(name = "content")
     private String content;
     @Column(name = "image")
@@ -41,11 +46,7 @@ public class Status {
     private String hashtag;
     @Transient
     private MultipartFile file;
-    @Column(name="avatar")
-    private String avatar;
-    @Column(name="full_name")
-    private String tenuser;
-
+   
     /**
      * @return the idStatus
      */
@@ -60,23 +61,7 @@ public class Status {
         this.idStatus = idStatus;
     }
 
-    /**
-     * @return the iduser
-     */
-    public int getIduser() {
-        return iduser;
-    }
-
-    /**
-     * @param iduser the iduser to set
-     */
-    public void setIduser(int iduser) {
-        this.iduser = iduser;
-    }
-
-    /**
-     * @return the content
-     */
+    
     public String getContent() {
         return content;
     }
@@ -147,29 +132,20 @@ public class Status {
     /**
      * @return the avatar
      */
-    public String getAvatar() {
-        return avatar;
+   
+
+    /**
+     * @return the login
+     */
+    public Login getLogin() {
+        return login;
     }
 
     /**
-     * @param avatar the avatar to set
+     * @param login the login to set
      */
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    /**
-     * @return the tenuser
-     */
-    public String getTenuser() {
-        return tenuser;
-    }
-
-    /**
-     * @param tenuser the tenuser to set
-     */
-    public void setTenuser(String tenuser) {
-        this.tenuser = tenuser;
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
 }

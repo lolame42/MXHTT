@@ -8,10 +8,36 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <link rel="stylesheet" href="<c:url value="/css/header.css"/>"/>
 <c:if test="${userwall!=null}">
-      <img class="img-fluid" src="<c:url value="${userwall.image}" />"alt="${userwall.full_name}"/>  
+
+    <img class="img-fluid" src="<c:url value="${userwall.image}" />"alt="${userwall.full_name}"/>  
+    <c:if test="${userwall.user_name!=user.user_name}">
+        <button>Tố cáo</button>
+    </c:if>
+    <c:if test="${userwall.user_name==user.user_name}">
+        <button>Cài đặt thông tin</button>
+    </c:if>
     <h1>${userwall.full_name}</h1>
     <h5>${userwall.description}<h5>
-</c:if>
-<c:if test="${userwall==null}">
-    <h1 class="text-center text-dark">Trở về <a>Trang chủ</a></h1>
-</c:if>
+            <c:forEach var="statuswall" items="${statuswall}">
+                <div>
+
+                    <a class="otb" href="<c:url value="/wall/${statuswall.login.id}"/>"><img class="img-fluid" src="<c:url value="${statuswall.login.image}" />" alt="${statuswall.login.full_name}"/>  </a>
+                    <div class="my-date">
+                        <h5>${statuswall.login.full_name}</h5>
+                        <i>${statuswall.date}</i>
+                    </div>
+
+                    <div class="card-body">
+                        <h5>${statuswall.content}</h5>
+                        <c:if test="${statuswall.hashtag!=null}">
+                            <h5>#${statuswall.hashtag}</h5>
+
+                        </c:if>
+
+                    </div>
+                    <button>Thích</button>
+                    <button>Bình Luận</button>
+
+                </div>
+            </c:forEach>
+        </c:if>

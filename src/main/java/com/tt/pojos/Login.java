@@ -6,11 +6,14 @@
 package com.tt.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -46,6 +49,8 @@ public class Login implements Serializable{
     private String image;
     private String description;
     private String userrole;
+    @OneToMany(mappedBy = "login",fetch = FetchType.EAGER)
+    private List<Status> status;
     
 
     /**
@@ -203,6 +208,20 @@ public class Login implements Serializable{
 
     public void setLogin() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the status
+     */
+    public List<Status> getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(List<Status> status) {
+        this.status = status;
     }
 
     /**
