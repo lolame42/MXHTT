@@ -40,6 +40,8 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
         Date date = new Date();
         status.setDate(date);
         status.setLogin(login);
+        if(status.getHashtag().isEmpty())
+            status.setHashtag(null);
 
         try {
             session.save(status);

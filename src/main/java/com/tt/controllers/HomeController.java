@@ -65,17 +65,24 @@ public class HomeController {
 
     @PostMapping("/home")
     public String addstt(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
-        int a = userService.getUserByUserName(principal.getName()).get(0).getId();
-        if (status.getContent() != null) {
-            if (this.statusService.add(status, a) == false) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("status", new Status());
+
+        model.addAttribute("allstatus", statusService.getStatus());
+
+        if (!status.getContent().isEmpty()) {
+            if (this.statusService.add(status, a.getId()) == false) {
                 model.addAttribute("errMsg", "Đăng bài không thành công");
                 return "home";
             } else {
                 return "redirect:/home";
             }
+
+        } else {
+            model.addAttribute("errMsg", "Status không được trống");
         }
-        else
-            model.addAttribute("thongbaostt","Nội dung status không được trống");
+
         return "home";
 
     }

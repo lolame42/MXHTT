@@ -15,8 +15,8 @@
     <div class="main">
 
         <div class="formregister">
-            <c:if test= "${thongbaostt!=null}">
-                <h2>${thongbaostt}</h2>
+            <c:if test= "${errMsg!=null}">
+                <h2 class="alert-danger">${errMsg}</h2>
             </c:if>
            
             <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
