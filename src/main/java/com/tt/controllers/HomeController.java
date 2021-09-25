@@ -127,12 +127,42 @@ public class HomeController {
     @GetMapping("/status/{idstt}")
     public String status(Model model, @PathVariable(value = "idstt") String idstt, Principal principal) {
         model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        model.addAttribute("newcmt", new Comment());
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
         if (!status.getDate().toString().isEmpty()) {
             model.addAttribute("status", status);
             model.addAttribute("allcomment", status.getComment());
         } else {
             model.addAttribute("zore", "aaaa");
+        }
+
+        return "status";
+
+    }
+
+    @PostMapping("/status/{idstt}")
+    public String addcmt(Model model, @ModelAttribute(value = "newcmt") Comment newcmt, @PathVariable(value = "idstt") String idstt, Principal principal) {
+        Login a =userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
+        if (!status.getDate().toString().isEmpty()) {
+            model.addAttribute("status", status);
+            model.addAttribute("allcomment", status.getComment());
+            model.addAttribute("idstt",idstt);
+        } else {
+
+            return "home";
+        }
+        if (!newcmt.getContent().isEmpty()) {
+            newcmt.setLogin(a);
+            newcmt.setStatus(status);
+            if (this.commentService.add(newcmt) == false) {
+                model.addAttribute("errMsg", "Bình luận không thành công");
+            }else
+                model.addAttribute("errMsg", "Bình luận thành công");
+
+        } else {
+            model.addAttribute("errMsg", "Bình luận không được trống");
         }
 
         return "status";

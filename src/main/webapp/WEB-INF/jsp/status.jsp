@@ -29,6 +29,23 @@
 </div>
 
 <div>Bình Luận</div>
+<div class="formregister">
+
+    <c:url value="/status/${idstt}" var="action" />
+    <form:form method="post" action="${action}" modelAttribute="newcmt" enctype="multipart/form-data">
+        
+        <h8 class="text-center text-dark"><b>Thêm bình luận</b></h8>
+        <div class="form-group">
+            <form:input type="text" id="content" path="content" cssClass="form-control" placeholder="Nội dung bình luận"/>
+        </div>
+        <c:if test = "${errMsg!=null}">
+            <div> <h8 class="text-center alert-danger"><b>${errMsg}</b></h8> <div> 
+        </c:if>
+        <div class="form-group">
+            <input type="submit" value="Đăng" class="btn btn-primary"/>
+        </div>  
+    </form:form>
+</div>
 <c:forEach var="allcomment" items="${allcomment}">
     <a class="otb" href="<c:url value="/wall/${allcomment.login.id}"/>"><img class="img-fluid" src="<c:url value="${allcomment.login.image}" />" alt="${allcomment.login.full_name}"/>  </a>
     <h6>${allcomment.login.full_name}</h6>
