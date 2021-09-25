@@ -41,6 +41,31 @@ color: #fff;
 .otb{
     border-radius: 50%;
 }
+.status{
+    border: 1px solid #000;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+.status img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.my-date i{
+    font-size: 14px;
+    margin-left: 60px;
+    color: #D2D2D2;
+}
+.ok{
+    border: 1px solid #000;
+    margin-bottom: 10px;
+}
+.ok img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
 
 
 

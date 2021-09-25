@@ -19,9 +19,9 @@
                 <h2 class="alert-danger">${errMsg}</h2>
             </c:if>
            
-            <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
-            <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data">
-
+              
+            <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data" cssClass="ok">
+                <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>
                 <div class="form-group">
                     <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu bản thân"/>
                 </div>
@@ -35,11 +35,11 @@
             </form:form>
 
             <c:forEach var="allstatus" items="${allstatus}">
-                <div>
+                <div class="status">
 
                     <a class="otb" href="<c:url value="/wall/${allstatus.login.id}"/>"><img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/>  </a>
+                    <h5>${allstatus.login.full_name}</h5>
                     <div class="my-date">
-                        <h5>${allstatus.login.full_name}</h5>
                         <i>${allstatus.date}</i>
                     </div>
 
@@ -52,8 +52,8 @@
 
                     </div>
 
-                    <button >Thích</button>
-                    <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>">Bình luận </a>
+                    <button ><i class="far fa-thumbs-up"></i></button>
+                    <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>"><i class="far fa-comment-alt"></i> </a>
 
                 </div>
             </c:forEach>

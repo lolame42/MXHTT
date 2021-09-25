@@ -8,6 +8,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <link rel="stylesheet" href="<c:url value="/css/header.css"/>"/>
+<link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>"/>
+<script src="<c:url value="/js/header.js"/>"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -29,8 +34,15 @@
                 <li class="nav-au active">
                     <a href="<c:url value="/"/>" class="nav-link"><i class="fas fa-gavel"></i></a>
                 </li>
-                <li class="nav-bell active">
-                    <a href="<c:url value="/"/>" class="nav-link"><i class="fas fa-bell"></i></a>
+                <li>
+                    <div class="dropdown">
+                        <button onclick="hamDropdown()" class="nut_dropdown">&#128276;</button>
+                        <div class="noidung_dropdown">
+                          <a href="#">Như vầy</a>
+                          <a href="#">Được không</a>
+                          <a href="#">á cu?</a>
+                        </div>
+                    </div>
                 </li>
                 <c:if test="${pageContext.request.userPrincipal.name==null}">
                     <li class="nav-black">
@@ -40,7 +52,7 @@
                 <c:if test="${pageContext.request.userPrincipal.name!=null}">
                     
                     <li class="nav-black">
-                         <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
+                        <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
                         <a href="<c:url value="/home"/>" class="nav-link text-danger"  >${user.full_name}</a>                  
                     </li>
                     <li class="nav-item active">
