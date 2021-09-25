@@ -6,7 +6,6 @@
 package com.tt.reponsitory.impl;
 
 import com.tt.pojos.Login;
-import com.tt.pojos.User;
 import com.tt.reponsitory.UserReponsitory;
 import java.util.List;
 import javax.persistence.Query;

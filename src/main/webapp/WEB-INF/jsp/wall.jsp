@@ -40,4 +40,23 @@
 
                 </div>
             </c:forEach>
+            <script>
+                window.onload = function () {
+                    let dates = document.querySelectorAll(".my-date>i")
+                    for (let i = 0; i < dates.length; i++)
+                    {
+                        let d = dates[i]
+                        d.innerText = moment(d.innerText).fromNow()
+
+                    }
+                }
+
+            </script>
+            <c:forEach var="allcomment" items="${allcomment}">
+                <div>
+
+                    <h1>${allcomment.content}</h1>
+
+                </div>
+            </c:forEach>
         </c:if>

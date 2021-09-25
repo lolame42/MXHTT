@@ -15,6 +15,10 @@
     <div class="main">
 
         <div class="formregister">
+            <c:if test= "${thongbaostt!=null}">
+                <h2>${thongbaostt}</h2>
+            </c:if>
+           
             <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
             <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data">
 
@@ -32,13 +36,13 @@
 
             <c:forEach var="allstatus" items="${allstatus}">
                 <div>
-                    
+
                     <a class="otb" href="<c:url value="/wall/${allstatus.login.id}"/>"><img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/>  </a>
                     <div class="my-date">
                         <h5>${allstatus.login.full_name}</h5>
                         <i>${allstatus.date}</i>
                     </div>
-                  
+
                     <div class="card-body">
                         <h5>${allstatus.content}</h5>
                         <c:if test="${allstatus.hashtag!=null}">
@@ -47,8 +51,9 @@
                         </c:if>
 
                     </div>
-                    <button>Thích</button>
-                    <button>Bình Luận</button>
+
+                    <button >Thích</button>
+                    <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>">Bình luận </a>
 
                 </div>
             </c:forEach>

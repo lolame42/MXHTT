@@ -49,6 +49,11 @@ and open the template in the editor.
          <put-attribute name="content" value="/WEB-INF/jsp/setting.jsp"/>
          
      </definition>
+      <definition name="status" extends="baseLayout">
+         <put-attribute name="title" value="Bình Luận"/>
+         <put-attribute name="content" value="/WEB-INF/jsp/status.jsp"/>
+         
+     </definition>
      
  </tiles-definitions>
 

@@ -34,14 +34,13 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public boolean add(Status status,int id) {
+    public boolean add(Status status, int id) {
         Session session = sessionFactory.getObject().getCurrentSession();
-        Login login = session.get(Login.class,id);
+        Login login = session.get(Login.class, id);
         Date date = new Date();
         status.setDate(date);
         status.setLogin(login);
-       
-        
+
         try {
             session.save(status);
             return true;
@@ -62,15 +61,25 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
 
     @Override
     public List<Status> getStatusByIduser(int i) {
-         Session session = sessionFactory.getObject().getCurrentSession();
-         Login login = session.get(Login.class, i);
-         List<Status> test =login.getStatus();
-         return test;
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Login login = session.get(Login.class, i);
+        List<Status> test = login.getStatus();
+        return test;
+    }
+
+    @Override
+    public List<Status> getStatusByIdStatus(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Status> query = builder.createQuery(Status.class);
+        Root root = query.from(Status.class);
+        query = query.select(root);
+        Predicate p = builder.equal(root.get("idStatus"), id);
+        query = query.where(p);
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
    
-    
-
-   
-
 }

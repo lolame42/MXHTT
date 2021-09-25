@@ -48,5 +48,11 @@ public class StatusServiceImpl implements StatusService{
     public List<Status> getStatusByIduser(int i) {
         return statusReponsitory.getStatusByIduser(i);
     }
+
+    @Override
+    public List<Status> getStatusByIdStatus(int id) {
+        return statusReponsitory.getStatusByIdStatus(id);
+    }
+
     
 }

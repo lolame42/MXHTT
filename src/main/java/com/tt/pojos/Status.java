@@ -5,8 +5,10 @@
  */
 package com.tt.pojos;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +18,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -27,7 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Entity
 @Table(name = "status")
-public class Status {
+public class Status implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +50,9 @@ public class Status {
     private String hashtag;
     @Transient
     private MultipartFile file;
+    @OneToMany(mappedBy = "status",fetch = FetchType.EAGER)
+    private List<Comment> comment;
+   
    
     /**
      * @return the idStatus
@@ -148,4 +155,22 @@ public class Status {
         this.login = login;
     }
 
+    /**
+     * @return the comment
+     */
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    /**
+     * @param comment the comment to set
+     */
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
+    }
+
+    /**
+     * @return the comment
+     */
+   
 }

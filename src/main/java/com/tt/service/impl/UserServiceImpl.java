@@ -8,7 +8,6 @@ package com.tt.service.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
-import com.tt.pojos.User;
 import com.tt.reponsitory.UserReponsitory;
 import com.tt.service.UserService;
 import java.io.IOException;

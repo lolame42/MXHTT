@@ -6,7 +6,6 @@
 package com.tt.service;
 
 import com.tt.pojos.Login;
-import com.tt.pojos.User;
 import java.util.List;
 
 /**

@@ -68,10 +68,9 @@ public class LoginReponsitoryImpl implements LoginReponsitory{
         Session session=sessionFactory.getObject().getCurrentSession();
         if(!userService.getUserById(login.getId()).isEmpty())
         {
-            Login c = session.get(Login.class,login.getId());
-            c.setLogin(login);
+            
             session.getTransaction().begin();
-            session.save(c);
+            session.save(login);
             session.getTransaction().commit();
             return true;
             

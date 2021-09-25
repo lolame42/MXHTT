@@ -26,12 +26,13 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Entity
 @Table(name = "login")
-public class Login implements Serializable{
-    public static final String ADMIN="ROLE_ADMIN";
-    public static final String USER="ROLE_USER";
+public class Login implements Serializable {
+
+    public static final String ADMIN = "ROLE_ADMIN";
+    public static final String USER = "ROLE_USER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Id")
+    @Column(name = "Id")
     private int Id;
     @Size(min = 1, max = 50, message = "{login.full_name.lenErr}")
     private String full_name;
@@ -44,31 +45,32 @@ public class Login implements Serializable{
     @Size(min = 10, max = 11, message = "{login.phone.lenErr}")
     private String phone;
     @NotNull(message = "{login.file.lenErr}")
-    @Transient    
+    @Transient
     private MultipartFile file;
     private String image;
     private String description;
     private String userrole;
-    @OneToMany(mappedBy = "login",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "login", fetch = FetchType.EAGER)
     private List<Status> status;
     
+   
 
     /**
      * @return the Id
      */
-    public void setLogin(Login a){
-        this.Id=a.Id;
+    public void setLogin(Login a) {
+        this.Id = a.Id;
         this.description = a.description;
-        this.email=a.email;
-        this.full_name=a.full_name;
-        this.image =a.image;
-        this.phone=a.phone;
+        this.email = a.email;
+        this.full_name = a.full_name;
+        this.image = a.image;
+        this.phone = a.phone;
         this.user_name = a.user_name;
-        this.user_password=a.user_password;
-        this.userrole= a.userrole;
-        
-        
+        this.user_password = a.user_password;
+        this.userrole = a.userrole;
+
     }
+
     public int getId() {
         return Id;
     }
@@ -224,8 +226,6 @@ public class Login implements Serializable{
         this.status = status;
     }
 
-    /**
-     * @return the active
-     */
     
+   
 }

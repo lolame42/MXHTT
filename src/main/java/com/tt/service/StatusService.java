@@ -17,5 +17,8 @@ public interface StatusService {
     boolean add(Status status, int id);
 
     List<Status> getStatus();
+
     List<Status> getStatusByIduser(int id);
+
+    List<Status> getStatusByIdStatus(int id);
 }

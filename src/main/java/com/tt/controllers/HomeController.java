@@ -6,10 +6,12 @@
 package com.tt.controllers;
 
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import com.tt.pojos.Comment;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
-import com.tt.pojos.User;
 import com.tt.reponsitory.UserReponsitory;
+import com.tt.service.CommentService;
+import com.tt.service.LoginService;
 import com.tt.service.StatusService;
 import com.tt.service.UserService;
 import java.security.Principal;
@@ -34,24 +36,24 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private CommentService commentService;
     @Autowired
     private StatusService statusService;
+    @Autowired
+    private LoginService loginService;
 
     @GetMapping("/")
-    public String login(Model model,Principal principal) {
-       
+    public String login(Model model, Principal principal) {
 
         return "login";
     }
-    
-            
-    
+
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
         model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
         model.addAttribute("status", new Status());
-      
+
         model.addAttribute("allstatus", statusService.getStatus());
 
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -64,34 +66,50 @@ public class HomeController {
     @PostMapping("/home")
     public String addstt(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
         int a = userService.getUserByUserName(principal.getName()).get(0).getId();
+        if (status.getContent() != null) {
+            if (this.statusService.add(status, a) == false) {
+                model.addAttribute("errMsg", "Đăng bài không thành công");
+                return "home";
+            } else {
+                return "redirect:/home";
+            }
+        }
+        else
+            model.addAttribute("thongbaostt","Nội dung status không được trống");
+        return "home";
 
-        if (this.statusService.add(status, a) == false) {
-            model.addAttribute("errMsg", "Đăng bài không thành công");
-            return "home";
+    }
+
+    @GetMapping("/setting")
+    public String viewsetting(Model model, Principal principal) {
+        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+
+        return "setting";
+    }
+
+    @PostMapping("/setting")
+    public String changesetting(Model model, @ModelAttribute(value = "user") Login user, Principal principal) {
+
+        if (this.loginService.Update(user)) {
+            model.addAttribute("thongbao", "thay đổi thành công");
+            return "setting";
         } else {
-            return "redirect:/home";
+            model.addAttribute("thongbao", "thay đổi thất bại");
+            return "redirect:/setting";
         }
 
     }
-    
-
-    @GetMapping("/setting")
-    public String viewsetting(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
-        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
-        return "setting";
-    }
-    
 
     @RequestMapping("/wall/{user_name}")
     public String wall(Model model, @PathVariable(value = "user_name") String user_name, Principal principal) {
         model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
-        
+
         Login loginwall;
         loginwall = userService.getUserById(Integer.parseInt(user_name)).get(0);
 
         if (!loginwall.getUser_name().isEmpty()) {
             model.addAttribute("userwall", loginwall);
-            model.addAttribute("statuswall",loginwall.getStatus());
+            model.addAttribute("statuswall", loginwall.getStatus());
             return "wall";
         } else {
             return "home";
@@ -99,10 +117,25 @@ public class HomeController {
 
     }
 
+    @GetMapping("/status/{idstt}")
+    public String status(Model model, @PathVariable(value = "idstt") String idstt, Principal principal) {
+        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
+        if (!status.getDate().toString().isEmpty()) {
+            model.addAttribute("status", status);
+            model.addAttribute("allcomment", status.getComment());
+        } else {
+            model.addAttribute("zore", "aaaa");
+        }
+
+        return "status";
+
+    }
+
     @RequestMapping("/find")
     public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw, Principal principal) {
         model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
-        
+
         model.addAttribute("userfind", this.userService.getUsers(kw));
         return "finduser";
     }
@@ -111,12 +144,6 @@ public class HomeController {
     public String hello(Model model, @PathVariable(value = "name") String name) {
         model.addAttribute("message", "Anh " + name + "!!!");
         return "hello";
-    }
-
-    @RequestMapping(path = "/hello-post", method = RequestMethod.POST)
-    public String show(Model model, @ModelAttribute(value = "user") User user) {
-        model.addAttribute("fullName", user.getFristName() + " " + user.getLastName());
-        return "index";
     }
 
     @RequestMapping(path = "/test")
