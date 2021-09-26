@@ -19,6 +19,7 @@ import com.tt.service.UserService;
 import java.security.Principal;
 import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
@@ -57,11 +58,16 @@ public class HomeController {
     public String home(Model model, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
-        model.addAttribute("noti", a.getNotiuser());
-        model.addAttribute("status", new Status());
+        List<Noti> noti = a.getNotiuser();
+        Collections.reverse(noti);
+        model.addAttribute("noti", noti);
         //
 
-        model.addAttribute("allstatus", statusService.getStatus());
+        model.addAttribute("status", new Status());
+
+        List<Status> allstatus = statusService.getStatus();
+        Collections.reverse(allstatus);
+        model.addAttribute("allstatus", allstatus);
 
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //String name = auth.getName(); //get logged in username
@@ -98,9 +104,12 @@ public class HomeController {
 
     @GetMapping("/setting")
     public String viewsetting(Model model, Principal principal) {
+
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
-        model.addAttribute("noti", a.getNotiuser());
+        List<Noti> noti = a.getNotiuser();
+        Collections.reverse(noti);
+        model.addAttribute("noti", noti);
         //
         return "setting";
     }
@@ -122,7 +131,9 @@ public class HomeController {
     public String wall(Model model, @PathVariable(value = "user_name") String user_name, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
-        model.addAttribute("noti", a.getNotiuser());
+        List<Noti> noti = a.getNotiuser();
+        Collections.reverse(noti);
+        model.addAttribute("noti", noti);
         //
 
         Login loginwall;
@@ -142,14 +153,18 @@ public class HomeController {
     public String status(Model model, @PathVariable(value = "idstt") String idstt, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
-        model.addAttribute("noti", a.getNotiuser());
+        List<Noti> noti = a.getNotiuser();
+        Collections.reverse(noti);
+        model.addAttribute("noti", noti);
         //
 
         model.addAttribute("newcmt", new Comment());
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
         if (!status.getDate().toString().isEmpty()) {
             model.addAttribute("status", status);
-            model.addAttribute("allcomment", status.getComment());
+            List<Comment> allcomment =status.getComment();
+            Collections.reverse(allcomment);
+            model.addAttribute("allcomment",allcomment );
         } else {
             model.addAttribute("zore", "aaaa");
         }
@@ -162,14 +177,18 @@ public class HomeController {
     public String addcmt(Model model, @ModelAttribute(value = "newcmt") Comment newcmt, @PathVariable(value = "idstt") String idstt, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
-        model.addAttribute("noti", a.getNotiuser());
+        List<Noti> noti = a.getNotiuser();
+        Collections.reverse(noti);
+        model.addAttribute("noti", noti);
         //
-        
+
         model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
         if (!status.getDate().toString().isEmpty()) {
             model.addAttribute("status", status);
-            model.addAttribute("allcomment", status.getComment());
+             List<Comment> allcomment =status.getComment();
+            Collections.reverse(allcomment);
+            model.addAttribute("allcomment",allcomment );
             model.addAttribute("idstt", idstt);
         } else {
 
@@ -201,7 +220,9 @@ public class HomeController {
     public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
-        model.addAttribute("noti", a.getNotiuser());
+        List<Noti> noti = a.getNotiuser();
+        Collections.reverse(noti);
+        model.addAttribute("noti", noti);
         //
 
         model.addAttribute("userfind", this.userService.getUsers(kw));
