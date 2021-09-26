@@ -8,10 +8,12 @@ package com.tt.controllers;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import com.tt.pojos.Comment;
 import com.tt.pojos.Login;
+import com.tt.pojos.Noti;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.UserReponsitory;
 import com.tt.service.CommentService;
 import com.tt.service.LoginService;
+import com.tt.service.NotiService;
 import com.tt.service.StatusService;
 import com.tt.service.UserService;
 import java.security.Principal;
@@ -42,6 +44,8 @@ public class HomeController {
     private StatusService statusService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private NotiService notiService;
 
     @GetMapping("/")
     public String login(Model model, Principal principal) {
@@ -51,8 +55,11 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
-        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", a.getNotiuser());
         model.addAttribute("status", new Status());
+        //
 
         model.addAttribute("allstatus", statusService.getStatus());
 
@@ -67,6 +74,8 @@ public class HomeController {
     public String addstt(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
+        model.addAttribute("noti", a.getNotiuser());
+        //
         model.addAttribute("status", new Status());
 
         model.addAttribute("allstatus", statusService.getStatus());
@@ -89,8 +98,10 @@ public class HomeController {
 
     @GetMapping("/setting")
     public String viewsetting(Model model, Principal principal) {
-        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
-
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", a.getNotiuser());
+        //
         return "setting";
     }
 
@@ -109,7 +120,10 @@ public class HomeController {
 
     @RequestMapping("/wall/{user_name}")
     public String wall(Model model, @PathVariable(value = "user_name") String user_name, Principal principal) {
-        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", a.getNotiuser());
+        //
 
         Login loginwall;
         loginwall = userService.getUserById(Integer.parseInt(user_name)).get(0);
@@ -126,7 +140,11 @@ public class HomeController {
 
     @GetMapping("/status/{idstt}")
     public String status(Model model, @PathVariable(value = "idstt") String idstt, Principal principal) {
-        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", a.getNotiuser());
+        //
+
         model.addAttribute("newcmt", new Comment());
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
         if (!status.getDate().toString().isEmpty()) {
@@ -142,13 +160,17 @@ public class HomeController {
 
     @PostMapping("/status/{idstt}")
     public String addcmt(Model model, @ModelAttribute(value = "newcmt") Comment newcmt, @PathVariable(value = "idstt") String idstt, Principal principal) {
-        Login a =userService.getUserByUserName(principal.getName()).get(0);
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", a.getNotiuser());
+        //
+        
         model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
         if (!status.getDate().toString().isEmpty()) {
             model.addAttribute("status", status);
             model.addAttribute("allcomment", status.getComment());
-            model.addAttribute("idstt",idstt);
+            model.addAttribute("idstt", idstt);
         } else {
 
             return "home";
@@ -156,10 +178,16 @@ public class HomeController {
         if (!newcmt.getContent().isEmpty()) {
             newcmt.setLogin(a);
             newcmt.setStatus(status);
+
             if (this.commentService.add(newcmt) == false) {
                 model.addAttribute("errMsg", "Bình luận không thành công");
-            }else
+            } else {
+                Noti addnoti = new Noti();
+                addnoti.setAvatar(a.getImage());
+                addnoti.setName(a.getFull_name());
+                notiService.add(addnoti, a, status, 1);
                 model.addAttribute("errMsg", "Bình luận thành công");
+            }
 
         } else {
             model.addAttribute("errMsg", "Bình luận không được trống");
@@ -171,7 +199,10 @@ public class HomeController {
 
     @RequestMapping("/find")
     public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw, Principal principal) {
-        model.addAttribute("user", userService.getUserByUserName(principal.getName()).get(0));
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", a.getNotiuser());
+        //
 
         model.addAttribute("userfind", this.userService.getUsers(kw));
         return "finduser";

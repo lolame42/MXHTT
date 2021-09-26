@@ -69,9 +69,7 @@ public class LoginReponsitoryImpl implements LoginReponsitory{
         if(!userService.getUserById(login.getId()).isEmpty())
         {
             
-            session.getTransaction().begin();
-            session.save(login);
-            session.getTransaction().commit();
+            session.update(login);
             return true;
             
         }

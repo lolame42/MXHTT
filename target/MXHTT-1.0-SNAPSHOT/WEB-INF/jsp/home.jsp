@@ -19,7 +19,7 @@
                 <h2 class="alert-danger">${errMsg}</h2>
             </c:if>
            
-              
+
             <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data" cssClass="ok">
                 <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>
                 <div class="form-group">

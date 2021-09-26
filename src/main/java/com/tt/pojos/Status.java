@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -50,8 +52,12 @@ public class Status implements Serializable{
     private String hashtag;
     @Transient
     private MultipartFile file;
-    @OneToMany(mappedBy = "status",fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "status")
     private List<Comment> comment;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "statusnoti")
+    private List<Noti> notistt;
    
    
     /**
@@ -167,6 +173,20 @@ public class Status implements Serializable{
      */
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    /**
+     * @return the notistt
+     */
+    public List<Noti> getNotistt() {
+        return notistt;
+    }
+
+    /**
+     * @param notistt the notistt to set
+     */
+    public void setNotistt(List<Noti> notistt) {
+        this.notistt = notistt;
     }
 
     /**

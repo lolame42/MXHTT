@@ -10,19 +10,19 @@
 <link rel="stylesheet" href="<c:url value="/css/header.css"/>"/>
 <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>"/>
 <script src="<c:url value="/js/header.js"/>"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<c:url value="/home"/>"><i class="fas fa-american-sign-language-interpreting"></i></a>
             <c:url value="/find" var="find"/>
         <form action="${find}">
-            
+
             <div class="input-group">
                 <input type="text" class="form-control rounded" name="kw" placeholder="Nhập tên muốn tìm" aria-label="Search"
-                  aria-describedby="search-addon" />
+                       aria-describedby="search-addon" />
                 <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
             </div>
         </form>      
@@ -36,11 +36,21 @@
                 </li>
                 <li>
                     <div class="dropdown">
+
                         <button onclick="hamDropdown()" class="nut_dropdown">&#128276;</button>
                         <div class="noidung_dropdown">
-                          <a href="#">Như vầy</a>
-                          <a href="#">Được không</a>
-                          <a href="#">á cu?</a>
+
+                            <c:forEach var="noti" items="${noti}">
+                                <div>
+                                    <img class="otb" src="<c:url value="${noti.avatar}" />"alt="${noti.name}"/> 
+                                    <c:if test = "${noti.type==1}">
+                                        <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>">${noti.name} đã cmt stt của bạn</a>
+                                    </c:if>
+                                    
+                                </div> 
+
+
+                            </c:forEach>
                         </div>
                     </div>
                 </li>
@@ -50,7 +60,7 @@
                     </li>
                 </c:if>
                 <c:if test="${pageContext.request.userPrincipal.name!=null}">
-                    
+
                     <li class="nav-black">
                         <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
                         <a href="<c:url value="/home"/>" class="nav-link text-danger"  >${user.full_name}</a>                  

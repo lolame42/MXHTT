@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -50,8 +52,12 @@ public class Login implements Serializable {
     private String image;
     private String description;
     private String userrole;
-    @OneToMany(mappedBy = "login", fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "login")
     private List<Status> status;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "loginnoti")
+    private List<Noti> notiuser;
     
    
 
@@ -224,6 +230,20 @@ public class Login implements Serializable {
      */
     public void setStatus(List<Status> status) {
         this.status = status;
+    }
+
+    /**
+     * @return the notiuser
+     */
+    public List<Noti> getNotiuser() {
+        return notiuser;
+    }
+
+    /**
+     * @param notiuser the notiuser to set
+     */
+    public void setNotiuser(List<Noti> notiuser) {
+        this.notiuser = notiuser;
     }
 
     
