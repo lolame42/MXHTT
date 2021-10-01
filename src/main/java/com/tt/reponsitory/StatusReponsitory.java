@@ -19,6 +19,8 @@ public interface StatusReponsitory {
     List<Status> getStatusByIduser(int id);
     List<Status> getStatusByIdStatus(int id);
     
+            
+    
     
  
 }

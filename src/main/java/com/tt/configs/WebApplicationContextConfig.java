@@ -8,6 +8,7 @@ package com.tt.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.validator.LoginNameValidator;
+import com.tt.validator.StatusNameValidator;
 import com.tt.validator.WebAppValidator;
 import java.util.HashSet;
 import java.util.Set;
@@ -73,6 +74,15 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public WebAppValidator loginValidator(){
         Set<Validator> springValidators= new HashSet<>();
         springValidators.add(new LoginNameValidator());
+        
+        WebAppValidator v= new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        return v;
+    }
+     @Bean
+    public WebAppValidator statusValidator(){
+        Set<Validator> springValidators= new HashSet<>();
+        springValidators.add(new StatusNameValidator());
         
         WebAppValidator v= new WebAppValidator();
         v.setSpringValidators(springValidators);

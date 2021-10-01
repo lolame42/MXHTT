@@ -32,7 +32,7 @@
                     <a href="<c:url value="/home"/>" class="nav-link"><i class="fas fa-home"></i></a>
                 </li>
                 <li class="nav-au active">
-                    <a href="<c:url value="/"/>" class="nav-link"><i class="fas fa-gavel"></i></a>
+                    <a href="<c:url value="/auction"/>" class="nav-link"><i class="fas fa-gavel"></i></a>
                 </li>
                 <li>
                     <div class="dropdown">

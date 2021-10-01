@@ -5,11 +5,18 @@
  */
 package com.tt.reponsitory.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.StatusReponsitory;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -32,24 +39,30 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
+    @Autowired
+    private Cloudinary Cloudinary;
 
     @Override
     public boolean add(Status status, int id) {
-        Session session = sessionFactory.getObject().getCurrentSession();
-        Login login = session.get(Login.class, id);
-        Date date = new Date();
-        status.setDate(date);
-        status.setLogin(login);
-        if(status.getHashtag().isEmpty())
-            status.setHashtag(null);
-
         try {
+            Session session = sessionFactory.getObject().getCurrentSession();
+            Login login = session.get(Login.class, id);
+            if (status.getFile() != null) {
+                Map r = this.Cloudinary.uploader().upload(status.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                status.setImage((String) r.get("secure_url"));
+            }
+            status.setDate(new Date());
+            status.setLogin(login);
+
             session.save(status);
             return true;
-        } catch (HibernateException ex) {
-            System.err.println(ex.getMessage());
+
+        } catch (IOException ex) {
+            Logger.getLogger(StatusReponsitoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return false;
+        
     }
 
     @Override
@@ -83,5 +96,4 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
         return q.getResultList();
     }
 
-   
 }

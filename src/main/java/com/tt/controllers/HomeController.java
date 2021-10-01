@@ -5,6 +5,8 @@
  */
 package com.tt.controllers;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import com.tt.pojos.Comment;
 import com.tt.pojos.Login;
@@ -16,13 +18,16 @@ import com.tt.service.LoginService;
 import com.tt.service.NotiService;
 import com.tt.service.StatusService;
 import com.tt.service.UserService;
+import java.io.IOException;
 import java.security.Principal;
 import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +52,7 @@ public class HomeController {
     private LoginService loginService;
     @Autowired
     private NotiService notiService;
+    
 
     @GetMapping("/")
     public String login(Model model, Principal principal) {
@@ -54,54 +60,7 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/home")
-    public String home(Model model, Principal principal) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        List<Noti> noti = a.getNotiuser();
-        Collections.reverse(noti);
-        model.addAttribute("noti", noti);
-        //
-
-        model.addAttribute("status", new Status());
-
-        List<Status> allstatus = statusService.getStatus();
-        Collections.reverse(allstatus);
-        model.addAttribute("allstatus", allstatus);
-
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //String name = auth.getName(); //get logged in username
-        //model.addAttribute("username", name);
-        //model.addAttribute("name",principal.getName()) ;
-        return "home";
-    }
-
-    @PostMapping("/home")
-    public String addstt(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        model.addAttribute("noti", a.getNotiuser());
-        //
-        model.addAttribute("status", new Status());
-
-        model.addAttribute("allstatus", statusService.getStatus());
-
-        if (!status.getContent().isEmpty()) {
-            if (this.statusService.add(status, a.getId()) == false) {
-                model.addAttribute("errMsg", "Đăng bài không thành công");
-                return "home";
-            } else {
-                return "redirect:/home";
-            }
-
-        } else {
-            model.addAttribute("errMsg", "Status không được trống");
-        }
-
-        return "home";
-
-    }
-
+   
     @GetMapping("/setting")
     public String viewsetting(Model model, Principal principal) {
 
@@ -162,9 +121,9 @@ public class HomeController {
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
         if (!status.getDate().toString().isEmpty()) {
             model.addAttribute("status", status);
-            List<Comment> allcomment =status.getComment();
+            List<Comment> allcomment = status.getComment();
             Collections.reverse(allcomment);
-            model.addAttribute("allcomment",allcomment );
+            model.addAttribute("allcomment", allcomment);
         } else {
             model.addAttribute("zore", "aaaa");
         }
@@ -186,9 +145,9 @@ public class HomeController {
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstt)).get(0);
         if (!status.getDate().toString().isEmpty()) {
             model.addAttribute("status", status);
-             List<Comment> allcomment =status.getComment();
+            List<Comment> allcomment = status.getComment();
             Collections.reverse(allcomment);
-            model.addAttribute("allcomment",allcomment );
+            model.addAttribute("allcomment", allcomment);
             model.addAttribute("idstt", idstt);
         } else {
 
@@ -204,7 +163,7 @@ public class HomeController {
                 Noti addnoti = new Noti();
                 addnoti.setAvatar(a.getImage());
                 addnoti.setName(a.getFull_name());
-                notiService.add(addnoti, a, status, 1);
+                notiService.add(addnoti, status.getLogin(), status, 1);
                 model.addAttribute("errMsg", "Bình luận thành công");
             }
 

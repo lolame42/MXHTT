@@ -40,6 +40,8 @@ public class Comment implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER,cascade =CascadeType.REMOVE )
     @JoinColumn(name = "iduser")
     private Login login;
+    @Column(name = "value")
+    private String value;
     
    
     
@@ -118,6 +120,20 @@ public class Comment implements Serializable{
      */
     public void setLogin(Login login) {
         this.login = login;
+    }
+
+    /**
+     * @return the value
+     */
+    public String getValue() {
+        return value;
+    }
+
+    /**
+     * @param value the value to set
+     */
+    public void setValue(String value) {
+        this.value = value;
     }
 
     /**

@@ -18,7 +18,7 @@
             <c:if test= "${errMsg!=null}">
                 <h2 class="alert-danger">${errMsg}</h2>
             </c:if>
-           
+
 
             <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data" cssClass="ok">
                 <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>
@@ -35,27 +35,28 @@
             </form:form>
 
             <c:forEach var="allstatus" items="${allstatus}">
-                <div class="status">
+                <c:if test="${allstatus.step==null}">
+                    <div class="status">
 
-                    <a class="otb" href="<c:url value="/wall/${allstatus.login.id}"/>"><img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/>  </a>
-                    <h5>${allstatus.login.full_name}</h5>
-                    <div class="my-date">
-                        <i>${allstatus.date}</i>
+                        <a class="otb" href="<c:url value="/wall/${allstatus.login.id}"/>"><img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/>  </a>
+                        <h5>${allstatus.login.full_name}</h5>
+                        <div class="my-date">
+                            <i>${allstatus.date}</i>
+                        </div>
+
+                        <div class="card-body">
+                            <h5>${allstatus.content}</h5>
+                            <c:if test="${allstatus.hashtag!=null}">
+                                <h5>#${allstatus.hashtag}</h5>
+                            </c:if>
+
+                        </div>
+
+                        <button ><i class="far fa-thumbs-up"></i></button>
+                        <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>"><i class="far fa-comment-alt"></i> </a>
+
                     </div>
-
-                    <div class="card-body">
-                        <h5>${allstatus.content}</h5>
-                        <c:if test="${allstatus.hashtag!=null}">
-                            <h5>#${allstatus.hashtag}</h5>
-
-                        </c:if>
-
-                    </div>
-
-                    <button ><i class="far fa-thumbs-up"></i></button>
-                    <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>"><i class="far fa-comment-alt"></i> </a>
-
-                </div>
+                </c:if>
             </c:forEach>
             <script>
                 window.onload = function () {

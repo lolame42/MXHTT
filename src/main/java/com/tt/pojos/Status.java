@@ -7,6 +7,8 @@ package com.tt.pojos;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -33,13 +35,13 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Entity
 @Table(name = "status")
-public class Status implements Serializable{
+public class Status implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idStatus")
     private int idStatus;
-    @ManyToOne(fetch = FetchType.EAGER,cascade =CascadeType.REMOVE )
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "iduser")
     private Login login;
     @Column(name = "content")
@@ -58,14 +60,20 @@ public class Status implements Serializable{
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "statusnoti")
     private List<Noti> notistt;
-   
-   
+    @Column(name = "step")
+    private String step;
+    @Column(name = "dateEnd")
+    private Date dateend;
+    @Transient
+    private String hour;
+
     /**
      * @return the idStatus
      */
     public int getIdStatus() {
         return idStatus;
     }
+   
 
     /**
      * @param idStatus the idStatus to set
@@ -74,7 +82,6 @@ public class Status implements Serializable{
         this.idStatus = idStatus;
     }
 
-    
     public String getContent() {
         return content;
     }
@@ -145,8 +152,6 @@ public class Status implements Serializable{
     /**
      * @return the avatar
      */
-   
-
     /**
      * @return the login
      */
@@ -190,7 +195,58 @@ public class Status implements Serializable{
     }
 
     /**
+     * @return the step
+     */
+    /**
+     * @return the hour
+     */
+    /**
+     * @return the step
+     */
+    public String getStep() {
+        return step;
+    }
+
+    /**
+     * @param step the step to set
+     */
+    public void setStep(String step) {
+        this.step = step;
+    }
+
+    /**
+     * @return the dateend
+     */
+    public Date getDateend() {
+        return dateend;
+    }
+
+    /**
+     * @param dateend the dateend to set
+     */
+    public void setDateend(Date dateend) {
+        this.dateend = dateend;
+    }
+
+    /**
+     * @return the hour
+     */
+    public String getHour() {
+        return hour;
+    }
+
+    /**
+     * @param hour the hour to set
+     */
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public void setDateend(Calendar c1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
      * @return the comment
      */
-   
 }
