@@ -18,6 +18,10 @@ public interface StatusReponsitory {
     List<Status> getStatus();
     List<Status> getStatusByIduser(int id);
     List<Status> getStatusByIdStatus(int id);
+    List<Status> getStatus(String kw,int page);
+    List<Status> getStatusByor(int id,String kw, int page);
+    List<Status> getStatusByor(int id);
+    
     
             
     

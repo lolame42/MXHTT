@@ -62,7 +62,7 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
             Logger.getLogger(StatusReponsitoryImpl.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
     }
 
     @Override
@@ -92,6 +92,65 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
         Predicate p = builder.equal(root.get("idStatus"), id);
         query = query.where(p);
 
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Status> getStatus(String kw, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Status> query = builder.createQuery(Status.class);
+        Root root = query.from(Status.class);
+        query = query.select(root);
+        if (kw != null) {
+            Predicate p = builder.like(root.get("orauction").as(String.class),
+                    String.format("%%%s%%", kw));
+            query = query.where(p);
+        }
+        query = query.orderBy(builder.desc(root.get("idStatus")));
+
+        Query q = session.createQuery(query);
+
+        int max = 30;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Status> getStatusByor(int id, String kw, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Status> query = builder.createQuery(Status.class);
+        Root root = query.from(Status.class);
+        query = query.select(root);
+        Predicate p = builder.equal(root.get("orauction"), id);
+        query = query.where(p);
+
+        if (kw != null) {
+            Predicate p1 = builder.like(root.get("orauction").as(String.class),
+                    String.format("%%%s%%", kw));
+            query = query.where(p1);
+        }
+        query = query.orderBy(builder.desc(root.get("idStatus")));
+
+        Query q = session.createQuery(query);
+        int max = 2;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Status> getStatusByor(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Status> query = builder.createQuery(Status.class);
+        Root root = query.from(Status.class);
+        query = query.select(root);
+        Predicate p = builder.equal(root.get("orauction"), id);
+        query = query.where(p);
         Query q = session.createQuery(query);
         return q.getResultList();
     }

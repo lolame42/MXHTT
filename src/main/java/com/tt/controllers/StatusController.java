@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -39,16 +40,30 @@ public class StatusController {
     private Cloudinary Cloudinary;
 
     @GetMapping("/home")
-    public String home(Model model, Principal principal) {
+    public String home(Model model, Principal principal, @RequestParam(required = false) Map<String, String> params) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
         List<Noti> noti = a.getNotiuser();
         Collections.reverse(noti);
         model.addAttribute("noti", noti);
         //
-        List<Status> allstatus = statusService.getStatus();
-        Collections.reverse(allstatus);
-        model.addAttribute("allstatus", allstatus);
+        model.addAttribute("statustest", 0);
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        String idstt = params.get("idstt");
+        model.addAttribute("allstatus", this.statusService.getStatus(kw, page));
+        if (idstt == null || idstt.equals("0")) {
+            model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("0"), idstt, page));
+            model.addAttribute("statustest", 0);
+            model.addAttribute("countstt", statusService.getStatusByor(0).size());
+
+        } else {
+            model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), idstt, page));
+            model.addAttribute("statustest", 1);
+            model.addAttribute("countstt", statusService.getStatusByor(1).size());
+
+        }
+
         //
         model.addAttribute("status", new Status());
 
@@ -67,9 +82,7 @@ public class StatusController {
         Collections.reverse(noti);
         model.addAttribute("noti", noti);
         //
-        List<Status> allstatus = statusService.getStatus();
-        Collections.reverse(allstatus);
-        model.addAttribute("allstatus", allstatus);
+
         //
         model.addAttribute("status", new Status());
 
@@ -77,41 +90,27 @@ public class StatusController {
             if (status.getHashtag().isEmpty()) {
                 status.setHashtag(null);
             }
+            status.setOrauction("0");
 
             if (this.statusService.add(status, a.getId()) == false) {
                 model.addAttribute("errMsg", "Đăng bài không thành công");
                 return "home";
             } else {
+                model.addAttribute("statustest", 0);
+                model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("0"), "0", 1));
+                model.addAttribute("countstt", statusService.getStatusByor(0).size());
                 return "redirect:/home";
             }
 
         } else {
             model.addAttribute("errMsg", "Status không được trống");
         }
+        model.addAttribute("statustest", 0);
+        model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("0"), "0", 1));
+        model.addAttribute("countstt", statusService.getStatusByor(0).size());
 
         return "home";
 
-    }
-
-    @GetMapping("/auction")
-    public String auctionhome(Model model, Principal principal) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        List<Noti> noti = a.getNotiuser();
-        Collections.reverse(noti);
-        model.addAttribute("noti", noti);
-        //
-        List<Status> allstatus = statusService.getStatus();
-        Collections.reverse(allstatus);
-        model.addAttribute("allstatus", allstatus);
-        //
-        model.addAttribute("status", new Status());
-
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //String name = auth.getName(); //get logged in username
-        //model.addAttribute("username", name);
-        //model.addAttribute("name",principal.getName()) ;
-        return "auction";
     }
 
     @PostMapping("/auction")
@@ -122,9 +121,7 @@ public class StatusController {
         Collections.reverse(noti);
         model.addAttribute("noti", noti);
         //
-        List<Status> allstatus = statusService.getStatus();
-        Collections.reverse(allstatus);
-        model.addAttribute("allstatus", allstatus);
+
         //
         model.addAttribute("status", new Status());
         int dem = 0;
@@ -156,7 +153,6 @@ public class StatusController {
                 dem++;
             }
         }
-        
 
         if (dem == 0) {
             try {
@@ -167,16 +163,28 @@ public class StatusController {
             } catch (IOException ex) {
                 System.err.println("==ADD ANH==" + ex.getMessage());
             }
+            status.setOrauction("1");
             if (this.statusService.add(status, a.getId()) == false) {
                 model.addAttribute("errMsg", "Đăng bài không thành công");
-                return "auction";
+                model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), "1", 1));
+                model.addAttribute("statustest", 1);
+                model.addAttribute("countstt", statusService.getStatusByor(1).size());
+                return "home";
 
             } else {
-                return "redirect:/auction";
+                model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), "1", 1));
+                model.addAttribute("statustest", 1);
+                model.addAttribute("countstt", statusService.getStatusByor(1).size());
+
+                return "redirect:/home";
             }
         }
 
-        return "auction";
+        model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), "1", 1));
+        model.addAttribute("statustest", 1);
+        model.addAttribute("countstt", statusService.getStatusByor(1).size());
+
+        return "home";
     }
 
 }

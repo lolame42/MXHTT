@@ -66,6 +66,8 @@ public class Status implements Serializable {
     private Date dateend;
     @Transient
     private String hour;
+    @Column(name = "orauction")
+    private String orauction;
 
     /**
      * @return the idStatus
@@ -244,6 +246,20 @@ public class Status implements Serializable {
 
     public void setDateend(Calendar c1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the orauction
+     */
+    public String getOrauction() {
+        return orauction;
+    }
+
+    /**
+     * @param orauction the orauction to set
+     */
+    public void setOrauction(String orauction) {
+        this.orauction = orauction;
     }
 
     /**
