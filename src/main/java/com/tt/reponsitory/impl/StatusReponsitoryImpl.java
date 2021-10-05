@@ -7,6 +7,7 @@ package com.tt.reponsitory.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.StatusReponsitory;
@@ -97,17 +98,13 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
     }
 
     @Override
-    public List<Status> getStatus(String kw, int page) {
+    public List<Status> getStatus(int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Status> query = builder.createQuery(Status.class);
         Root root = query.from(Status.class);
         query = query.select(root);
-        if (kw != null) {
-            Predicate p = builder.like(root.get("orauction").as(String.class),
-                    String.format("%%%s%%", kw));
-            query = query.where(p);
-        }
+
         query = query.orderBy(builder.desc(root.get("idStatus")));
 
         Query q = session.createQuery(query);
@@ -119,40 +116,75 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
     }
 
     @Override
-    public List<Status> getStatusByor(int id, String kw, int page) {
+    public boolean addauc(Auction auction, Login login) {
+        
+         try {
+            Session session = sessionFactory.getObject().getCurrentSession();
+            
+            if (auction.getFile() != null) {
+                Map r = this.Cloudinary.uploader().upload(auction.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                auction.setImage((String) r.get("secure_url"));
+            }
+            auction.setDate(new Date());
+            auction.setLogin(login);
+
+            session.save(auction);
+            return true;
+
+        } catch (IOException ex) {
+            Logger.getLogger(StatusReponsitoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    @Override
+    public List<Auction> getAuction() {
+
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Auction");
+        return q.getResultList();
+
+    }
+
+    @Override
+    public List<Auction> getAuctionByIduser(int i) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Login login = session.get(Login.class, i);
+        List<Auction> test = login.getAuction();
+        return test;
+    }
+
+    @Override
+    public List<Auction> getAuctionByIdAuction(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Status> query = builder.createQuery(Status.class);
-        Root root = query.from(Status.class);
+        CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
+        Root root = query.from(Auction.class);
         query = query.select(root);
-        Predicate p = builder.equal(root.get("orauction"), id);
+        Predicate p = builder.equal(root.get("idauction"), id);
         query = query.where(p);
 
-        if (kw != null) {
-            Predicate p1 = builder.like(root.get("orauction").as(String.class),
-                    String.format("%%%s%%", kw));
-            query = query.where(p1);
-        }
-        query = query.orderBy(builder.desc(root.get("idStatus")));
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Auction> getAuction(int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
+        Root root = query.from(Auction.class);
+        query = query.select(root);
+
+        query = query.orderBy(builder.desc(root.get("idauction")));
 
         Query q = session.createQuery(query);
-        int max = 2;
+
+        int max = 30;
         q.setMaxResults(max);
         q.setFirstResult((page - 1) * max);
         return q.getResultList();
     }
 
-    @Override
-    public List<Status> getStatusByor(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Status> query = builder.createQuery(Status.class);
-        Root root = query.from(Status.class);
-        query = query.select(root);
-        Predicate p = builder.equal(root.get("orauction"), id);
-        query = query.where(p);
-        Query q = session.createQuery(query);
-        return q.getResultList();
-    }
 
 }

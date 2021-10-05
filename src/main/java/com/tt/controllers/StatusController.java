@@ -5,14 +5,12 @@
  */
 package com.tt.controllers;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
+import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
 import com.tt.pojos.Status;
 import com.tt.service.StatusService;
 import com.tt.service.UserService;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
@@ -36,34 +34,25 @@ public class StatusController {
     UserService userService;
     @Autowired
     StatusService statusService;
-    @Autowired
-    private Cloudinary Cloudinary;
 
-    @GetMapping("/home")
-    public String home(Model model, Principal principal, @RequestParam(required = false) Map<String, String> params) {
+    @ModelAttribute
+    public void ahihi(Model model, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
         List<Noti> noti = a.getNotiuser();
         Collections.reverse(noti);
         model.addAttribute("noti", noti);
+    }
+
+    @GetMapping("/home")
+    public String home(Model model, Principal principal, @RequestParam(required = false) Map<String, String> params) {
+
         //
-        model.addAttribute("statustest", 0);
         String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        String idstt = params.get("idstt");
-        model.addAttribute("allstatus", this.statusService.getStatus(kw, page));
-        if (idstt == null || idstt.equals("0")) {
-            model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("0"), idstt, page));
-            model.addAttribute("statustest", 0);
-            model.addAttribute("countstt", statusService.getStatusByor(0).size());
 
-        } else {
-            model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), idstt, page));
-            model.addAttribute("statustest", 1);
-            model.addAttribute("countstt", statusService.getStatusByor(1).size());
-
-        }
-
+        model.addAttribute("allstatus", this.statusService.getStatus(page));
+        model.addAttribute("countstt", this.statusService.getStatus().size());
         //
         model.addAttribute("status", new Status());
 
@@ -73,118 +62,100 @@ public class StatusController {
         //model.addAttribute("name",principal.getName()) ;
         return "home";
     }
+    @GetMapping("/auction")
+    public String auction(Model model, Principal principal, @RequestParam(required = false) Map<String, String> params) {
+
+        //
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+
+        model.addAttribute("allauction", this.statusService.getAuction(page));
+        model.addAttribute("countauc", this.statusService.getAuction().size());
+        model.addAttribute("auction", new Auction());
+
+        return "auction";
+    }
 
     @PostMapping("/home")
-    public String addstt(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
+    public String addstt(Model model, @ModelAttribute(value = "status") Status status, Principal principal, @RequestParam(required = false) Map<String, String> params) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        List<Noti> noti = a.getNotiuser();
-        Collections.reverse(noti);
-        model.addAttribute("noti", noti);
         //
 
         //
-        model.addAttribute("status", new Status());
-
-        if (!status.getContent().isEmpty()) {
-            if (status.getHashtag().isEmpty()) {
-                status.setHashtag(null);
-            }
-            status.setOrauction("0");
-
-            if (this.statusService.add(status, a.getId()) == false) {
-                model.addAttribute("errMsg", "Đăng bài không thành công");
-                return "home";
-            } else {
-                model.addAttribute("statustest", 0);
-                model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("0"), "0", 1));
-                model.addAttribute("countstt", statusService.getStatusByor(0).size());
-                return "redirect:/home";
-            }
-
+        if (status.getContent() == null || status.getContent().isEmpty()) {
+            model.addAttribute("errcontent", "Nội dung trạng thái không được trống");
         } else {
-            model.addAttribute("errMsg", "Status không được trống");
+            if (status.getHashtag().length() > 20) {
+                model.addAttribute("errhashtag", "Hashtag tối đa 20 ký tự ");
+            } else {
+                if (status.getHashtag().isEmpty()) {
+                    status.setHashtag(null);
+                }
+                if (this.statusService.add(status, a.getId()) == true) {
+                    model.addAttribute("errMsg", "Đăng bài thành công");
+
+                } else {
+                    model.addAttribute("errMsg", "Đăng bài không thành công");
+
+                }
+            }
         }
-        model.addAttribute("statustest", 0);
-        model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("0"), "0", 1));
-        model.addAttribute("countstt", statusService.getStatusByor(0).size());
+
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("allstatus", this.statusService.getStatus(1));
+        model.addAttribute("countstt", this.statusService.getStatus().size());
+        model.addAttribute("status", new Status());
 
         return "home";
 
     }
 
-    @PostMapping("/auction")
-    public String addauc(Model model, @ModelAttribute(value = "status") Status status, Principal principal) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        List<Noti> noti = a.getNotiuser();
-        Collections.reverse(noti);
-        model.addAttribute("noti", noti);
-        //
+    
 
+    @PostMapping("/auction")
+    public String addauc(Model model, @ModelAttribute(value = "auction") Auction auction, Principal principal, @RequestParam(required = false) Map<String, String> params) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
         //
-        model.addAttribute("status", new Status());
         int dem = 0;
-        if (status.getContent().isEmpty()) {
-            model.addAttribute("ErrContent", "Giới thiệu sản phẩm trống");
+        if (auction.getContent() == null || auction.getContent().isEmpty()) {
+            model.addAttribute("errcontent", "Giới thiệu sản phẩm không được trống và tối đa 5000 ký tự");
             dem++;
         }
-        if (status.getFile().isEmpty()) {
-            model.addAttribute("ErrFile", "Ảnh sản phẩm trống");
+        if (auction.getFile().isEmpty() || auction.getFile() == null) {
+            model.addAttribute("errimage", "Hình ảnh sản phẩm trống");
             dem++;
         }
-        if (status.getStep().isEmpty()) {
-            model.addAttribute("ErrStep", "Bước nhảy Trống");
+        if (auction.getStepstr().isEmpty() || auction.getStepstr() == null) {
+            model.addAttribute("errstep", "Bước trống");
             dem++;
         } else {
-            double bien = Integer.parseInt(status.getStep());
-            if (bien < 10000 || bien % 10000 != 0 || bien > 100000) {
-                model.addAttribute("ErrStep", "Bước nhảy phải là bội số của 10.000 và nhỏ hơn 101.000");
-                dem++;
-            }
-        }
-        if (status.getHour().isEmpty()) {
-            model.addAttribute("ErrHour", "Số giờ tồn tại trống");
-            dem++;
-        } else {
-            double bien = Integer.parseInt(status.getHour());
-            if (bien < 0 || bien % 2 != 0 || bien > 50) {
-                model.addAttribute("ErrStep", "Số giờ tồn tại là số nguyên, lớn hơn 0 và nhỏ hơn 50");
+            if (Double.parseDouble(auction.getStepstr()) % 10 != 0 || Double.parseDouble(auction.getStepstr()) > 100) {
+                model.addAttribute("errstep", "Bước không hợp lệ, bước cần là số nguyên, tối đa 100 (Đơn vị ngàn VND)");
                 dem++;
             }
         }
 
         if (dem == 0) {
-            try {
-                Map r = this.Cloudinary.uploader().upload(status.getFile().getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-                status.setImage((String) r.get("secure_url"));
-
-            } catch (IOException ex) {
-                System.err.println("==ADD ANH==" + ex.getMessage());
-            }
-            status.setOrauction("1");
-            if (this.statusService.add(status, a.getId()) == false) {
-                model.addAttribute("errMsg", "Đăng bài không thành công");
-                model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), "1", 1));
-                model.addAttribute("statustest", 1);
-                model.addAttribute("countstt", statusService.getStatusByor(1).size());
-                return "home";
+            auction.setStep(Double.parseDouble(auction.getStepstr()));
+            if (statusService.addauc(auction, a) == true) {
+                model.addAttribute("err", "Thêm thành công");
 
             } else {
-                model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), "1", 1));
-                model.addAttribute("statustest", 1);
-                model.addAttribute("countstt", statusService.getStatusByor(1).size());
-
-                return "redirect:/home";
+                model.addAttribute("err", "Thêm thất bại");
             }
+        } else {
+            model.addAttribute("err", "Thêm thất bại");
         }
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
 
-        model.addAttribute("allstatus", this.statusService.getStatusByor(Integer.parseInt("1"), "1", 1));
-        model.addAttribute("statustest", 1);
-        model.addAttribute("countstt", statusService.getStatusByor(1).size());
+        model.addAttribute("allauction", this.statusService.getAuction(page));
+        model.addAttribute("countauc", this.statusService.getAuction().size());
+        model.addAttribute("auction", new Auction());
 
-        return "home";
+        return "auction";
+
     }
 
 }

@@ -60,14 +60,7 @@ public class Status implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "statusnoti")
     private List<Noti> notistt;
-    @Column(name = "step")
-    private String step;
-    @Column(name = "dateEnd")
-    private Date dateend;
-    @Transient
-    private String hour;
-    @Column(name = "orauction")
-    private String orauction;
+   
 
     /**
      * @return the idStatus
@@ -205,64 +198,7 @@ public class Status implements Serializable {
     /**
      * @return the step
      */
-    public String getStep() {
-        return step;
-    }
+   
 
-    /**
-     * @param step the step to set
-     */
-    public void setStep(String step) {
-        this.step = step;
-    }
-
-    /**
-     * @return the dateend
-     */
-    public Date getDateend() {
-        return dateend;
-    }
-
-    /**
-     * @param dateend the dateend to set
-     */
-    public void setDateend(Date dateend) {
-        this.dateend = dateend;
-    }
-
-    /**
-     * @return the hour
-     */
-    public String getHour() {
-        return hour;
-    }
-
-    /**
-     * @param hour the hour to set
-     */
-    public void setHour(String hour) {
-        this.hour = hour;
-    }
-
-    public void setDateend(Calendar c1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * @return the orauction
-     */
-    public String getOrauction() {
-        return orauction;
-    }
-
-    /**
-     * @param orauction the orauction to set
-     */
-    public void setOrauction(String orauction) {
-        this.orauction = orauction;
-    }
-
-    /**
-     * @return the comment
-     */
+    
 }

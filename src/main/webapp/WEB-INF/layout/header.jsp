@@ -28,29 +28,17 @@
         </form>      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-home active">
-                    <a href="<c:url value="/home"/>"  class="nav-link"></a>
-                </li>
-                <li class="nav-au active">
-                    <a href="<c:url value="/auction"/>" class="nav-link"></a>
-                </li>
+               
                 <li class="nav-item">
-                    <c:url value ="/home" var="sttPath">
-                        <c:param name = "idstt" value="0"></c:param>
-                    </c:url>
-                    <a class="nav-link" href="${sttPath}"><i class="fas fa-home"></i> </a>
+                   
+                    <a class="nav-link" href="<c:url value="/home"/>"><i class="fas fa-home"></i> </a>
                 </li
                  <li class="nav-item">
-                    <c:url value ="/home" var="sttPath">
-                        <c:param name = "idstt" value="1"></c:param>
-                    </c:url>
-                    <a class="nav-link" href="${sttPath}"><i class="fas fa-gavel"></i> </a>
+                   
+                    <a class="nav-link" href="<c:url value="/auction"/>"><i class="fas fa-gavel"></i> </a>
                 </li
-                       
-                             
-
                 <li>
-                    <div class="dropdown">
+                    <div class="dropdown" >
 
                         <button onclick="hamDropdown()" class="nut_dropdown">&#128276;</button>
                         <div class="noidung_dropdown">
@@ -63,8 +51,6 @@
                                     </c:if>
 
                                 </div> 
-
-
                             </c:forEach>
                         </div>
                     </div>

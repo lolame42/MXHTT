@@ -5,6 +5,7 @@ D:\MXHTT\src\main\java\com\tt\configs\DispatcherServletInitializer.java
 D:\MXHTT\src\main\java\com\tt\reponsitory\impl\CommentReponsitoryImpl.java
 D:\MXHTT\src\main\java\com\tt\service\LoginService.java
 D:\MXHTT\src\main\java\com\tt\reponsitory\impl\LoginReponsitoryImpl.java
+D:\MXHTT\src\main\java\com\tt\pojos\Auction.java
 D:\MXHTT\src\main\java\com\tt\reponsitory\impl\NotiReponsitoryImpl.java
 D:\MXHTT\src\main\java\com\tt\controllers\upload.java
 D:\MXHTT\src\main\java\com\tt\pojos\Comment.java
@@ -32,6 +33,7 @@ D:\MXHTT\src\main\java\com\tt\service\impl\CommentServiceImpl.java
 D:\MXHTT\src\main\java\com\tt\configs\TilesConfig.java
 D:\MXHTT\src\main\java\com\tt\service\NotiService.java
 D:\MXHTT\src\main\java\com\tt\configs\WebApplicationContextConfig.java
+D:\MXHTT\src\main\java\com\tt\controllers\StatusController.java
 D:\MXHTT\src\main\java\com\tt\service\CommentService.java
 D:\MXHTT\src\main\java\com\tt\validator\SpringValidator.java
 D:\MXHTT\src\main\java\com\tt\pojos\Noti.java

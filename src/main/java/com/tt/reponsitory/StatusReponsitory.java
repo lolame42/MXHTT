@@ -5,6 +5,7 @@
  */
 package com.tt.reponsitory;
 
+import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import java.util.List;
@@ -18,9 +19,13 @@ public interface StatusReponsitory {
     List<Status> getStatus();
     List<Status> getStatusByIduser(int id);
     List<Status> getStatusByIdStatus(int id);
-    List<Status> getStatus(String kw,int page);
-    List<Status> getStatusByor(int id,String kw, int page);
-    List<Status> getStatusByor(int id);
+    List<Status> getStatus(int page);
+    boolean addauc(Auction auction,Login login);
+    List<Auction> getAuction();
+    List<Auction> getAuctionByIduser(int id);
+    List<Auction> getAuctionByIdAuction(int id);
+    List<Auction> getAuction(int page);
+    
     
     
             

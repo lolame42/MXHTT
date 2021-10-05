@@ -16,63 +16,63 @@
     <div class="main">
 
         <div class="formregister">
-            <c:if test="${errMsg!=null}">
-                <h3>${errMsg}</h3>
-            </c:if>
 
-            <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data">
-                <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>
+
+            <form:form method="post" action="${action}" modelAttribute="auction" enctype="multipart/form-data">
+
+                <c:if test="${err!=null}">
+                    <h3>${err}</h3>
+                </c:if>
                 <div class="form-group">
-                    <c:if test="${ErrContent!=null}"><h2 class="alert-danger">${ErrContent}</h2></c:if>
-                    <c:if test="${ErrContent==null}"><h2>Giới thiệu sản phẩm đấu giá</h2></c:if>
+                    <c:if test="${errcontent!=null}"><h2 class="alert-danger">${errcontent}</h2></c:if>
+                    <c:if test="${errcontent==null}"><h2>Giới thiệu sản phẩm đấu giá</h2></c:if>
                     <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu về sản phẩm cần đấu giá"/>
                 </div>
                 <div class="form-group">
-                    <c:if test="${ErrFile!=null}"><h2 class="alert-danger">${ErrFile}</h2></c:if>
-                    <c:if test="${ErrFile==null}"><h2>Hình ảnh sản phẩm đấu giá</h2></c:if>
+                    <c:if test="${errimage!=null}"><h2 class="alert-danger">${errimage}</h2></c:if>
+                    <c:if test="${errimage==null}"><h2>Hình ảnh sản phẩm đấu giá</h2></c:if>
                     <form:input type="file" id="file" path="file" cssClass="form-control" placeholder="Ảnh của sản phẩm"/>
                 </div>
                 <div class="form-group">
-                    <c:if test="${ErrStep!=null}"><h2 class="alert-danger">${ErrStep}</h2></c:if>
-                    <c:if test="${ErrStep==null}"><h2>Bước nhảy của phiên đấu giá(bội số của 10.000 và nhỏ hơn 100.001)</h2></c:if>
-                    <form:input type="hashtag" id="step" path="step" cssClass="form-control" placeholder="Bước nhảy"/>
+                    <c:if test="${errstep!=null}"><h2 class="alert-danger">${errstep}</h2></c:if>
+                    <c:if test="${errstep==null}"><h2>Bước nhảy có đơn vị (Ngàn VND) tối đa 100, là số nguyên và không âm</h2></c:if>
+                    <form:input type="hashtag" id="stepstr" path="stepstr" cssClass="form-control" placeholder="Bước nhảy"/>
                 </div>  
-                <div class="form-group">
-                    <c:if test="${ErrHour!=null}"><h2 class="alert-danger">${ErrHour}</h2></c:if>
-                    <c:if test="${ErrHour==null}"><h2>Số giờ của phiên đấu giá(Sau khi hết giờ bạn có 3 tiếng để xác định người thắng)</h2></c:if>
-                    <form:input type="hashtag" id="hour" path="hour" cssClass="form-control" placeholder="Số giờ tồn tại của phiên đấu giá này"/>
-                </div>  
+
 
 
                 <div class="form-group">
                     <input type="submit" value="Đăng" class="btn btn-primary"/>
                 </div>  
             </form:form>
-
-            <c:forEach var="allstatus" items="${allstatus}">
-                <c:if test="${allstatus.step!=null}">
-                    <div class="status">
-
-                        <a class="otb " href="<c:url value="/wall/${allstatus.login.id}"/>"><img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/>  </a>
-                        <h5>${allstatus.login.full_name}</h5>
-                        <div class="my-date">
-                            <i>${allstatus.date}</i>
-                        </div>
-                        <div><img class="img-fluid" src="<c:url value="${allstatus.image}" />"alt="${allstatus.login.full_name}"/>  
-                        </div>
-                        <div class="card-body">
-                            <h5>${allstatus.content}</h5>
-                            <h5>Bước nhảy ${allstatus.step}</h5>
-                        </div>
-                           
-                            
-
-                       
-                        <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>"><i class="far fa-comment-alt"></i> </a>
+            <c:forEach var="allauction" items="${allauction}">
+                <div class="status">
+                    <a class="otb" href="<c:url value="/wall/${allauction.login.id}"/>"><img class="img-fluid" src="<c:url value="${allauction.login.image}" />" alt="${allauction.login.full_name}"/>  </a>
+                    <h5>${allauction.login.full_name}</h5>
+                    <div class="my-date">
+                        <i>${allauction.date}</i>
+                    </div>
+                    <div>  <img class="img-fluid" src="<c:url value="${allauction.image}" />"/> </div>
+                    <div class="card-body">
+                        <h5>${allauction.content}</h5>
 
                     </div>
-                </c:if>
+                    <div class="card-body">
+                        <h5>Bước nhảy ${allauction.step}</h5>
+
+                    </div>
+                    <button ><i class="far fa-thumbs-up"></i></button>
+                    <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>"><i class="far fa-comment-alt"></i> </a>
+                </div>
             </c:forEach>
+            <ul>
+               <c:forEach begin="1" end="${Math.ceil(countauc/30)}" var = "page">
+                    <li class="page-item"><a class="page-link" href=" <c:url value="/auction" />?page=${page}">${page}</a></li>
+
+                </c:forEach>
+            </ul>
+
+
             <script>
                 window.onload = function () {
                     let dates = document.querySelectorAll(".my-date>i")

@@ -7,6 +7,7 @@ package com.tt.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.StatusReponsitory;
@@ -24,24 +25,23 @@ import org.springframework.stereotype.Service;
  * @author DAVADO
  */
 @Service
-public class StatusServiceImpl implements StatusService{
+public class StatusServiceImpl implements StatusService {
+
     @Autowired
     private Cloudinary Cloudinary;
     @Autowired
-    private StatusReponsitory statusReponsitory ;
+    private StatusReponsitory statusReponsitory;
     @Autowired
     private UserService userService;
-    
 
+    @Override
+    public boolean add(Status status, int i) {
+        return statusReponsitory.add(status, i);
+    }
 
     @Override
     public List<Status> getStatus() {
         return statusReponsitory.getStatus();
-    }
-
-    @Override
-    public boolean add(Status status, int i) {
-       return statusReponsitory.add(status, i);
     }
 
     @Override
@@ -55,19 +55,33 @@ public class StatusServiceImpl implements StatusService{
     }
 
     @Override
-    public List<Status> getStatus(String string, int page) {
-        return statusReponsitory.getStatus(string, page);
+    public List<Status> getStatus(int page) {
+        return statusReponsitory.getStatus(page);
     }
 
     @Override
-    public List<Status> getStatusByor(int i,String kw, int page) {
-        return statusReponsitory.getStatusByor(i,kw,page);
+    public boolean addauc(Auction auction, Login login) {
+        return statusReponsitory.addauc(auction, login);
     }
 
     @Override
-    public List<Status> getStatusByor(int i) {
-        return statusReponsitory.getStatusByor(i);
+    public List<Auction> getAuction() {
+        return statusReponsitory.getAuction();
     }
 
-    
+    @Override
+    public List<Auction> getAuctionByIduser(int i) {
+        return statusReponsitory.getAuctionByIduser(i);
+    }
+
+    @Override
+    public List<Auction> getAuctionByIdAuction(int id) {
+        return statusReponsitory.getAuctionByIdAuction(id);
+    }
+
+    @Override
+    public List<Auction> getAuction(int page) {
+        return statusReponsitory.getAuction(page);
+    }
+
 }

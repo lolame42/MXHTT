@@ -5,6 +5,8 @@
  */
 package com.tt.service;
 
+import com.tt.pojos.Auction;
+import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import java.util.List;
 
@@ -22,9 +24,16 @@ public interface StatusService {
 
     List<Status> getStatusByIdStatus(int id);
 
-    List<Status> getStatus(String kw, int page);
+    List<Status> getStatus(int page);
 
-    List<Status> getStatusByor(int id, String kw, int page);
+    boolean addauc(Auction auction, Login login);
 
-    List<Status> getStatusByor(int id);
+    List<Auction> getAuction();
+
+    List<Auction> getAuctionByIduser(int id);
+
+    List<Auction> getAuctionByIdAuction(int id);
+
+    List<Auction> getAuction(int page);
+
 }

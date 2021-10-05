@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,8 +57,9 @@ public class Login implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "loginnoti")
     private List<Noti> notiuser;
-    
-   
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "login")
+    private List<Auction> auction;
 
     /**
      * @return the Id
@@ -80,7 +80,6 @@ public class Login implements Serializable {
     public int getId() {
         return Id;
     }
-   
 
     /**
      * @param Id the Id to set
@@ -247,6 +246,21 @@ public class Login implements Serializable {
         this.notiuser = notiuser;
     }
 
-    
-   
+    /**
+     * @return the auction
+     */
+    public List<Auction> getAuction() {
+        return auction;
+    }
+
+    /**
+     * @param auction the auction to set
+     */
+    public void setAuction(List<Auction> auction) {
+        this.auction = auction;
+    }
+
+    /**
+     * @return the auction
+     */
 }
