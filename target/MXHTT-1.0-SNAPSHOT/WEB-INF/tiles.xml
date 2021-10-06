@@ -59,6 +59,17 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/auction.jsp"/>
          
     </definition>
+     <definition name="baseAdminLayout" template="/WEB-INF/layout/baseadmin.jsp">
+        <put-attribute name="title" value="Quản Lý Bài Viết, Tài Khoản"/>
+        <put-attribute name="left" value="/WEB-INF/layout/adminleft.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/layout/adminfooter.jsp"/>
+        <put-attribute name="content" value="..."/>
+    </definition>
+     <definition name="stthashtag" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê bài đăng theo hashtag"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/stthashtag.jsp"/>
+         
+    </definition>
      
 </tiles-definitions>
 
