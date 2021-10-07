@@ -22,8 +22,7 @@
             <h5>#${status.hashtag}</h5>
         </c:if>
     </div>
-    <button ><i class="far fa-thumbs-up"></i></button>
-    <button><i class="far fa-comment-alt"></i></button>
+    
 </div>
 <div class="formregister">
 

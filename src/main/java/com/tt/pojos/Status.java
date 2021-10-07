@@ -58,9 +58,8 @@ public class Status implements Serializable {
     @OneToMany(mappedBy = "status")
     private List<Comment> comment;
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "statusnoti")
-    private List<Noti> notistt;
-   
+    @OneToMany(mappedBy = "statuslike")
+    private List<Ufeel> ufeel;
 
     /**
      * @return the idStatus
@@ -68,7 +67,6 @@ public class Status implements Serializable {
     public int getIdStatus() {
         return idStatus;
     }
-   
 
     /**
      * @param idStatus the idStatus to set
@@ -176,29 +174,20 @@ public class Status implements Serializable {
     }
 
     /**
+     * @return the ufeel
+     */
+    public List<Ufeel> getUfeel() {
+        return ufeel;
+    }
+
+    /**
+     * @param ufeel the ufeel to set
+     */
+    public void setUfeel(List<Ufeel> ufeel) {
+        this.ufeel = ufeel;
+    }
+
+    /**
      * @return the notistt
      */
-    public List<Noti> getNotistt() {
-        return notistt;
-    }
-
-    /**
-     * @param notistt the notistt to set
-     */
-    public void setNotistt(List<Noti> notistt) {
-        this.notistt = notistt;
-    }
-
-    /**
-     * @return the step
-     */
-    /**
-     * @return the hour
-     */
-    /**
-     * @return the step
-     */
-   
-
-    
 }

@@ -52,7 +52,8 @@ public class HomeController {
     private LoginService loginService;
     @Autowired
     private NotiService notiService;
-    
+
+   
 
     @GetMapping("/")
     public String login(Model model, Principal principal) {
@@ -60,29 +61,16 @@ public class HomeController {
         return "login";
     }
 
-   
     @GetMapping("/setting")
     public String viewsetting(Model model, Principal principal) {
 
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        List<Noti> noti = a.getNotiuser();
-        Collections.reverse(noti);
-        model.addAttribute("noti", noti);
-        //
         return "setting";
     }
 
     @PostMapping("/setting")
     public String changesetting(Model model, @ModelAttribute(value = "user") Login user, Principal principal) {
 
-        if (this.loginService.Update(user)) {
-            model.addAttribute("thongbao", "thay đổi thành công");
-            return "setting";
-        } else {
-            model.addAttribute("thongbao", "thay đổi thất bại");
-            return "redirect:/setting";
-        }
+        return "";
 
     }
 
@@ -94,9 +82,8 @@ public class HomeController {
         Collections.reverse(noti);
         model.addAttribute("noti", noti);
         //
-
         Login loginwall;
-        loginwall = userService.getUserById(Integer.parseInt(user_name)).get(0);
+        loginwall = userService.getUserById(Integer.parseInt(user_name));
 
         if (!loginwall.getUser_name().isEmpty()) {
             model.addAttribute("userwall", loginwall);
@@ -154,16 +141,11 @@ public class HomeController {
             return "home";
         }
         if (!newcmt.getContent().isEmpty()) {
-            newcmt.setLogin(a);
-            newcmt.setStatus(status);
 
-            if (this.commentService.add(newcmt) == false) {
+            if (this.commentService.add(a, status, newcmt) == false) {
                 model.addAttribute("errMsg", "Bình luận không thành công");
             } else {
-                Noti addnoti = new Noti();
-                addnoti.setAvatar(a.getImage());
-                addnoti.setName(a.getFull_name());
-                notiService.add(addnoti, status.getLogin(), status, 1);
+
                 model.addAttribute("errMsg", "Bình luận thành công");
             }
 
@@ -183,6 +165,7 @@ public class HomeController {
         Collections.reverse(noti);
         model.addAttribute("noti", noti);
         //
+       
 
         model.addAttribute("userfind", this.userService.getUsers(kw));
         return "finduser";

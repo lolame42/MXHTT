@@ -21,16 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Repository
-public class CommentReponsitoryImpl implements CommentReponsitory{
-     @Autowired
+public class CommentReponsitoryImpl implements CommentReponsitory {
+
+    @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
     public boolean add(Comment comment) {
         Session session = sessionFactory.getObject().getCurrentSession();
-        Date date = new Date();
-        comment.setDate(date);
-         try {
+
+        comment.setDate(new Date());
+        try {
             session.save(comment);
             return true;
         } catch (HibernateException ex) {
@@ -38,5 +39,5 @@ public class CommentReponsitoryImpl implements CommentReponsitory{
         }
         return false;
     }
-    
+
 }

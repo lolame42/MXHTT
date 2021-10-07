@@ -35,8 +35,8 @@
                         </c:if>
 
                     </div>
-                    <button>Thích</button>
-                    <button>Bình Luận</button>
+                    
+                    
 
                 </div>
             </c:forEach>

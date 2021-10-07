@@ -28,13 +28,13 @@
         </form>      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               
+
                 <li class="nav-item">
-                   
+
                     <a class="nav-link" href="<c:url value="/home"/>"><i class="fas fa-home"></i> </a>
                 </li
-                 <li class="nav-item">
-                   
+                <li class="nav-item">
+
                     <a class="nav-link" href="<c:url value="/auction"/>"><i class="fas fa-gavel"></i> </a>
                 </li
                 <li>
@@ -47,7 +47,10 @@
                                 <div>
                                     <img class="otb" src="<c:url value="${noti.avatar}" />"alt="${noti.name}"/> 
                                     <c:if test = "${noti.type==1}">
-                                        <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>">${noti.name} đã cmt stt của bạn</a>
+                                        <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>">${noti.name} đã đã bình luận bài viết của bạn</a>
+                                    </c:if>
+                                    <c:if test = "${noti.type==2}">
+                                        <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>">${noti.name} đã thích bài viết của bạn</a>
                                     </c:if>
 
                                 </div> 

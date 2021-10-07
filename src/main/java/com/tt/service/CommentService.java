@@ -6,12 +6,14 @@
 package com.tt.service;
 
 import com.tt.pojos.Comment;
+import com.tt.pojos.Login;
+import com.tt.pojos.Status;
 
 /**
  *
  * @author DAVADO
  */
 public interface CommentService {
-    boolean add(Comment comment);
+    boolean add(Login login,Status status,Comment comment);
     
 }

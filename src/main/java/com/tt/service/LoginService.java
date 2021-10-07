@@ -19,6 +19,6 @@ public interface LoginService extends UserDetailsService {
 
     boolean addOrUpdate(Login login);
     
-    boolean Update(Login login);
+   
 
 }

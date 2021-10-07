@@ -63,16 +63,5 @@ public class LoginReponsitoryImpl implements LoginReponsitory{
         
     }
 
-    @Override
-    public boolean Update(Login login) {
-        Session session=sessionFactory.getObject().getCurrentSession();
-        if(!userService.getUserById(login.getId()).isEmpty())
-        {
-            
-            session.update(login);
-            return true;
-            
-        }
-        return false;
-    }
+    
 }

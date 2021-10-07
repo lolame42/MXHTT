@@ -20,6 +20,6 @@ public interface UserReponsitory {
 
     List<Login> getUserByUserName(String string);
 
-    List<Login> getUserById(int id);
+    Login getUserById(int id);
 
 }

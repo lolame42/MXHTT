@@ -9,7 +9,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
+<script src="<c:url value="/js/like.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
+
 <div class="main">
     <c:url value="/home" var="action" />
     <div class="main">
@@ -54,10 +56,14 @@
                             <h5>#${allstatus.hashtag}</h5>
                         </c:if>
                     </div>
-                    <button ><i class="far fa-thumbs-up"></i></button>
+                    <c:if test= "${user.id!=allstatus.login.id}">
+                        <input type="button" value="Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
+                    </c:if>
+                    
                     <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>"><i class="far fa-comment-alt"></i> </a>
                 </div>
             </c:forEach>
+
             <ul>
                 <c:forEach begin="1" end="${Math.ceil(countstt/30)}" var = "page">
                     <li class="page-item"><a class="page-link" href=" <c:url value="/home" />?page=${page}">${page}</a></li>

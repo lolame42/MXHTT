@@ -49,7 +49,7 @@ public class UserReponsitoryImpl implements UserReponsitory {
         if (!kw.isEmpty() && kw != null) {
             Predicate p = builder.like(root.get("full_name").as(String.class),
                     String.format("%%%s%%", kw));
-            query=query.where(p);
+            query = query.where(p);
 
         }
 
@@ -67,7 +67,7 @@ public class UserReponsitoryImpl implements UserReponsitory {
         if (!string.isEmpty() && string != null) {
             Predicate p = builder.like(root.get("user_name").as(String.class),
                     String.format("%s", string));
-            query=query.where(p);
+            query = query.where(p);
 
         }
 
@@ -76,21 +76,11 @@ public class UserReponsitoryImpl implements UserReponsitory {
     }
 
     @Override
-    public List<Login> getUserById(int id) {
+    public Login getUserById(int id) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Login> query = builder.createQuery(Login.class);
-        Root root = query.from(Login.class);
-        query = query.select(root);
-        Predicate p = builder.equal(root.get("Id"), id);
-        query = query.where(p);
+        Login login = session.get(Login.class, id);
+        return login;
 
-        Query q = session.createQuery(query);
-        return q.getResultList();
-        
     }
-
-   
-    
 
 }
