@@ -1,15 +1,69 @@
-.otb img{
+body{background-color: #F5F7F4;}
+.mains{
+    background-color: #FFF;
+    padding: 10px;
+    margin-top: 20px;
+}
+.otb, .otb img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 .status{
-    border: 1px solid #000;
+    border: 1px solid #D2D2D2;
 }
-.main{
-    background-color: #F5F7F4;
-    border-radius: 5px;
-    border: 1px solid #000;
-    padding: 10px;
+.info{
+    display: flex;
+    background-color: #F7F7F7;
+    border: #D2D2D2 solid 1px;
+    margin: -2px;
+}
+.info img{
+    margin: 4px;
+}
+.tgcmt, .tgcmt p{
+    margin-left: 10px;
+    margin-top: -5px;
+}
+.tgcmt p{
+    font-size: small;
+    color: graytext;}
+.tgcmt h5{
+    margin-top: 10px;
+}
+.card-body p{
+    font-size: larger;
+    word-wrap: break-word;}
+.nut{
+    display: flex;
+}
+.full{
+    border: #D2D2D2 solid 1px;
+}
+.post{
+    display: flex;
     margin-bottom: 5px;
+    margin-left: 40px;
+}
+.post input{
+    width: 90%;
+    margin-top: 5px;
+    margin-left: 10px;
+    border-radius: 15px;
+    background-color: #F0F2F5;
+}
+.comment{
+    width: auto;
+    font-size: larger;
+    background-color: #F0F2F5;
+    border-radius: 25px;
+    padding: 15px;
+    margin: 10px;
+    margin-top: -5px;
+}
+.comment p{margin-left: -10px;}
+.comments{
+    display: flex;
+    margin-left: 40px;
+    margin-top: 5px;
 }

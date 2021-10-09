@@ -1,27 +1,30 @@
 body{ background-color: #F5F7F4;}
+
 .main{
     margin-bottom: 10%;
     margin-top: 3%;
-}
-.main {
-border-radius: 4px;
-float: left;
-width: 100%;
-background-color: #FFF;
-}
-textarea {
+    float: left;
     width: 100%;
-    height: 142px;
+    background-color: #FFF;
+}
+.box textarea{
+    width: 100.2%;
     color: #000;
     font-family: Lato;
     font-size: 20px;
-    padding: 20px;
+    padding: 10px;
+    margin: -1px;
     resize:vertical;
-    border: medium none;
-    border-radius: 4px 4px 0 0;
-    background-color: #F5F7F4;
+    border: #D2D2D2 solid 1px;
 }
-
+.hashtag{
+    width: 100.2%;
+    margin: -1px;
+    margin-bottom: 15px;
+}
+.formregister{
+    padding: 10px;
+}
 ul {
 float: left;
 list-style: none outside none;
@@ -31,10 +34,6 @@ width: auto;
 a{
     cursor: pointer;
 }
-a:hover {
-background: none repeat scroll 0 0 #606060;
-color: #fff;
-}
 .btn{
     margin-left: 90%;
 }
@@ -42,29 +41,78 @@ color: #fff;
     border-radius: 50%;
 }
 .status{
-    border: 1px solid #000;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #FFF;
 }
 .status img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    margin: 4px;
 }
-.my-date i{
-    font-size: 14px;
-    margin-left: 60px;
-    color: #D2D2D2;
+
+.name h5{margin-top: 5px;}
+.my-date p{
+    color: graytext;
+    font-size:small;
+    margin-top: -5px;
 }
 .ok{
-    border: 1px solid #000;
+    border: 1px solid #D2D2D2;
     margin-bottom: 10px;
+    background-color: #F7F7F7;
 }
 .ok img{
     width: 50px;
     height: 50px;
     border-radius: 50px;
+    margin: 5px;
+}
+.info{
+    display: flex;
+    background-color: #F7F7F7;
+
+    border: solid #D2D2D2 1px;
+}
+.name{
+    margin-left: 10px;
+    height: 60px;
+}
+.name i{
+    margin-left: 0px;
+    font-size: 18px;
+    background-color: #F7F7F7;
+    color: graytext;
+}
+.nut{
+    height: 50px;
+    background-color: #F7F7F7;
+    margin-top: -1px;  
+    border: #D2D2D2 solid 1px;
+    display: flex;
+}
+.nut input{
+    border: none;
+    background-color: #F7F7F7;
+    font-size: 20px;
+    margin-left: 10px;
+}
+.nut input:hover{
+    color: #6495ED;
+}
+.nut a{
+    color: #000;
+    font-size: 20px;
+}
+.nut a:hover{
+    background-color: #F7F7F7;
+}
+.card-body{
+    padding: 10px;
+    word-wrap: break-word;
+    margin-top: -1px;
+    font-size: larger;
+    border: #D2D2D2 solid 1px;
 }
 
 

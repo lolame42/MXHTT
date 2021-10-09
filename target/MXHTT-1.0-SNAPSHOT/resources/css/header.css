@@ -1,6 +1,7 @@
 nav{
     width: 100%;
     height: auto;
+    background-color: #FFFF;
 }
 i{
     font-size: 30px;
@@ -8,7 +9,7 @@ i{
     border-radius: 50%;
 }
 .nav-link:hover{
-    background-color: #F5F7F4;
+    background-color: #FFF;
 }
 .nav-home{
     margin-left: 50px;
@@ -26,46 +27,76 @@ i{
     height: 50px;
     border-radius: 50%;
 }
-.nav-black a:hover{
-    background-color: #F5F7F4;
+.nav-black a, .nut_dropdown button, .nut_dropdown, .navbar-brand, .input-group button:hover{
+    background-color: #FFFF;;
 }
 .nav-item{
     font-size: 22px;
 }
-.input-group button:hover{
-    background-color: #FFF;
+.navbar-brand img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.navbar-nav{
+    margin-left: 50px;
 }
 .nut_dropdown {
-  background-color: #F8F9FA;
+  background-color: #FFF;
   color: white;
   font-size: 26px;
   border: none;
 }
-
-/* Thiết lập vị trí cho thẻ div với class dropdown*/
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Nội dung Dropdown */
 .noidung_dropdown {
-  /*Ẩn nội dụng các đường dẫn*/
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+    width: 340px;
+    height: 600px;
+    overflow-x: hidden;
+    display: none;
+    margin-left: -120px;
+    margin-top: 10px;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 
-/* Thiết kế style cho các đường dẫn tronng Dropdown */
+}
 .noidung_dropdown a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
+.input-group button{
+    height: 38px;
+}
 .hienThi{
   display:block;
+}
+.notification{
+    display: flex
+}
+.notification img{
+    width: 60px;
+    height: 60px;
+    padding: 5px;}
+
+.text hr{
+    width: 260px;
+    margin-left: -20px;
+}
+.text a{
+    width: 270px;
+    height: 60px;
+    font-size: 18px;
+    margin-top: 0px;
+    padding: 5px;}
+.text a:hover{
+    border-radius:20%;
+    background-color: #F2F2F2;
 }

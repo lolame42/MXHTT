@@ -26,11 +26,11 @@
         <form method="post" action="${action}">
             <div class="form-group">
                 <label for="user_name"></label>
-                <input type="text" id="user_name" name="user_name" class="form-control" placeholder="Tên tài khoản"/>      
+                <input type="text" id="user_name" name="user_name" class="form-control" placeholder="&#128272; Tên tài khoản"/>      
             </div>
             <div class="form-group">
                 <label for="user_password"></label>
-                <input type="password" id="user_password" name="user_password" class="form-control" placeholder="Mật khẩu"/>      
+                <input type="password" id="user_password" name="user_password" class="form-control" placeholder="&#128273; Mật khẩu"/>      
             </div>
             <div class="form-group">
                 <input type="submit" class="login text-white" value="Đăng Nhập"/>
@@ -38,7 +38,7 @@
             </div>
         </form>
             <hr />
-            <a href="<c:url value="/register"/>" class="nav-link text-dark text-center">Bạn chưa có tài khoản? <b>Đăng ký ngay!!!</b></a>
+            <a href="<c:url value="/register"/>" class="nav-link text-dark text-center">Bạn chưa có tài khoản? &#128073; <b>Đăng ký ngay!!!</b></a>
          
     </div>
 </div>
