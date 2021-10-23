@@ -20,11 +20,13 @@ public interface StatusReponsitory {
     List<Status> getStatusByIduser(int id);
     List<Status> getStatusByIdStatus(int id);
     List<Status> getStatus(int page);
+    boolean deletestt(int id);
     boolean addauc(Auction auction,Login login);
     List<Auction> getAuction();
     List<Auction> getAuctionByIduser(int id);
-    List<Auction> getAuctionByIdAuction(int id);
+    Auction getAuctionByIdAuction(int id);
     List<Auction> getAuction(int page);
+    boolean deleteauc(int id);
     
     
     

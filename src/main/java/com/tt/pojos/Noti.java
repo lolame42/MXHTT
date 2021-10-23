@@ -30,12 +30,15 @@ public class Noti implements Serializable {
     @Column(name = "idnoti")
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "idUser")
     private Login loginnoti;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "idStt")
     private Status statusnoti;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "idAuction")
+    private Auction auctionnoti;
     @Column(name = "Fullname")
     private String name;
     @Column(name = "Avatar")
@@ -141,6 +144,20 @@ public class Noti implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the auction
+     */
+    public Auction getAuctionnoti() {
+        return auctionnoti;
+    }
+
+    /**
+     * @param auction the auction to set
+     */
+    public void setAuctionnoti(Auction auctionnoti) {
+        this.auctionnoti = auctionnoti;
     }
 
 }

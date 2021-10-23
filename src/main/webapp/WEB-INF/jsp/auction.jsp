@@ -61,12 +61,14 @@
                         <h5>Bước nhảy ${allauction.step}</h5>
 
                     </div>
-                    <button ><i class="far fa-thumbs-up"></i></button>
-                    <a class="otb" href="<c:url value="/status/${allstatus.idStatus}"/>"><i class="far fa-comment-alt"></i> </a>
+
+                </div>
+                <a class="otb nav-link" href="<c:url value="/auctionpart/${allauction.id}" />">Đấu Giá</a>
                 </div>
             </c:forEach>
+        
             <ul>
-               <c:forEach begin="1" end="${Math.ceil(countauc/30)}" var = "page">
+                <c:forEach begin="1" end="${Math.ceil(countauc/30)}" var = "page">
                     <li class="page-item"><a class="page-link" href=" <c:url value="/auction" />?page=${page}">${page}</a></li>
 
                 </c:forEach>

@@ -25,6 +25,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -117,10 +118,10 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
 
     @Override
     public boolean addauc(Auction auction, Login login) {
-        
-         try {
+
+        try {
             Session session = sessionFactory.getObject().getCurrentSession();
-            
+
             if (auction.getFile() != null) {
                 Map r = this.Cloudinary.uploader().upload(auction.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
@@ -137,6 +138,7 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
             return false;
         }
     }
+
     @Override
     public List<Auction> getAuction() {
 
@@ -155,17 +157,12 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
     }
 
     @Override
-    public List<Auction> getAuctionByIdAuction(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
-        Root root = query.from(Auction.class);
-        query = query.select(root);
-        Predicate p = builder.equal(root.get("idauction"), id);
-        query = query.where(p);
+    public Auction getAuctionByIdAuction(int id) {
 
-        Query q = session.createQuery(query);
-        return q.getResultList();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Auction auction = session.get(Auction.class, id);
+        return auction;
+
     }
 
     @Override
@@ -175,7 +172,6 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
         CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
         Root root = query.from(Auction.class);
         query = query.select(root);
-
         query = query.orderBy(builder.desc(root.get("idauction")));
 
         Query q = session.createQuery(query);
@@ -186,5 +182,30 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
         return q.getResultList();
     }
 
+    @Override
+    public boolean deletestt(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Status status = getStatusByIdStatus(id).get(0);
+            session.delete(status);
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteauc(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Auction auction = getAuctionByIdAuction(id);
+            session.delete(auction);
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
 
 }

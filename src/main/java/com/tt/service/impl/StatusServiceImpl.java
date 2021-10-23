@@ -75,13 +75,22 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
-    public List<Auction> getAuctionByIdAuction(int id) {
+    public Auction getAuctionByIdAuction(int id) {
         return statusReponsitory.getAuctionByIdAuction(id);
     }
 
     @Override
     public List<Auction> getAuction(int page) {
         return statusReponsitory.getAuction(page);
+    }
+      @Override
+    public boolean deletestt(int id) {
+      return statusReponsitory.deletestt(id);
+    }
+
+    @Override
+    public boolean deleteauc(int id) {
+      return statusReponsitory.deleteauc(id);
     }
 
 }

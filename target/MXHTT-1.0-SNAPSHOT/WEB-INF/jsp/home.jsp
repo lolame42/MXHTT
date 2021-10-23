@@ -61,7 +61,7 @@
                     </div>
                     <div class="nut">
                         <c:if test= "${user.id!=allstatus.login.id}">
-                            <input type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
+                            <input id="thich" type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
                         </c:if> 
                         <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Bình luận</a>
                     </div>

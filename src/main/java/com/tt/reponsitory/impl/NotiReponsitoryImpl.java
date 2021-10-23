@@ -5,11 +5,16 @@
  */
 package com.tt.reponsitory.impl;
 
+import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
+import com.tt.pojos.Sell;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.NotiReponsitory;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +50,37 @@ public class NotiReponsitoryImpl implements NotiReponsitory {
         return false;
         
 
+    }
+
+    @Override
+    public boolean addnotiauc(Noti noti, Login login, Auction auction, int type) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        noti.setLoginnoti(login);
+        noti.setAuctionnoti(auction);
+        noti.setType(type);
+        Date date = new Date();
+        noti.setDate(date);
+        try {
+            session.save(noti);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+        
+    }
+
+    @Override
+    public List<Noti> getNotibyLogin(Login i) {
+       
+       List<Noti> list = i.getNotiuser();
+       Collections.sort(list, new Comparator<Noti>() {
+           @Override
+           public int compare(Noti o1, Noti o2) {
+               return o2.getId() - o1.getId();
+           }
+       });
+       return list;
     }
 
 }

@@ -12,13 +12,10 @@ import com.tt.pojos.Status;
 import com.tt.reponsitory.CommentReponsitory;
 import com.tt.service.CommentService;
 import com.tt.service.NotiService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author DAVADO
- */
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -28,16 +25,22 @@ public class CommentServiceImpl implements CommentService {
     NotiService notiService;
 
     @Override
-    public boolean add(Login login, Status status,Comment comment) {
-        
-        comment.setLogin(login);
-        comment.setStatus(status);
-        Noti addnoti = new Noti();
-        addnoti.setAvatar(login.getImage());
-        addnoti.setName(login.getFull_name());
-        notiService.add(addnoti, status.getLogin(), status, 1);
+    public boolean addcmt(Login login, Status status, Comment comment) {
 
-        return commentReponsitory.add(comment);
+        comment.setLogincmt(login);
+        comment.setStatuscomment(status);
+        if (login.getId() != status.getLogin().getId()) {
+            Noti noti = new Noti();
+            noti.setAvatar(login.getImage());
+            noti.setName(login.getFull_name());
+            notiService.add(noti, status.getLogin(), status, 1);
+        }
+        return commentReponsitory.addcmt(comment);
+    }
+
+    @Override
+    public List<Comment> getCmtByIdStatus(int i) {
+        return commentReponsitory.getCmtByIdStatus(i);
     }
 
 }

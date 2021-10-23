@@ -24,29 +24,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "comment")
-public class Comment implements Serializable{
-    
+public class Comment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcomment")
-    private int id ;
+    private int id;
     @Column(name = "datecomment")
     private Date date;
     @Column(name = "contencomment")
     private String content;
-    @ManyToOne(fetch = FetchType.EAGER,cascade =CascadeType.REMOVE )
-    @JoinColumn(name = "idstatus")
-    private Status status;
-    @ManyToOne(fetch = FetchType.EAGER,cascade =CascadeType.REMOVE )
-    @JoinColumn(name = "iduser")
-    private Login login;
-    @Column(name = "value")
-    private String value;
-    
-   
-    
-    
-   
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "idlogin")
+    private Login logincmt;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "idstatuscomment")
+    private Status statuscomment;
 
     /**
      * @return the id
@@ -62,10 +55,6 @@ public class Comment implements Serializable{
         this.id = id;
     }
 
-    /**
-     * @return the iduser
-     */
-   
     /**
      * @return the date
      */
@@ -95,52 +84,32 @@ public class Comment implements Serializable{
     }
 
     /**
-     * @return the status
+     * @return the logincmt
      */
-    public Status getStatus() {
-        return status;
+    public Login getLogincmt() {
+        return logincmt;
     }
 
     /**
-     * @param status the status to set
+     * @param logincmt the logincmt to set
      */
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setLogincmt(Login logincmt) {
+        this.logincmt = logincmt;
     }
 
     /**
-     * @return the login
+     * @return the statuscomment
      */
-    public Login getLogin() {
-        return login;
+    public Status getStatuscomment() {
+        return statuscomment;
     }
 
     /**
-     * @param login the login to set
+     * @param statuscomment the statuscomment to set
      */
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setStatuscomment(Status statuscomment) {
+        this.statuscomment = statuscomment;
     }
 
-    /**
-     * @return the value
-     */
-    public String getValue() {
-        return value;
-    }
-
-    /**
-     * @param value the value to set
-     */
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    /**
-     * @return the iduser
-     */
-  
-    
-   
    
 }

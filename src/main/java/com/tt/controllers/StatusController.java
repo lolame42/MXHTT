@@ -7,13 +7,12 @@ package com.tt.controllers;
 
 import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
-import com.tt.pojos.Noti;
 import com.tt.pojos.Status;
+import com.tt.service.NotiService;
+import com.tt.service.SellService;
 import com.tt.service.StatusService;
 import com.tt.service.UserService;
 import java.security.Principal;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,14 +33,16 @@ public class StatusController {
     UserService userService;
     @Autowired
     StatusService statusService;
+    @Autowired
+    NotiService notiService;
+    @Autowired
+    SellService sellService;
 
     @ModelAttribute
     public void ahihi(Model model, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
-        List<Noti> noti = a.getNotiuser();
-        Collections.reverse(noti);
-        model.addAttribute("noti", noti);
+        model.addAttribute("noti", notiService.getNotibyLogin(a));
     }
 
     @GetMapping("/home")
@@ -61,19 +62,6 @@ public class StatusController {
         //model.addAttribute("username", name);
         //model.addAttribute("name",principal.getName()) ;
         return "home";
-    }
-    @GetMapping("/auction")
-    public String auction(Model model, Principal principal, @RequestParam(required = false) Map<String, String> params) {
-
-        //
-        String kw = params.getOrDefault("kw", null);
-        int page = Integer.parseInt(params.getOrDefault("page", "1"));
-
-        model.addAttribute("allauction", this.statusService.getAuction(page));
-        model.addAttribute("countauc", this.statusService.getAuction().size());
-        model.addAttribute("auction", new Auction());
-
-        return "auction";
     }
 
     @PostMapping("/home")
@@ -111,14 +99,26 @@ public class StatusController {
 
     }
 
-    
+    @GetMapping("/auction")
+    public String auction(Model model, Principal principal, @RequestParam(required = false) Map<String, String> params) {
+
+        //
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+
+        model.addAttribute("allauction", this.statusService.getAuction(page));
+        model.addAttribute("countauc", this.statusService.getAuction().size());
+        model.addAttribute("auction", new Auction());
+
+        return "auction";
+    }
 
     @PostMapping("/auction")
     public String addauc(Model model, @ModelAttribute(value = "auction") Auction auction, Principal principal, @RequestParam(required = false) Map<String, String> params) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         //
         int dem = 0;
-        if (auction.getContent() == null || auction.getContent().isEmpty()) {
+        if (auction.getContent() == null || auction.getContent().isEmpty() || auction.getContent().length() > 4999) {
             model.addAttribute("errcontent", "Giới thiệu sản phẩm không được trống và tối đa 5000 ký tự");
             dem++;
         }
@@ -130,10 +130,16 @@ public class StatusController {
             model.addAttribute("errstep", "Bước trống");
             dem++;
         } else {
-            if (Double.parseDouble(auction.getStepstr()) % 10 != 0 || Double.parseDouble(auction.getStepstr()) > 100) {
-                model.addAttribute("errstep", "Bước không hợp lệ, bước cần là số nguyên, tối đa 100 (Đơn vị ngàn VND)");
+            if (sellService.Laso(auction.getStepstr())) {
+                if (Double.parseDouble(auction.getStepstr()) % 10 != 0 || Double.parseDouble(auction.getStepstr()) > 100) {
+                    model.addAttribute("errstep", "Bước cần là số nguyên, tối đa 1000 (Đơn vị ngàn VND)");
+                    dem++;
+                }
+            } else {
                 dem++;
+                model.addAttribute("errstep", "Bước không định dạng");
             }
+
         }
 
         if (dem == 0) {

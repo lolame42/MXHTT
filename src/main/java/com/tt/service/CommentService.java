@@ -8,12 +8,14 @@ package com.tt.service;
 import com.tt.pojos.Comment;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
+import java.util.List;
 
 /**
  *
  * @author DAVADO
  */
 public interface CommentService {
-    boolean add(Login login,Status status,Comment comment);
+    boolean addcmt(Login login,Status status, Comment comment);
+    List<Comment> getCmtByIdStatus(int i) ;
     
 }

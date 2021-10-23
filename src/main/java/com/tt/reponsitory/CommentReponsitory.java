@@ -6,11 +6,13 @@
 package com.tt.reponsitory;
 
 import com.tt.pojos.Comment;
+import java.util.List;
 
 /**
  *
  * @author DAVADO
  */
 public interface CommentReponsitory {
-    boolean add(Comment comment);
+    boolean addcmt(Comment cmt);
+    List<Comment> getCmtByIdStatus(int i) ;
 }

@@ -59,6 +59,22 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/auction.jsp"/>
          
     </definition>
+    <definition name="auctionpart" extends="baseLayout">
+        <put-attribute name="title" value="Sản Phẩm Đấu Giá"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/auctionpart.jsp"/>
+         
+    </definition>
+    <definition name="billsell" extends="baseLayout">
+        <put-attribute name="title" value="Danh sách sản phẩm bán"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/billsell.jsp"/>
+         
+    </definition>
+    
+    
+    
+    
+    
+    
      <definition name="baseAdminLayout" template="/WEB-INF/layout/baseadmin.jsp">
         <put-attribute name="title" value="Quản Lý Bài Viết, Tài Khoản"/>
         <put-attribute name="left" value="/WEB-INF/layout/adminleft.jsp"/>
@@ -67,7 +83,7 @@ and open the template in the editor.
     </definition>
      <definition name="stthashtag" extends="baseAdminLayout">
         <put-attribute name="title" value="Thống kê bài đăng theo hashtag"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/stthashtag.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/stthashtag.jsp"/>
          
     </definition>
      

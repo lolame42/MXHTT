@@ -41,7 +41,7 @@ public class Status implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idStatus")
     private int idStatus;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "iduser")
     private Login login;
     @Column(name = "content")
@@ -55,11 +55,11 @@ public class Status implements Serializable {
     @Transient
     private MultipartFile file;
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "status")
-    private List<Comment> comment;
-    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "statuslike")
     private List<Ufeel> ufeel;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "statuscomment")
+    private List<Comment> comment;
 
     /**
      * @return the idStatus
@@ -162,17 +162,6 @@ public class Status implements Serializable {
     /**
      * @return the comment
      */
-    public List<Comment> getComment() {
-        return comment;
-    }
-
-    /**
-     * @param comment the comment to set
-     */
-    public void setComment(List<Comment> comment) {
-        this.comment = comment;
-    }
-
     /**
      * @return the ufeel
      */
@@ -185,6 +174,20 @@ public class Status implements Serializable {
      */
     public void setUfeel(List<Ufeel> ufeel) {
         this.ufeel = ufeel;
+    }
+
+    /**
+     * @return the statuscmt
+     */
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    /**
+     * @param statuscmt the statuscmt to set
+     */
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
     }
 
     /**

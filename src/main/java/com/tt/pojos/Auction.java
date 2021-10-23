@@ -7,6 +7,7 @@ package com.tt.pojos;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -36,6 +40,8 @@ public class Auction implements Serializable {
     private String image;
     @Column(name = "date")
     private Date date;
+    @Column(name = "dateend")
+    private Date dateend;
     @Column(name = "step")
     private double step;
     @Transient
@@ -44,16 +50,21 @@ public class Auction implements Serializable {
     private String content;
     @Transient
     private String stepstr;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "idlogin")
     private Login login;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "auctionsell")
+    private List<Sell> listsell;
 
     /**
      * @return the id
      */
+  
     public int getId() {
         return getIdaution();
     }
+    
 
     /**
      * @param id the id to set
@@ -169,6 +180,20 @@ public class Auction implements Serializable {
      */
     public void setLogin(Login login) {
         this.login = login;
+    }
+
+    /**
+     * @return the listsell
+     */
+    public List<Sell> getListsell() {
+        return listsell;
+    }
+
+    /**
+     * @param listsell the listsell to set
+     */
+    public void setListsell(List<Sell> listsell) {
+        this.listsell = listsell;
     }
 
     /**

@@ -60,6 +60,12 @@ public class Login implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "login")
     private List<Auction> auction;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "loginsell")
+    private List<Bill> billsell;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "loginpay")
+    private List<Bill> billpay;
 
     /**
      * @return the Id
@@ -258,6 +264,34 @@ public class Login implements Serializable {
      */
     public void setAuction(List<Auction> auction) {
         this.auction = auction;
+    }
+
+    /**
+     * @return the billsell
+     */
+    public List<Bill> getBillsell() {
+        return billsell;
+    }
+
+    /**
+     * @param billsell the billsell to set
+     */
+    public void setBillsell(List<Bill> billsell) {
+        this.billsell = billsell;
+    }
+
+    /**
+     * @return the billpay
+     */
+    public List<Bill> getBillpay() {
+        return billpay;
+    }
+
+    /**
+     * @param billpay the billpay to set
+     */
+    public void setBillpay(List<Bill> billpay) {
+        this.billpay = billpay;
     }
 
     /**

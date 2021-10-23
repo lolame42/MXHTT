@@ -33,6 +33,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/auction"/>"><i class="fas fa-gavel"></i> </a>
                 </li
+
                 <li>
                     <div class="dropdown" >
                         <button onclick="hamDropdown()" class="nut_dropdown">&#128276;</button>
@@ -45,18 +46,25 @@
                                     </div>
                                     <div class="text">
                                         <c:if test = "${noti.type==1}">
-                                            <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã đã bình luận bài viết của bạn</a>
+                                            <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bình luận bài viết của bạn</a>
                                             <hr />
                                         </c:if>
                                         <c:if test = "${noti.type==2}">
                                             <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã thích bài viết của bạn</a>
                                             <hr />
-                                        </c:if>          
+                                        </c:if> 
+                                        <c:if test = "${noti.type==3}">
+                                            <a href="<c:url value="/auctionpart/${noti.auctionnoti.id}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
+                                            <hr />
+                                        </c:if>   
                                     </div>
                                 </div>
                             </c:forEach>
                         </div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/billsell/0"/>"><i class="fa-home" ></i> </a>
                 </li>
                 <c:if test="${pageContext.request.userPrincipal.name==null}">
                     <li class="nav-black">
