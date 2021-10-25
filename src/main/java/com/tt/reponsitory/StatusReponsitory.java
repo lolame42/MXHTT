@@ -24,7 +24,7 @@ public interface StatusReponsitory {
     boolean addauc(Auction auction,Login login);
     List<Auction> getAuction();
     List<Auction> getAuctionByIduser(int id);
-    Auction getAuctionByIdAuction(int id);
+    List<Auction> getAuctionByIdAuction(int id);
     List<Auction> getAuction(int page);
     boolean deleteauc(int id);
     

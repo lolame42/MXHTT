@@ -5,20 +5,13 @@
  */
 package com.tt.reponsitory.impl;
 
-import com.tt.pojos.Auction;
+import com.tt.pojos.Bill;
 import com.tt.pojos.Login;
 import com.tt.pojos.Sell;
-import com.tt.pojos.Status;
-import com.tt.reponsitory.SellReponsitory;
-import com.tt.service.StatusService;
+import com.tt.reponsitory.BillReponsitory;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -31,38 +24,48 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Repository
-public class SellReponsitoryImpl implements SellReponsitory {
+public class BillReponsitoryImpl implements BillReponsitory {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    @Autowired
-    private StatusService auctionService;
 
     @Override
-    public boolean addsell(Sell sell) {
-        Session s = sessionFactory.getObject().getCurrentSession();
+    public boolean addbill(Bill bill) {
+        Session session =  this.sessionFactory.getObject().getCurrentSession();
         try {
-            sell.setDate(new Date());
-            s.save(sell);
+            session.save(bill);
             return true;
         } catch (Exception e) {
+            return false;
         }
-        return false;
-
     }
 
     @Override
-    public List<Sell> getSellByIdAuction(int i) {
-       Auction a= auctionService.getAuctionByIdAuction(i).get(0);
-       List<Sell> list = a.getListsell();
-       Collections.sort(list, new Comparator<Sell>() {
+    public List<Bill> getbillsell(Login login) {
+        List<Bill> list = login.getBillsell();
+        Collections.sort(list, new Comparator<Bill>() {
            @Override
-           public int compare(Sell o1, Sell o2) {
+           public int compare(Bill o1, Bill o2) {
                return o2.getId() - o1.getId();
            }
        });
        return list;
+        
+        
     }
-    
+
+    @Override
+    public List<Bill> getbillpay(Login login) {
+        List<Bill> list = login.getBillpay();
+        Collections.sort(list, new Comparator<Bill>() {
+           @Override
+           public int compare(Bill o1, Bill o2) {
+               return o2.getId() - o1.getId();
+           }
+       });
+       return list;
+        
+        
+    }
 
 }

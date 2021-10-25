@@ -46,17 +46,39 @@
                                     </div>
                                     <div class="text">
                                         <c:if test = "${noti.type==1}">
-                                            <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bình luận bài viết của bạn</a>
-                                            <hr />
+                                             <c:if test = "${noti.statusnoti.idStatus!=null}">
+                                                <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bình luận bài viết của bạn</a>
+                                                <hr />
+                                            </c:if> 
+                                            <c:if test = "${noti.statusnoti.idStatus==null}">
+                                                <a href="<c:url value="/status/0"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bình luận bài viết của bạn</a>
+                                                <hr />
+                                            </c:if>
                                         </c:if>
                                         <c:if test = "${noti.type==2}">
-                                            <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã thích bài viết của bạn</a>
-                                            <hr />
+                                            <c:if test = "${noti.statusnoti.idStatus!=null}">
+                                                <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã thích bài viết của bạn</a>
+                                                <hr />
+                                            </c:if> 
+                                            <c:if test = "${noti.statusnoti.idStatus==null}">
+                                                <a href="<c:url value="/status/0"/>" class="nav-link text-dark"><b>${noti.name}</b>đã thích bài viết của bạn</a>
+                                                <hr />
+                                            </c:if>
                                         </c:if> 
                                         <c:if test = "${noti.type==3}">
-                                            <a href="<c:url value="/auctionpart/${noti.auctionnoti.id}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
-                                            <hr />
+                                            <c:if test = "${noti.auctionnoti.id==null}">
+                                                <a href="<c:url value="/auctionpart/0"/>" class="nav-link text-dark"><b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
+                                                <hr />
+                                            </c:if> 
+                                            <c:if test = "${noti.auctionnoti.id!=null}">
+                                                <a href="<c:url value="/auctionpart/${noti.auctionnoti.id}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
+                                                <hr />
+                                            </c:if>
                                         </c:if>   
+                                        <c:if test = "${noti.type==4}">
+                                            <a href="<c:url value="/billsell/0"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bán sản phẩm cho bạn</a>
+                                            <hr />
+                                        </c:if> 
                                     </div>
                                 </div>
                             </c:forEach>
@@ -74,8 +96,8 @@
                 <c:if test="${pageContext.request.userPrincipal.name!=null}">
 
                     <li class="nav-black">
-                        <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  
-                        <a href="<c:url value="/home"/>" class="nav-link text-dark"><b>${user.full_name}</b></a>                  
+                        <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  </a>
+                        <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><b>${user.full_name}</b></a>                  
                     </li>
                     <li class="nav-item active">
                         <a href="<c:url value="/logout"/>" class="nav-link text-dark"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a>

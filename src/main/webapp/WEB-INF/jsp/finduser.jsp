@@ -18,7 +18,9 @@
                 <div class="card-body">
                     <c:if test="${userfind.image!=null}">
                         <div class="info">
-                            <img class="img-fluid" src="<c:url value="${userfind.image}" />"alt="${userfind.full_name}"/>  
+                            <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
+                                <img class="img-fluid" src="<c:url value="${userfind.image}" />"alt="${userfind.full_name}"/> </a>
+
                             <div class="card-body">
                                 <h4 class="card-title">${userfind.full_name}</h4>
                             </div>
@@ -27,7 +29,9 @@
 
                     <c:if test="${userfind.image==null}">
                         <div class="info">
-                            <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${userfind.full_name}"/>     
+                            <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
+                                <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${userfind.full_name}"/>      </a>
+
                             <div class="card-body">
                                 <h4 class="card-title">${userfind.full_name}</h4>
                             </div>

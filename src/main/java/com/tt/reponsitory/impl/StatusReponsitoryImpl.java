@@ -157,12 +157,18 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
     }
 
     @Override
-    public Auction getAuctionByIdAuction(int id) {
+    public List<Auction> getAuctionByIdAuction(int id) {
 
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Auction auction = session.get(Auction.class, id);
-        return auction;
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
+        Root root = query.from(Auction.class);
+        query = query.select(root);
+        Predicate p = builder.equal(root.get("idauction"), id);
+        query = query.where(p);
 
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
     @Override
@@ -199,7 +205,7 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
     public boolean deleteauc(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            Auction auction = getAuctionByIdAuction(id);
+            Auction auction = getAuctionByIdAuction(id).get(0);
             session.delete(auction);
             return true;
         } catch (Exception e) {

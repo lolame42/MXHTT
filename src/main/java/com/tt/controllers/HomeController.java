@@ -10,6 +10,7 @@ import com.tt.pojos.Comment;
 import com.tt.pojos.Login;
 import com.tt.pojos.Sell;
 import com.tt.pojos.Status;
+import com.tt.service.BillService;
 import com.tt.service.CommentService;
 import com.tt.service.LoginService;
 import com.tt.service.NotiService;
@@ -34,7 +35,8 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private BillService billService;
     @Autowired
     private StatusService statusService;
     @Autowired
@@ -98,7 +100,7 @@ public class HomeController {
             model.addAttribute("allcomment", commentService.getCmtByIdStatus(Integer.parseInt(idstt)));
             return "status";
         }
-        return "err";
+        return "error";
 
     }
 
@@ -109,27 +111,30 @@ public class HomeController {
         model.addAttribute("noti", notiService.getNotibyLogin(a));
         //
         List<Status> status = statusService.getStatusByIdStatus(Integer.parseInt(idstt));
-        model.addAttribute("status", status.get(0));
-        model.addAttribute("allcomment", commentService.getCmtByIdStatus(Integer.parseInt(idstt)));
-        model.addAttribute("newcmt", new Comment());
-        if (newcmt.getContent().length() > 4999) {
-            model.addAttribute("errMsg", "Bạn bình luận quá ư là dài !");
-        } else {
-            if (newcmt.getContent().length() == 0) {
-                model.addAttribute("errMsg", "Bạn chưa bình luận !");
+        if (!status.isEmpty()) {
+            model.addAttribute("status", status.get(0));
+            model.addAttribute("allcomment", commentService.getCmtByIdStatus(Integer.parseInt(idstt)));
+            model.addAttribute("newcmt", new Comment());
+            if (newcmt.getContent().length() > 4999) {
+                model.addAttribute("errMsg", "Bạn bình luận quá ư là dài !");
             } else {
-                if (commentService.addcmt(a, status.get(0), newcmt)) {
-                    model.addAttribute("errMsg", "Bình Luận thành công");
-
-                    model.addAttribute("allcomment", commentService.getCmtByIdStatus(Integer.parseInt(idstt)));
-
+                if (newcmt.getContent().length() == 0) {
+                    model.addAttribute("errMsg", "Bạn chưa bình luận !");
                 } else {
-                    model.addAttribute("errMsg", "Bình Luận thất bại");
+                    if (commentService.addcmt(a, status.get(0), newcmt)) {
+                        model.addAttribute("errMsg", "Bình Luận thành công");
+
+                        model.addAttribute("allcomment", commentService.getCmtByIdStatus(Integer.parseInt(idstt)));
+
+                    } else {
+                        model.addAttribute("errMsg", "Bình Luận thất bại");
+                    }
                 }
             }
         }
 
         return "status";
+
     }
 
     @GetMapping("/auctionpart/{idauc}")
@@ -139,31 +144,37 @@ public class HomeController {
         model.addAttribute("noti", notiService.getNotibyLogin(a));
         //
         model.addAttribute("newsell", new Sell());
-        Auction auction = statusService.getAuctionByIdAuction(Integer.parseInt(idauc));
-        model.addAttribute("auction", auction);
-        List<Sell> allsell = sellService.getSellByIdAuction(Integer.parseInt(idauc));
-        double top = 0;
-        if (auction.getLogin().getId() == a.getId()) {
-            model.addAttribute("my", "a");
-        }
-        if (!allsell.isEmpty()) {
-            Sell topSell = allsell.get(0);
-            if (topSell.getValue() == auction.getStep() * 20) {
 
-                model.addAttribute("an", "Sản phẩm này đã được mua với giá cao nhất");
+        List<Auction> listauction = statusService.getAuctionByIdAuction(Integer.parseInt(idauc));
+        if (!listauction.isEmpty()) {
+            Auction auction = listauction.get(0);
+            model.addAttribute("auction", auction);
+            List<Sell> allsell = sellService.getSellByIdAuction(Integer.parseInt(idauc));
+            double top = 0;
+            if (auction.getLogin().getId() == a.getId()) {
+                model.addAttribute("my", "a");
+            }
+            if (!allsell.isEmpty()) {
+                Sell topSell = allsell.get(0);
+                if (topSell.getValue() == auction.getStep() * 20) {
 
-            } else {
-                model.addAttribute("allsell", allsell);
-                top = topSell.getValue();
-                model.addAttribute("top", top);
-                if (topSell.getLoginsell().getId() == a.getId()) {
-                    model.addAttribute("check", "Bạn đang là người ra giá cao nhất");
+                    model.addAttribute("an", "Sản phẩm này đã được mua với giá cao nhất");
+
+                } else {
+                    model.addAttribute("allsell", allsell);
+                    top = topSell.getValue();
+                    model.addAttribute("top", top);
+                    if (topSell.getLoginsell().getId() == a.getId()) {
+                        model.addAttribute("check", "Bạn đang là người ra giá cao nhất");
+                    }
                 }
+
             }
 
+            return "auctionpart";
+        } else {
+            return "error";
         }
-
-        return "auctionpart";
 
     }
 
@@ -174,7 +185,7 @@ public class HomeController {
         model.addAttribute("noti", notiService.getNotibyLogin(a));
         //
         model.addAttribute("newsell", new Sell());
-        Auction auction = statusService.getAuctionByIdAuction(Integer.parseInt(idauc));
+        Auction auction = statusService.getAuctionByIdAuction(Integer.parseInt(idauc)).get(0);
         model.addAttribute("auction", auction);
         List<Sell> allsell = sellService.getSellByIdAuction(Integer.parseInt(idauc));
         double top = 0;
@@ -246,25 +257,33 @@ public class HomeController {
         model.addAttribute("user", a);
         model.addAttribute("noti", notiService.getNotibyLogin(a));
         //
-        if (kind != "0") {
-            Auction auction = statusService.getAuctionByIdAuction(Integer.parseInt(kind));
-            if (auction != null) {
-                if(statusService.deleteauc(auction.getId()))
-                    return"billsell";
-             
-            }else
-            {
-                Status status = statusService.getStatusByIdStatus(Integer.parseInt(kind)).get(0);
-                statusService.deletestt(status.getIdStatus());
+        if (kind != null) {
+            List<Auction> listauction = statusService.getAuctionByIdAuction(Integer.parseInt(kind));
+            if (!listauction.isEmpty()) {
+                Auction auction = listauction.get(0);
+                if (auction.getLogin().getId() == a.getId()) {
+                    List<Sell> sell = sellService.getSellByIdAuction(auction.getId());
+                    if (!sell.isEmpty()) {
+                        billService.addbill(auction.getLogin(), sell.get(0).getLoginsell(), (int) sell.get(0).getValue());
+                    }
+                    statusService.deleteauc(auction.getId());
+
+                }
             }
+            model.addAttribute("allbillsell", billService.getbillsell(a));
+            model.addAttribute("allbillpay", billService.getbillpay(a));
+
+            return "billsell";
         }
 
-        return "billsell";
+        return "error";
 
     }
 
     @RequestMapping("/find")
-    public String find(Model model, @RequestParam(value = "kw", required = false, defaultValue = "") String kw, Principal principal) {
+    public String find(Model model,
+            @RequestParam(value = "kw", required = false, defaultValue = "") String kw, Principal principal
+    ) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
         model.addAttribute("noti", notiService.getNotibyLogin(a));        //
@@ -274,13 +293,16 @@ public class HomeController {
     }
 
     @RequestMapping("/hello/{name}")
-    public String hello(Model model, @PathVariable(value = "name") String name) {
+    public String hello(Model model,
+            @PathVariable(value = "name") String name
+    ) {
         model.addAttribute("message", "Anh " + name + "!!!");
         return "hello";
     }
 
     @RequestMapping(path = "/test")
-    public String testRedirect(Model model) {
+    public String testRedirect(Model model
+    ) {
         model.addAttribute("testMg", "Anh Iu Em");
 
         return "forward:/hello/Tu";

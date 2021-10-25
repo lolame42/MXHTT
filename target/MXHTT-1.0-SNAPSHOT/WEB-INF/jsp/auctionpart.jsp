@@ -61,7 +61,7 @@
             </c:if>
             <c:if test= "${my!=null}">
                
-                 <a class="nav-link"  href="<c:url value="/billsell/${auction.id}"/>">Dừng phiên đấu giá này </a>
+                <a class="nav-link"  href="<c:url value="/billsell/${auction.id}"/>" >Dừng phiên đấu giá này </a>
                 <c:forEach var="allsell" items="${allsell}">
                     <a href="<c:url value="/wall/${allsell.loginsell.id}"/>"><h5>${allsell.loginsell.full_name}</h5></a>
                     <h5>${allsell.value}</h5>
