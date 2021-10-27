@@ -53,6 +53,8 @@ public class Status implements Serializable {
     @Column(name = "hashtag")
     private String hashtag;
     @Transient
+    private int check;
+    @Transient
     private MultipartFile file;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "statuslike")
@@ -188,6 +190,20 @@ public class Status implements Serializable {
      */
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    /**
+     * @return the check
+     */
+    public int getCheck() {
+        return check;
+    }
+
+    /**
+     * @param check the check to set
+     */
+    public void setCheck(int check) {
+        this.check = check;
     }
 
     /**

@@ -44,17 +44,28 @@ public class SellServiceImpl implements SellService {
 
     @Override
     public List<Sell> getSellByIdAuction(int i) {
-      
+
         return sellReponsitory.getSellByIdAuction(i);
     }
 
     @Override
-    public boolean Laso(String string) {
-        try {
-            Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    public boolean Laso(String string, int a) {
+        if (a == 0) {
+            try {
+                Integer.parseInt(string);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        else
+        {
+            try {
+                Long.parseLong(string);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
         }
     }
 

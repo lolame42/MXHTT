@@ -21,6 +21,7 @@
             </c:if>
             <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data" cssClass="ok">
                 <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>
+                <h1>${user.full_name}</h1>
                 <div class="box">
                     <c:if test= "${errcontent!=null}">
                         <h2 class="alert-danger">${errcontent}</h2>
@@ -59,11 +60,15 @@
                             <p class="text-info">#${allstatus.hashtag}</p>
                         </c:if>
                     </div>
-                    <div class="nut">
-                        <c:if test= "${user.id!=allstatus.login.id}">
-                            <input id="thich" type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
-                        </c:if> 
+                   <div class="nut">
+
                         <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Bình luận</a>
+                        <c:if test= "${user.id!=allstatus.login.id}">
+                            <c:if test= "${allstatus.check==0}">
+                                <input id="${allstatus.idStatus}" class="hihi${allstatus.idStatus}" type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
+
+                            </c:if> 
+                        </c:if> 
                     </div>
                 </div>
             </c:forEach>

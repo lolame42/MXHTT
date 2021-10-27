@@ -6,6 +6,7 @@
 package com.tt.service.impl;
 
 import com.tt.pojos.Bill;
+import com.tt.pojos.Check;
 import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
 import com.tt.reponsitory.BillReponsitory;
@@ -48,6 +49,24 @@ public class BillServiceImpl implements BillService{
     @Override
     public List<Bill> getbillpay(Login login) {
         return billReponsitory.getbillpay(login);
+    }
+
+    @Override
+    public List<Check> getCheckbyidBill(int i) {
+        return billReponsitory.getCheckbyidBill(i);
+    }
+
+    @Override
+    public List<Bill> getBillbyidBill(int i) {
+       return billReponsitory.getBillbyidBill(i);
+    }
+
+    @Override
+    public boolean addcheck(Check check, Bill bill) {
+       check.setDate(new Date());
+       check.setBillcheck(bill);
+       check.setValue(bill.getValue());
+       return billReponsitory.addcheck(check);
     }
 
     

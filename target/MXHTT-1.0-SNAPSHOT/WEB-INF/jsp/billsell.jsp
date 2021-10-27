@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-xs-12"> 
-            <h2 class="text-center text-info">Hóa đơn chờ bạn thanh toán</h2>
+            <h2 class="text-center text-info">Hóa đơn bạn chờ thanh toán</h2>
 
             <table class="table">
                 <tr>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="col-md-6 col-xs-12"> 
-            <h2 class="text-center text-info">Hóa đơn bạn chờ thanh toán</h2>
+            <h2 class="text-center text-info">Hóa đơn chờ bạn thanh toán</h2>
 
             <table class="table">
                 <tr>
@@ -63,7 +63,7 @@
                         <td><a href="<c:url value="/wall/${allbillpay.loginsell.id}"/>">${allbillpay.loginsell.full_name}</a></th>
                         <td>${allbillpay.value}k</th>
                             <c:if test= "${allbillpay.type==0}">
-                            <td><a href="#">Thanh toán<a></th>  
+                            <td><a href="<c:url value="/check/${allbillpay.id}"/>">Thanh toán<a></th>  
                             </c:if>
                             <c:if test= "${allbillpay.type==1}">
                             <td><a>Chờ xác nhận<a></th>  

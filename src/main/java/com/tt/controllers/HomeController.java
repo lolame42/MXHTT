@@ -209,7 +209,7 @@ public class HomeController {
             }
 
         }
-        if (sellService.Laso(newsell.getStep())) {
+        if (sellService.Laso(newsell.getStep(),0)) {
             if ((Integer.parseInt(newsell.getStep()) % auction.getStep() != 0)) {
                 model.addAttribute("errValue", "Giá tiền không hợp lệ, phải chia hết cho bước nhảy");
             } else {

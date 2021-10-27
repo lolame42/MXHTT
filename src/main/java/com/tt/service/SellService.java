@@ -17,6 +17,6 @@ import java.util.List;
 public interface SellService {
     boolean addsell(Login login, Auction auction, double value);
     List<Sell> getSellByIdAuction(int i) ;
-    boolean Laso(String str) ;
+    boolean Laso(String str, int a) ;
  
 }

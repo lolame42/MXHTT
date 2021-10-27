@@ -7,6 +7,7 @@ package com.tt.pojos;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -44,7 +48,7 @@ public class Bill implements Serializable{
     private Date date ;
     @Column(name = "dateend")
     private Date dateend;
-
+   
     /**
      * @return the id
      */
@@ -142,6 +146,11 @@ public class Bill implements Serializable{
     public void setDateend(Date dateend) {
         this.dateend = dateend;
     }
+
+    /**
+     * @return the check
+     */
+   
     
     
 }

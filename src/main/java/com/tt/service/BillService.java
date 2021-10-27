@@ -6,6 +6,7 @@
 package com.tt.service;
 
 import com.tt.pojos.Bill;
+import com.tt.pojos.Check;
 import com.tt.pojos.Login;
 import java.util.List;
 
@@ -14,7 +15,18 @@ import java.util.List;
  * @author DAVADO
  */
 public interface BillService {
-     boolean addbill(Login loginsell,Login loginpay, int tien);
-     List<Bill> getbillsell(Login login);
-     List<Bill> getbillpay(Login login);
+
+    boolean addbill(Login loginsell, Login loginpay, int tien);
+
+    List<Bill> getbillsell(Login login);
+
+    List<Bill> getbillpay(Login login);
+
+    List<Check> getCheckbyidBill(int i);
+
+    List<Bill> getBillbyidBill(int i);
+    
+    boolean addcheck(Check check, Bill bill);
+    
+    
 }
