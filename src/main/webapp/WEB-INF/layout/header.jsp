@@ -33,7 +33,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/auction"/>"><i class="fas fa-gavel"></i> </a>
                 </li
-
                 <li>
                     <div class="dropdown" >
                         <button onclick="hamDropdown()" class="nut_dropdown">&#128276;</button>
@@ -94,7 +93,6 @@
                     </li>
                 </c:if>
                 <c:if test="${pageContext.request.userPrincipal.name!=null}">
-
                     <li class="nav-black">
                         <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  </a>
                         <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><b>${user.full_name}</b></a>                  
