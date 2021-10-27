@@ -86,7 +86,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/billsell/0"/>"><i class="fa-home" ></i> </a>
+                    <a class="nav-link" href="<c:url value="/billsell/0"/>"><i class="fas fa-shopping-cart"></i></a>
                 </li>
                 <c:if test="${pageContext.request.userPrincipal.name==null}">
                     <li class="nav-black">

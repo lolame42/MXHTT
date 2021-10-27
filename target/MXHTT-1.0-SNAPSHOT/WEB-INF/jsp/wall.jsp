@@ -6,18 +6,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<link rel="stylesheet" href="<c:url value="/css/header.css"/>"/>
+<link rel="stylesheet" href="<c:url value="/css/wall.css"/>"/>
 <c:if test="${userwall!=null}">
-
-    <img class="img-fluid" src="<c:url value="${userwall.image}" />"alt="${userwall.full_name}"/>  
+    <div class="info">
+        <img class="img-fluid" src="<c:url value="${userwall.image}" />"alt="${userwall.full_name}"/>
+        <h1>${userwall.full_name}</h1>
+    </div>
     <c:if test="${userwall.user_name!=user.user_name}">
         <button>Tố cáo</button>
     </c:if>
     <c:if test="${userwall.user_name==user.user_name}">
         <button>Cài đặt thông tin</button>
     </c:if>
-    <h1>${userwall.full_name}</h1>
-    <h5>${userwall.description}<h5>
+    
             <c:forEach var="statuswall" items="${statuswall}">
                 <div>
 

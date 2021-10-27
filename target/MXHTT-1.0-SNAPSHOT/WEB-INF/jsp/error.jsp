@@ -6,5 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h1>Trang không hiển thị</h1>
-<a class="otb nav-link" href="<c:url value="/home" />">Về trang chủ</a>
+<link rel="stylesheet" href="<c:url value="/css/error.css"/>"/>
+
+<div class="text">
+    <img class="img" src="<c:url value="/images/logo1.png"/>"/>
+    <p class="text-info"><b>Trang không hiển thị</b></p>
+    <p>Tài nguyên bạn yêu cầu đã bị xóa hoặc ẩn đi</p>
+    <a class="otb nav-link" href="<c:url value="/home" />">Về trang chủ</a>
+</div>

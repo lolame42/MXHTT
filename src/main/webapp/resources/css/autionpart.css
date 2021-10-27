@@ -1,0 +1,36 @@
+body{
+    background-color: #F0F2F5;
+}
+.img-fluid{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.info{
+    background-color: white;
+    border: #D2D2D2 solid 1px;
+}
+.info1{
+    display: flex;
+    padding: 5px;
+}
+.info2{
+    font-size: 20px;
+    padding: 30px;
+}
+hr{margin-top: -10px;}
+.auction{
+    border: #D2D2D2 solid 1px;
+    background-color: white;
+    margin-top: -1px;
+    padding: 5px;
+}
+.cmt{display: flex;}
+.cmt h5{margin-left: 5px;}
+.btt{
+    width: 220px;
+    background-color: blue;
+}
+.btt:hover{
+    background-color: #6495ED;
+}
