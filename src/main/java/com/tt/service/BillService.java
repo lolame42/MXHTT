@@ -22,11 +22,8 @@ public interface BillService {
 
     List<Bill> getbillpay(Login login);
 
-    List<Check> getCheckbyidBill(int i);
-
     List<Bill> getBillbyidBill(int i);
     
-    boolean addcheck(Check check, Bill bill);
     
     
 }

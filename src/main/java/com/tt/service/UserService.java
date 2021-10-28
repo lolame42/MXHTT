@@ -17,5 +17,7 @@ public interface UserService {
     List<Login> getUsers(String kw);
     List<Login> getUserByUserName(String string);
     Login getUserById(int id);
+    boolean Update(Login login);
+    List<Login> getListUserbyId(int id);
    
 }

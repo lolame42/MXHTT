@@ -22,4 +22,8 @@ public interface UserReponsitory {
 
     Login getUserById(int id);
 
+    boolean Update(Login login);
+    
+    List<Login> getListUserByid(int id);
+
 }

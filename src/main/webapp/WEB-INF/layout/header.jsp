@@ -28,12 +28,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/home"/>"><i class="fas fa-home"></i> </a>
+                    <a class="icon nav-link" href="<c:url value="/home"/>"><i class="fas fa-home"></i> </a>
                 </li
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/auction"/>"><i class="fas fa-gavel"></i> </a>
+                    <a class="icon nav-link" href="<c:url value="/auction"/>"><i class="fas fa-gavel"></i> </a>
                 </li
-                <li>
+                <li class="icon nav-item">
                     <div class="dropdown" >
                         <button onclick="hamDropdown()" class="nut_dropdown">&#128276;</button>
                         <div class="noidung_dropdown">
@@ -85,7 +85,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/billsell/0"/>"><i class="fas fa-shopping-cart"></i></a>
+                    <a class="icon nav-link" href="<c:url value="/billsell/0"/>"><i class="fas fa-shopping-cart"></i></a>
                 </li>
                 <c:if test="${pageContext.request.userPrincipal.name==null}">
                     <li class="nav-black">
@@ -95,10 +95,10 @@
                 <c:if test="${pageContext.request.userPrincipal.name!=null}">
                     <li class="nav-black">
                         <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  </a>
-                        <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><b>${user.full_name}</b></a>                  
+                        <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><h4>${user.full_name}</h4></a>                  
                     </li>
                     <li class="nav-item active">
-                        <a href="<c:url value="/logout"/>" class="nav-link text-dark"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a>
+                        <a href="<c:url value="/logout"/>" class="logout nav-link text-dark"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a>
                     </li>
                 </c:if>
             </ul>   

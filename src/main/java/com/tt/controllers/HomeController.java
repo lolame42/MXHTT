@@ -16,8 +16,10 @@ import com.tt.service.LoginService;
 import com.tt.service.NotiService;
 import com.tt.service.SellService;
 import com.tt.service.StatusService;
+import com.tt.service.UfeelService;
 import com.tt.service.UserService;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +49,8 @@ public class HomeController {
     private SellService sellService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private UfeelService ufeelService;
 
     @GetMapping("/")
     public String login(Model model, Principal principal) {
@@ -56,15 +60,114 @@ public class HomeController {
 
     @GetMapping("/setting")
     public String viewsetting(Model model, Principal principal) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", notiService.getNotibyLogin(a));
+        //
 
         return "setting";
     }
 
     @PostMapping("/setting")
     public String changesetting(Model model, @ModelAttribute(value = "user") Login user, Principal principal) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", notiService.getNotibyLogin(a));
+        if (userService.Update(a)) {
+            model.addAttribute("thongbao", "thay đổi thành công");
+        } else {
+            model.addAttribute("thongbao", "thay đổi thất bại");
+        }
 
-        return "";
+        return "setting";
 
+    }
+
+    @GetMapping("/setting/status/{idstatus}")
+    public String viewsettingstatus(Model model, Principal principal, @PathVariable(value = "idstatus") String idstatus) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", notiService.getNotibyLogin(a));
+        //
+        List<Status> liststatus = statusService.getStatusByIdStatus(Integer.parseInt(idstatus));
+        if (!liststatus.isEmpty()) {
+            Status status = liststatus.get(0);
+            if (status.getLogin().getId() == a.getId()) {
+                model.addAttribute("status", status);
+                model.addAttribute("newstatus", new Status());
+                return "settingstatus";
+            }
+
+        }
+
+        return "error";
+    }
+
+    @PostMapping("/setting/status/{idstatus}")
+    public String settingstatus(Model model, @ModelAttribute(value = "newstatus") Status newstatus, Principal principal, @PathVariable(value = "idstatus") String idstatus) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", notiService.getNotibyLogin(a));
+        //
+        Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstatus)).get(0);
+        int dem = 0;
+        if (newstatus.getContent().length() > 4999 || newstatus.getContent().length() == 0) {
+            dem++;
+            model.addAttribute("errcontent", "nội dung không hợp lệ");
+        }
+        if (newstatus.getHashtag().length() > 20) {
+            dem++;
+            model.addAttribute("errhashtag", "hashtag độ dài tối đa 20 kí tự");
+        }
+        if (dem == 0) {
+            if (statusService.update(status.getIdStatus(), newstatus.getContent())) {
+                model.addAttribute("err", "Sửa thành công");
+            } else {
+                model.addAttribute("err", "Sửa không thành công");
+            }
+        } else {
+            model.addAttribute("err", "Sửa không thành công");
+        }
+        Status status1 = statusService.getStatusByIdStatus(Integer.parseInt(idstatus)).get(0);
+        model.addAttribute("status", status1);
+        model.addAttribute("newstatus", new Status());
+        return "settingstatus";
+
+    }
+
+    @RequestMapping("/delete/status/{idstatus}")
+    public String deletestatus(Model model, Principal principal, @PathVariable(value = "idstatus") String idstatus) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", notiService.getNotibyLogin(a));
+        //
+        List<Status> liststatus = statusService.getStatusByIdStatus(Integer.parseInt(idstatus));
+        if (!liststatus.isEmpty()) {
+            Status status = liststatus.get(0);
+            if (status.getLogin().getId() == a.getId()) {
+                statusService.deletestt(status.getIdStatus());
+                model.addAttribute("status", status);
+                model.addAttribute("newstatus", new Status());
+
+                List<Status> allstatus = this.statusService.getStatus(1);
+                for (int i = 0; i < allstatus.size(); i++) {
+                    if (ufeelService.check(allstatus.get(i), a.getId()) == true) {
+                        allstatus.get(i).setCheck(1);
+                    } else {
+                        allstatus.get(i).setCheck(0);
+                    }
+                }
+
+                model.addAttribute("allstatus", allstatus);
+                model.addAttribute("countstt", this.statusService.getStatus().size());
+                model.addAttribute("status", new Status());
+
+                return "home";
+            }
+
+        }
+
+        return "error";
     }
 
     @RequestMapping("/wall/{user_name}")
@@ -73,15 +176,25 @@ public class HomeController {
         model.addAttribute("user", a);
         model.addAttribute("noti", notiService.getNotibyLogin(a));
         //
-        Login loginwall;
-        loginwall = userService.getUserById(Integer.parseInt(user_name));
 
-        if (!loginwall.getUser_name().isEmpty()) {
-            model.addAttribute("userwall", loginwall);
-            model.addAttribute("statuswall", loginwall.getStatus());
+        List<Login> list = userService.getListUserbyId(Integer.parseInt(user_name));
+
+        if (!list.isEmpty()) {
+            List<Status> allstatus = list.get(0).getStatus();
+            if (a.getId() == list.get(0).getId()) {
+                for (int i = 0; i < allstatus.size(); i++) {
+                    if (allstatus.get(i).getLogin().getId() == a.getId()) {
+                        allstatus.get(i).setCountlike(allstatus.get(i).getUfeel().size());
+                    }
+                }
+            }
+
+            model.addAttribute("userwall", list.get(0));
+            model.addAttribute("statuswall", allstatus);
+            model.addAttribute("auctionwall", list.get(0).getAuction());
             return "wall";
         } else {
-            return "home";
+            return "error";
         }
 
     }
@@ -209,7 +322,7 @@ public class HomeController {
             }
 
         }
-        if (sellService.Laso(newsell.getStep(),0)) {
+        if (sellService.Laso(newsell.getStep(), 0)) {
             if ((Integer.parseInt(newsell.getStep()) % auction.getStep() != 0)) {
                 model.addAttribute("errValue", "Giá tiền không hợp lệ, phải chia hết cho bước nhảy");
             } else {
@@ -292,19 +405,4 @@ public class HomeController {
         return "finduser";
     }
 
-    @RequestMapping("/hello/{name}")
-    public String hello(Model model,
-            @PathVariable(value = "name") String name
-    ) {
-        model.addAttribute("message", "Anh " + name + "!!!");
-        return "hello";
-    }
-
-    @RequestMapping(path = "/test")
-    public String testRedirect(Model model
-    ) {
-        model.addAttribute("testMg", "Anh Iu Em");
-
-        return "forward:/hello/Tu";
-    }
 }

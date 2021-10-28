@@ -28,6 +28,8 @@ public interface StatusService {
 
     boolean deletestt(int id);
 
+    boolean update(int id, String string);
+
     boolean addauc(Auction auction, Login login);
 
     List<Auction> getAuction();

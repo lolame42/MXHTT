@@ -28,24 +28,25 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "bill")
-public class Bill implements Serializable{
+public class Bill implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idbill")
     private int id;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "idsell")
-    private Login loginsell ;
+    private Login loginsell;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "idpay")
-    private Login loginpay ;
+    private Login loginpay;
     @Column(name = "value")
     private int value;
     //1 chua thanh toan, 2 da thanh toan , 3 hoan thanh
     @Column(name = "type")
-    private int type ;
+    private int type;
     @Column(name = "date")
-    private Date date ;
+    private Date date;
     @Column(name = "dateend")
     private Date dateend;
    
@@ -147,10 +148,5 @@ public class Bill implements Serializable{
         this.dateend = dateend;
     }
 
-    /**
-     * @return the check
-     */
-   
-    
-    
+  
 }

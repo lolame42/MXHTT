@@ -214,4 +214,19 @@ public class StatusReponsitoryImpl implements StatusReponsitory {
         return false;
     }
 
+    @Override
+    public boolean update(int id,String string) {
+       Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            
+            Status status = getStatusByIdStatus(id).get(0);
+            status.setContent(string);
+            session.update(status);
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+
 }

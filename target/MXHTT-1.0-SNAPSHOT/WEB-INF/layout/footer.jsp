@@ -13,7 +13,7 @@
       <!-- Facebook -->
       <a
         class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
+        href="https://www.facebook.com/"
         role="button"
         data-mdb-ripple-color="dark"
         ><i class="fab fa-facebook-f"></i
@@ -22,7 +22,7 @@
       <!-- Twitter -->
       <a
         class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
+        href="https://twitter.com/?lang=vi"
         role="button"
         data-mdb-ripple-color="dark"
         ><i class="fab fa-twitter"></i
@@ -31,7 +31,7 @@
       <!-- Google -->
       <a
         class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
+        href="google.com"
         role="button"
         data-mdb-ripple-color="dark"
         ><i class="fab fa-google"></i
@@ -40,7 +40,7 @@
       <!-- Instagram -->
       <a
         class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
+        href="https://www.instagram.com/"
         role="button"
         data-mdb-ripple-color="dark"
         ><i class="fab fa-instagram"></i
@@ -49,7 +49,7 @@
       <!-- Linkedin -->
       <a
         class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
+        href="https://www.linkedin.com/"
         role="button"
         data-mdb-ripple-color="dark"
         ><i class="fab fa-linkedin"></i
@@ -57,7 +57,7 @@
       <!-- Github -->
       <a
         class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
+        href="github.com"
         role="button"
         data-mdb-ripple-color="dark"
         ><i class="fab fa-github"></i

@@ -48,6 +48,8 @@ public class StatusController {
     UfeelService ufeelService;
     @Autowired
     BillService billService;
+    @Autowired
+    BillReponsitory billReponsitory;
 
     @ModelAttribute
     public void ahihi(Model model, Principal principal) {
@@ -71,8 +73,13 @@ public class StatusController {
                 allstatus.get(i).setCheck(0);
             }
         }
-
+        for (int i = 0; i < allstatus.size(); i++) {
+            if (allstatus.get(i).getLogin().getId() == a.getId()) {
+                allstatus.get(i).setCountlike(allstatus.get(i).getUfeel().size());
+            }
+        }
         model.addAttribute("allstatus", allstatus);
+
         model.addAttribute("countstt", this.statusService.getStatus().size());
         //
         model.addAttribute("status", new Status());
@@ -111,7 +118,13 @@ public class StatusController {
 
         String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("allstatus", this.statusService.getStatus(1));
+        List<Status> liststatus = this.statusService.getStatus(1);
+         for (int i = 0; i < liststatus.size(); i++) {
+            if (liststatus.get(i).getLogin().getId() == a.getId()) {
+                liststatus.get(i).setCountlike(liststatus.get(i).getUfeel().size());
+            }
+        }
+        model.addAttribute("allstatus",liststatus );
         model.addAttribute("countstt", this.statusService.getStatus().size());
         model.addAttribute("status", new Status());
 
@@ -121,51 +134,13 @@ public class StatusController {
 
     @GetMapping("/check/{idBill}")
     public String check(Model model, Principal principal, @PathVariable(value = "idBill") String idBill) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        List<Bill> listbill = billService.getBillbyidBill(Integer.parseInt(idBill));
-        if (!listbill.isEmpty()) {
 
-            Bill bill = listbill.get(0);
-
-            //if (!listcheck.isEmpty()) {
-            //    Check check = listcheck.get(0);
-            //    if (bill.getLoginsell().getId() == a.getId()) {
-            //        model.addAttribute("status", "sell");
-            //         model.addAttribute("bill", check);
-            //    } else {
-            //       if (bill.getLoginpay().getId() == a.getId()) {
-            //            model.addAttribute("status", "pay");
-            //         }
-            //    }
-            //  } else {
-            //      if (bill.getLoginpay().getId() == a.getId()) {
-            //            model.addAttribute("newcheck",new Check());
-            //        }
-            // }
-        }
-
-        return "check";
+        return "error";
     }
 
     @PostMapping("/check/{idBill}")
     public String addcheck(Model model, Principal principal, @PathVariable(value = "idBill") String idBill, @ModelAttribute(value = "newcheck") Check newcheck) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        Bill bill = billService.getBillbyidBill(Integer.parseInt(idBill)).get(0);
-        if (!sellService.Laso(newcheck.getCode(), 1)) {
-
-            model.addAttribute("errcode", "mã số giao dịch không xác định");
-        } else {
-            if (newcheck.getCode().length() != 11) {
-
-                model.addAttribute("errcode", "mã số giao dịch là mười một số");
-
-            } else {
-                billService.addcheck(newcheck, bill);
-
-            }
-        }
-
-        return "check";
+        return "error";
     }
 
     @GetMapping("/auction")

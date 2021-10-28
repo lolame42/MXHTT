@@ -9,6 +9,7 @@ body{
 .info{
     background-color: white;
     border: #D2D2D2 solid 1px;
+    margin-top: 10px;
 }
 .info1{
     display: flex;
@@ -34,3 +35,17 @@ hr{margin-top: -10px;}
 .btt:hover{
     background-color: #6495ED;
 }
+.div{
+    border: #D2D2D2 solid 1px;
+    background-color: white;
+    margin-top: -1px;
+}
+.div h5{text-align: center;}
+.nut{display: flex;}
+.btn, .form-control{border-radius: 0%;}
+.btt{
+    margin-left: 40%;
+    background-color: crimson;
+    text-align: center;
+}
+.btt:hover{background-color: coral;}

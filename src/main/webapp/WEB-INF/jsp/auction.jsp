@@ -19,18 +19,18 @@
                 <h3>${err}</h3>
             </c:if>
             <div class="form-group">
-                <c:if test="${errcontent!=null}"><h2 class="alert-danger">${errcontent}</h2></c:if>
-                <c:if test="${errcontent==null}"><h2>Giới thiệu sản phẩm đấu giá</h2></c:if>
+                <c:if test="${errcontent!=null}"><h3 class="alert-danger">${errcontent}</h3></c:if>
+                <c:if test="${errcontent==null}"><h3>Giới thiệu sản phẩm đấu giá</h3></c:if>
                 <form:textarea type="text" id="content" path="content" cssClass="form-control" placeholder="Giới thiệu về sản phẩm cần đấu giá"/>
             </div>
             <div class="form-group">
-                <c:if test="${errimage!=null}"><h2 class="alert-danger">${errimage}</h2></c:if>
-                <c:if test="${errimage==null}"><h2>Hình ảnh sản phẩm đấu giá</h2></c:if>
+                <c:if test="${errimage!=null}"><h3 class="alert-danger">${errimage}</h3></c:if>
+                <c:if test="${errimage==null}"><h3>Hình ảnh sản phẩm đấu giá</h3></c:if>
                 <form:input type="file" id="file" path="file" cssClass="form-control" placeholder="Ảnh của sản phẩm"/>
             </div>
             <div class="form-group">
-                <c:if test="${errstep!=null}"><h2 class="alert-danger">${errstep}</h2></c:if>
-                <c:if test="${errstep==null}"><h2>Bước nhảy có đơn vị (Ngàn VND) tối đa 100, là số nguyên và không âm</h2></c:if>
+                <c:if test="${errstep!=null}"><h3 class="alert-danger">${errstep}</h3></c:if>
+                <c:if test="${errstep==null}"><h3>Bước nhảy có đơn vị (Ngàn VND) tối đa 100, là số nguyên và không âm</h3></c:if>
                 <form:input type="hashtag" id="stepstr" path="stepstr" cssClass="form-control" placeholder="Bước nhảy"/>
             </div>  
             <div class="form-group">
@@ -47,13 +47,13 @@
                         <h5>Thời gian bắt đầu:</h5>
                         <i>${allauction.date}</i>
                     </div>
-                        <h5>Giới thiệu: ${allauction.content}</h5>
-                        <h5>Bước nhảy ${allauction.step}</h5>
-                        <a class="otb1 nav-link" href="<c:url value="/auctionpart/${allauction.id}" />">Đấu Giá</a>
+                    <h5>Giới thiệu: ${allauction.content}</h5>
+                    <h5>Bước nhảy ${allauction.step}</h5>
+                    <a class="otb1 nav-link" href="<c:url value="/auctionpart/${allauction.id}" />">Đấu Giá</a>
                 </div>     
             </div>
         </c:forEach>       
-    <ul class="ul">
+        <ul class="ul">
             <c:forEach begin="1" end="${Math.ceil(countauc/30)}" var = "page">
                 <li class="page-item"><a class="page-link" href=" <c:url value="/auction" />?page=${page}">${page}</a></li>
             </c:forEach>

@@ -11,20 +11,20 @@ i{
 .nav-link:hover{
     background-color: #FFF;
 }
-.nav-home{
-    margin-left: 50px;
-}
-.nav-au, .nav-bell{
-    margin-left: 20px;
+.icon{
+    margin-top: 8px;
 }
 .nav-black{
-    margin-left: 120px;
+    margin-left: 80px;
     font-size: 22px;
     display: flex;
 }
+.nav-black h4, .logout{
+    margin-top: 8px;
+}
 .nav-black img{
     width: 50px;
-    height: 40px;
+    height: 50px;
     border-radius: 50%;
 }
 .nav-black a, .nut_dropdown button, .nut_dropdown, .navbar-brand, .input-group button:hover{
@@ -46,6 +46,7 @@ i{
   color: white;
   font-size: 26px;
   border: none;
+  margin-top: 8px;
 }
 .dropdown {
   position: relative;
@@ -64,7 +65,6 @@ i{
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-
 }
 .noidung_dropdown a {
   color: black;

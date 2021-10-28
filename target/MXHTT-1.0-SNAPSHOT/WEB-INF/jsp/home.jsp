@@ -8,7 +8,6 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
 <script src="<c:url value="/js/like.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
 
@@ -20,8 +19,10 @@
                 <h2 class="alert-danger">${errMsg}</h2>
             </c:if>
             <form:form method="post" action="${action}" modelAttribute="status" enctype="multipart/form-data" cssClass="ok">
-                <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>
-                <h1>${user.full_name}</h1>
+                <div class="infostt">
+                    <img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>
+                    <h3>${user.full_name}</h3>
+                </div>
                 <div class="box">
                     <c:if test= "${errcontent!=null}">
                         <h2 class="alert-danger">${errcontent}</h2>
@@ -34,7 +35,6 @@
                     </c:if>
                     <form:input type="hashtag" id="hashtag" path="hashtag" cssClass="form-control" placeholder="Hashtag"/>
                 </div>  
-
                 <div class="form-group">
                     <input type="submit" value="Đăng" class="btn btn-primary"/>
                 </div>  
@@ -45,43 +45,48 @@
                         <div>
                             <a class="otb" href="<c:url value="/wall/${allstatus.login.id}"/>">
                                 <img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/></a>
+                            <c:if test= "${allstatus.countlike!=0}">
+                                <h5>${allstatus.countlike} like</h5> 
+                            </c:if>
+
                         </div>
                         <div class="name">
                             <h5>${allstatus.login.full_name}</h5>
+                            <c:if test= "${allstatus.login.id==user.id}">
+                                <a class="otb nav-link" href="<c:url value="/setting/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Sửa</a>
+                                <a class="otb nav-link" href="<c:url value="/delete/status/${allstatus.idStatus}" />"><i class="far fa-comment" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"></i> Xóa</a>
+                            </c:if>
+
                             <div class="my-date">
                                 <p>${allstatus.date}</p>
                             </div>
+
                         </div>
-                    </div>
-                     
+                    </div>                 
                     <div class="card-body">
                         <p>${allstatus.content}</p>
                         <c:if test="${allstatus.hashtag!=null}">
                             <p class="text-info">#${allstatus.hashtag}</p>
                         </c:if>
-                    </div>
-                   <div class="nut">
 
-                        <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Bình luận</a>
+                    </div>
+                    <div class="nut">     
                         <c:if test= "${user.id!=allstatus.login.id}">
                             <c:if test= "${allstatus.check==0}">
                                 <input id="${allstatus.idStatus}" class="hihi${allstatus.idStatus}" type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
-
                             </c:if> 
-                        </c:if> 
+                        </c:if>
+                        <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Bình luận</a>
+
                     </div>
                 </div>
-            </c:forEach>
 
+            </c:forEach>
             <ul>
                 <c:forEach begin="1" end="${Math.ceil(countstt/30)}" var = "page">
                     <li class="page-item"><a class="page-link" href=" <c:url value="/home" />?page=${page}">${page}</a></li>
-
-                </c:forEach>
+                    </c:forEach>
             </ul>
-
-
-
             <script>
                 window.onload = function () {
                     let dates = document.querySelectorAll(".my-date>p")
@@ -89,7 +94,6 @@
                     {
                         let d = dates[i]
                         d.innerText = moment(d.innerText).fromNow()
-
                     }
                 }
             </script>

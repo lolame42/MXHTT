@@ -13,7 +13,9 @@ import com.tt.service.UserService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,14 +23,15 @@ import org.springframework.stereotype.Service;
  * @author Tu
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserReponsitory userReponsitory;
-   
+
     @Override
     public List<Login> getUsers() {
         return this.userReponsitory.getUsers();
-    }  
+    }
 
     @Override
     public List<Login> getUsers(String kw) {
@@ -45,8 +48,14 @@ public class UserServiceImpl implements UserService{
         return this.userReponsitory.getUserById(id);
     }
 
-    
-    
+    @Override
+    public boolean Update(Login login) {
 
-    
+        return userReponsitory.Update(login);
+    }
+
+    @Override
+    public List<Login> getListUserbyId(int i) {
+        return userReponsitory.getListUserByid(i);
+    }
 }

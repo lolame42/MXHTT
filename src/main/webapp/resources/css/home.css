@@ -1,5 +1,5 @@
-body{ background-color: #F5F7F4;}
-
+body{ 
+    background-color: #F5F7F4;}
 .main{
     margin-bottom: 10%;
     margin-top: 3%;
@@ -22,24 +22,24 @@ body{ background-color: #F5F7F4;}
     margin: -1px;
     margin-bottom: 15px;
 }
-.formregister{
-    padding: 10px;
-}
+.formregister{  
+    padding: 10px;}
 ul {
-float: left;
-list-style: none outside none;
-margin: 0;
-width: auto;
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    width: auto;
 }
-a{
-    cursor: pointer;
-}
-.btn{
-    margin-left: 90%;
-}
-.otb{
-    border-radius: 50%;
-}
+a{  
+    cursor: pointer;}
+.btn{   
+    margin-left: 90%;}
+.otb{   
+    border-radius: 50%;}
+.infostt{   
+    display: flex;}
+.infostt h3{    
+    margin-top: 10px;}
 .status{
     margin-bottom: 10px;
     background-color: #FFF;
@@ -51,7 +51,7 @@ a{
     margin: 4px;
 }
 
-.name h5{margin-top: 5px;}
+.name h5{   margin-top: 5px;}
 .my-date p{
     color: graytext;
     font-size:small;
@@ -71,7 +71,6 @@ a{
 .info{
     display: flex;
     background-color: #F7F7F7;
-
     border: solid #D2D2D2 1px;
 }
 .name{
@@ -97,16 +96,13 @@ a{
     font-size: 20px;
     margin-left: 10px;
 }
-.nut input:hover{
-    color: #6495ED;
-}
+.nut input:hover{   color: #6495ED;}
 .nut a{
     color: #000;
     font-size: 20px;
 }
-.nut a:hover{
-    background-color: #F7F7F7;
-}
+.nut a:hover{   
+    background-color: #F7F7F7;}
 .card-body{
     padding: 10px;
     word-wrap: break-word;

@@ -29,44 +29,47 @@
                     <div><b>Bước nhảy :</b> ${auction.step} ngàn VND</div>   
                     <div><b>Giá hiện tại :</b> ${top}  ngàn VND</div>
                 </div>
-            </div>  
-            <c:if test= "${my==null}">
-                <c:if test= "${an!=null}">
-                    <h2 class="alert-danger">${an}</h2>
-                </c:if>
-                <c:if test= "${check!=null}">
-                    <h2 class="alert-danger">${check}</h2>
-                </c:if>
-                <c:if test= "${an==null}">
-                    <div>
-                        <c:url value="/auctionpart/${auction.id}" var="action" />
-                        <form:form method="post" action="${action}" modelAttribute="newsell" enctype="multipart/form-data" cssClass="ok">                   
-                            <div class="box">
-                                <c:if test= "${errValue!=null}">
-                                    <h2 class="alert-danger">${errValue}</h2>
-                                </c:if>
-                            </div>  
-                            <c:if test= "${check==null}">
+            </div>
+            <div class="div">
+                <c:if test= "${my==null}">
+                    <c:if test= "${an!=null}">
+                        <h2 class="alert-danger">${an}</h2>
+                    </c:if>
+                    <c:if test= "${check!=null}">
+                        <h2 class="alert-danger">${check}</h2>
+                    </c:if>
+                    <c:if test= "${an==null}">
+                        <div>
+                            <c:url value="/auctionpart/${auction.id}" var="action" />
+                            <form:form method="post" action="${action}" modelAttribute="newsell" enctype="multipart/form-data" cssClass="ok">                   
+                                <div class="box">
+                                    <c:if test= "${errValue!=null}">
+                                        <h2 class="alert-danger">${errValue}</h2>
+                                    </c:if>
+                                </div>  
                                 <h5>Giá tiền đấu giá lớn hơn đỉnh, không lớn hơn tối đa và chia hết cho bước nhảy</h5>
-                                <form:input type="step" id="step" path="step" cssClass="form-control" placeholder="Nhập số tiền đấu giá (ngàn VNĐ)"/>
-                                <div class="form-group">
-                                    <input type="submit" value="Đấu giá" class="btn btn-primary"/>
-                                </div> 
-                            </c:if>
-                        </form:form>
-                    </div>
-                </c:if>
-            </c:if>
-            <div class="auction">
-                <c:if test= "${my!=null}">
-                    <c:forEach var="allsell" items="${allsell}">
-                        <div class="cmt">
-                            <a href="<c:url value="/wall/${allsell.loginsell.id}"/>"><h5>${allsell.loginsell.full_name}</h5></a>
-                            <h5>đã đấu giá ${allsell.value}</h5>
+                                <c:if test= "${check==null}">
+                                    <div class="nut">
+                                        <form:input type="step" id="step" path="step" cssClass="form-control" placeholder="Nhập số tiền đấu giá (ngàn VNĐ)"/>
+                                        <input type="submit" value="Đấu giá" class="btn btn-primary"/> 
+                                    </div>
+                                </c:if>
+                            </form:form>
                         </div>
-                    </c:forEach>
+                    </c:if>
                 </c:if>
-                <a class="btt nav-link text-white"  href="<c:url value="/billsell/${auction.id}"/>" >Dừng phiên đấu giá này </a>
+                <div class="auction">
+                    <c:if test= "${my!=null}">
+                        <c:forEach var="allsell" items="${allsell}">
+                            <div class="cmt">
+                                <a href="<c:url value="/wall/${allsell.loginsell.id}"/>"><h5>${allsell.loginsell.full_name}</h5></a>
+                                <h5>đã đấu giá ${allsell.value}</h5>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                    <a class="btt nav-link text-white"  href="<c:url value="/billsell/${auction.id}"/>" onclick="return confirm('Bạn có chắc muốn dừng phiên đấu giá này ?');" >Dừng phiên đấu giá này </a>
+                    
+                </div>
             </div>
         </div>
     </div>

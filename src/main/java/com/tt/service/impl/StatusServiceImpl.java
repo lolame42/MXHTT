@@ -94,4 +94,9 @@ public class StatusServiceImpl implements StatusService {
         return statusReponsitory.deleteauc(id);
     }
 
+    @Override
+    public boolean update(int i, String string) {
+        return statusReponsitory.update(i, string);
+    }
+
 }

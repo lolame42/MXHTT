@@ -24,8 +24,5 @@ public interface BillReponsitory {
 
     List<Bill> getBillbyidBill(int i);
 
-    List<Check> getCheckbyidBill(int i);
-    
-    boolean addcheck(Check check);
 
 }

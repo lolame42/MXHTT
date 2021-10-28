@@ -1,9 +1,8 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="<c:url value="/css/status.css"/>"/>
+
 <div class="mains">
     <div class="full">
         <div class="status">
@@ -23,26 +22,20 @@
         </div>
         <div class="formregister">
             <c:url value="/status/${idstt}" var="action" />
-
             <form:form method="post" action="${action}" modelAttribute="newcmt" enctype="multipart/form-data">
                 <hr/>
                 <div class="nut">
-                    <c:if test= "${user.id!=status.login.id}">
-                        <input type="button" value="&#128077; Thích" onclick="addlike(${status.idStatus},${user.id})"/>
-                    </c:if> 
-
+                    <input type="button" value="&#128077; Thích" onclick="addlike(${status.idStatus},${user.id})"/>
+                    <input type="submit" value="Bình Luận" class="btn btn-primary"/>
                 </div>
                 <hr />
                 <c:if test = "${errMsg!=null}">
                     <div> <h8 class="text-center alert-danger"><b>${errMsg}</b></h8> </div> 
-                            </c:if> 
+                </c:if> 
                 <div class="post">
                     <a class="otb" href="<c:url value="/wall/${status.login.id}"/>"><img class="img-fluid" src="<c:url value="${status.login.image}" />" alt="${status.login.full_name}"/></a>
-
                     <form:input type="text" id="content" path="content" cssClass="form-control" placeholder="Viết bình luận"/>
                 </div>
-                <input type="submit" value="Bình Luận" class="btn btn-primary"/>
-
             </form:form>
         </div>
         <c:forEach var="allcomment" items="${allcomment}">
@@ -57,8 +50,6 @@
                 </div>
             </div>
         </c:forEach>
-
-
     </div>
 </div>
 <script>
@@ -71,4 +62,3 @@
         }
     }
 </script>
-

@@ -1,14 +1,66 @@
-body{
-    background-color: #F0F2F5;
-    
-}
+body{   background-color: #F0F2F5;}
 .img-fluid{
     border-radius: 50%;
     width: 150px;
     height: 150px;
+    border: 3px solid #D2D2D2;
+}
+.infosa{
+    width: 100%;
+    height: 200px;
+    border: #F0F2F5 solid 1px;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .info{
     display: flex;
     padding: 10px;
 }
 .info h1{margin-top: 30px;}
+.tc{
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    right: 21.5%;
+    top: 13%;
+    border: 1px #F0F2F5 solid;
+    border-radius: 7%;
+}
+.tc:hover{  background-color: darkgray;}
+.cd{
+    width: 150px;
+    height: 40px;
+    position: absolute;
+    right: 21.5%;
+    top: 13%;
+    border: 1px #F0F2F5 solid;
+    border-radius: 7%;
+}
+.cd:hover{  background-color: darkgray;}
+.infosb{
+    width: 100%;
+    display: flex;
+}
+.info1{
+    width: 34.5%;
+    text-align: center;
+}
+.info2{
+    width: 64.5%;
+    margin-left: 10px;
+}
+.img-fluid1{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.info2a{    display: flex;}
+.my-date i{ font-size: 16px;}
+.info1, .info2{
+    border: #F0F2F5 solid 1px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+}

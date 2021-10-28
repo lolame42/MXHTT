@@ -55,6 +55,8 @@ public class Status implements Serializable {
     @Transient
     private int check;
     @Transient
+    private int countlike;
+    @Transient
     private MultipartFile file;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "statuslike")
@@ -204,6 +206,20 @@ public class Status implements Serializable {
      */
     public void setCheck(int check) {
         this.check = check;
+    }
+
+    /**
+     * @return the countlike
+     */
+    public int getCountlike() {
+        return countlike;
+    }
+
+    /**
+     * @param countlike the countlike to set
+     */
+    public void setCountlike(int countlike) {
+        this.countlike = countlike;
     }
 
     /**

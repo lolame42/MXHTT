@@ -74,21 +74,7 @@ public class BillReponsitoryImpl implements BillReponsitory {
 
     }
 
-    @Override
-    public List<Check> getCheckbyidBill(int i) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Check> query = builder.createQuery(Check.class);
-        Root root = query.from(Check.class);
-        query = query.select(root);
-        Predicate p = builder.equal(root.get("idbill"), i);
-        query = query.where(p);
-
-        Query q = session.createQuery(query);
-        return q.getResultList();
-
-    }
-
+   
     @Override
     public List<Bill> getBillbyidBill(int i) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -103,15 +89,6 @@ public class BillReponsitoryImpl implements BillReponsitory {
         return q.getResultList();
     }
 
-    @Override
-    public boolean addcheck(Check check) {
-         Session session = this.sessionFactory.getObject().getCurrentSession();
-        try {
-            session.save(check);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+   
 
 }

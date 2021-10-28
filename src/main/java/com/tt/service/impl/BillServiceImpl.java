@@ -51,23 +51,14 @@ public class BillServiceImpl implements BillService{
         return billReponsitory.getbillpay(login);
     }
 
-    @Override
-    public List<Check> getCheckbyidBill(int i) {
-        return billReponsitory.getCheckbyidBill(i);
-    }
+   
 
     @Override
     public List<Bill> getBillbyidBill(int i) {
        return billReponsitory.getBillbyidBill(i);
     }
 
-    @Override
-    public boolean addcheck(Check check, Bill bill) {
-       check.setDate(new Date());
-       check.setBillcheck(bill);
-       check.setValue(bill.getValue());
-       return billReponsitory.addcheck(check);
-    }
+    
 
     
     

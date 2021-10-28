@@ -21,6 +21,11 @@ public interface StatusReponsitory {
     List<Status> getStatusByIdStatus(int id);
     List<Status> getStatus(int page);
     boolean deletestt(int id);
+    boolean update(int id,String string);
+    
+    
+    
+    
     boolean addauc(Auction auction,Login login);
     List<Auction> getAuction();
     List<Auction> getAuctionByIduser(int id);

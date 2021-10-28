@@ -6,6 +6,7 @@
 package com.tt.reponsitory.impl;
 
 import com.tt.pojos.Login;
+import com.tt.pojos.Status;
 import com.tt.reponsitory.UserReponsitory;
 import java.util.List;
 import javax.persistence.Query;
@@ -82,5 +83,34 @@ public class UserReponsitoryImpl implements UserReponsitory {
         return login;
 
     }
+
+    @Override
+    public boolean Update(Login login) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+     
+        try {
+
+            session.update(login);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    @Override
+    public List<Login> getListUserByid(int id) {
+        
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Login> query = builder.createQuery(Login.class);
+        Root root = query.from(Login.class);
+        query = query.select(root);
+        Predicate p = builder.equal(root.get("Id"), id);
+        query = query.where(p);
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+    
 
 }

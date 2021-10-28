@@ -37,6 +37,16 @@ body{background-color: #F5F7F4;}
 .nut{
     display: flex;
 }
+.nut input{
+    background-color: #F0F2F5; 
+    color: black;
+    margin: 5px;
+    border: 1px #D2D2D2 solid;
+    border-radius: 10px;
+}
+.nut input:hover{
+    background-color: #6495ED;
+}
 .full{
     border: #D2D2D2 solid 1px;
 }

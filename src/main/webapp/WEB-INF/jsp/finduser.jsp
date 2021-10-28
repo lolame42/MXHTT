@@ -20,10 +20,11 @@
                         <div class="info">
                             <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
                                 <img class="img-fluid" src="<c:url value="${userfind.image}" />"alt="${userfind.full_name}"/> </a>
-
-                            <div class="card-body">
-                                <h4 class="card-title">${userfind.full_name}</h4>
-                            </div>
+                            <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
+                                <div class="card-body">
+                                    <h4 class="card-title">${userfind.full_name}</h4>
+                                </div>
+                            </a>
                         </div>
                     </c:if>
 
