@@ -5,6 +5,8 @@
  */
 package com.tt.reponsitory;
 
+import com.tt.pojos.Login;
+import com.tt.pojos.Report;
 import com.tt.pojos.Sell;
 import java.util.List;
 
@@ -15,5 +17,7 @@ import java.util.List;
 public interface SellReponsitory {
     boolean addsell(Sell sell);
     List<Sell> getSellByIdAuction(int i) ;
+    
+    
     
 }

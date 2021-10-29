@@ -44,23 +44,23 @@
                     <div class="info">
                         <div>
                             <a class="otb" href="<c:url value="/wall/${allstatus.login.id}"/>">
-                                <img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/></a>
-                            <c:if test= "${allstatus.countlike!=0}">
-                                <h5>${allstatus.countlike} like</h5> 
-                            </c:if>
-
+                                <img class="img-fluid" src="<c:url value="${allstatus.login.image}" />" alt="${allstatus.login.full_name}"/>
+                            </a>
                         </div>
                         <div class="name">
                             <h5>${allstatus.login.full_name}</h5>
                             <c:if test= "${allstatus.login.id==user.id}">
-                                <a class="otb nav-link" href="<c:url value="/setting/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Sửa</a>
-                                <a class="otb nav-link" href="<c:url value="/delete/status/${allstatus.idStatus}" />"><i class="far fa-comment" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"></i> Xóa</a>
+                                <div class="setting">
+                                    <a  class="btn text-white" data-toggle="collapse" href="#noidung"><i class="fas fa-cog"></i></a>
+                                    <div id="noidung" class="collapses">
+                                        <a class="otb nav-link text-dark" href="<c:url value="/setting/status/${allstatus.idStatus}" />"><b><i class="fas fa-pencil-alt"></i> Chỉnh sửa</b></a>
+                                        <a class="otb nav-link text-dark" href="<c:url value="/delete/status/${allstatus.idStatus}" />"><b><i class="fas fa-trash-alt" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"></i> Xóa bài</b></a>
+                                    </div>
+                                </div>                               
                             </c:if>
-
                             <div class="my-date">
                                 <p>${allstatus.date}</p>
                             </div>
-
                         </div>
                     </div>                 
                     <div class="card-body">
@@ -68,19 +68,19 @@
                         <c:if test="${allstatus.hashtag!=null}">
                             <p class="text-info">#${allstatus.hashtag}</p>
                         </c:if>
-
                     </div>
                     <div class="nut">     
                         <c:if test= "${user.id!=allstatus.login.id}">
                             <c:if test= "${allstatus.check==0}">
-                                <input id="${allstatus.idStatus}" class="hihi${allstatus.idStatus}" type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
+                                <input id="${allstatus.idStatus}" class="hihi${allstatus.idStatus} " type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
                             </c:if> 
                         </c:if>
-                        <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Bình luận</a>
-
+                        <c:if test= "${allstatus.countlike!=0}">
+                            <h5>${allstatus.countlike} <i class="far fa-thumbs-up"></i></h5> 
+                        </c:if>
+                        <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
                     </div>
                 </div>
-
             </c:forEach>
             <ul>
                 <c:forEach begin="1" end="${Math.ceil(countstt/30)}" var = "page">
@@ -95,6 +95,7 @@
                         let d = dates[i]
                         d.innerText = moment(d.innerText).fromNow()
                     }
+                    
                 }
             </script>
         </div>

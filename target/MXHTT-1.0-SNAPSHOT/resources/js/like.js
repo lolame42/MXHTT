@@ -8,9 +8,3 @@ function addlike(idStatus, idlogin) {
     test1.setAttribute('style','visibility:hidden;')
 }
 
-function finishsell(idAucion) {
-    fetch("/MXHTT/api/finish-sell/" + idAucion + "/", {
-        method: 'POST',
-
-    })
-}

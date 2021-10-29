@@ -49,12 +49,5 @@ public class APIcontroller {
         }
     }
 
-    @PostMapping("/MXHTT/api/finish-sell/{idAuction}")
-    public void finishsell(@PathVariable(value = "idAuction") String idAuction) {
-       
-       
-        
-       
-    }
-
+    
 }

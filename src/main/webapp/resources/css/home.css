@@ -103,6 +103,29 @@ a{
 }
 .nut a:hover{   
     background-color: #F7F7F7;}
+.nut h5{
+    padding: 5px;
+    color: #6495ED;
+    margin: 2px;
+}
+.setting{
+    position: absolute;
+    right: 23.6%;
+    margin-top: -36px;
+}
+.btn i{font-size: 26px;}
+.collapses{
+    width: 150px;
+    height: 100px;
+    padding: 8px;
+    position: absolute;
+    right: -80%;
+    background-color: #F5F7F4;
+    border: 1px solid #D2D2D2;
+}
+.collapses a:hover{
+    border-radius: 10%;
+}
 .card-body{
     padding: 10px;
     word-wrap: break-word;

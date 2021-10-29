@@ -64,3 +64,14 @@ body{   background-color: #F0F2F5;}
     padding: 5px;
     border-radius: 10px;
 }
+.img-fluidd{
+    width: 350px;
+    height: 150px;
+}
+.otb1{
+    width: 100px;
+    margin-left: 135px;
+}
+.icon{
+    display: flex;
+}

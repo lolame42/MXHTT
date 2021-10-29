@@ -29,8 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Table(name = "login")
 public class Login implements Serializable {
 
-    public static final String ADMIN = "ROLE_ADMIN";
-    public static final String USER = "ROLE_USER";
+    private static String ADMIN = "ROLE_ADMIN";
+    private static String USER = "ROLE_USER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -66,20 +66,23 @@ public class Login implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "loginpay")
     private List<Bill> billpay;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "loginbidong")
+    private List<Report> reportbidong;
 
     /**
      * @return the Id
      */
     public void setLogin(Login a) {
-        this.Id = a.Id;
-        this.description = a.description;
-        this.email = a.email;
-        this.full_name = a.full_name;
-        this.image = a.image;
-        this.phone = a.phone;
-        this.user_name = a.user_name;
-        this.user_password = a.user_password;
-        this.userrole = a.userrole;
+        this.setId(a.getId());
+        this.setDescription(a.getDescription());
+        this.setEmail(a.getEmail());
+        this.setFull_name(a.getFull_name());
+        this.setImage(a.getImage());
+        this.setPhone(a.getPhone());
+        this.setUser_name(a.getUser_name());
+        this.setUser_password(a.getUser_password());
+        this.setUserrole(a.getUserrole());
 
     }
 
@@ -295,6 +298,50 @@ public class Login implements Serializable {
     }
 
     /**
-     * @return the auction
+     * @return the report
      */
+    public List<Report> getReportbidong() {
+        return reportbidong;
+    }
+
+    /**
+     * @param report the report to set
+     */
+    public void setReportbidong(List<Report> reportbidong) {
+        this.reportbidong = reportbidong;
+    }
+
+    /**
+     * @return the ADMIN
+     */
+    public static String getADMIN() {
+        return ADMIN;
+    }
+
+    /**
+     * @param aADMIN the ADMIN to set
+     */
+    public static void setADMIN(String aADMIN) {
+        ADMIN = aADMIN;
+    }
+
+    /**
+     * @return the USER
+     */
+    public static String getUSER() {
+        return USER;
+    }
+
+    /**
+     * @param aUSER the USER to set
+     */
+    public static void setUSER(String aUSER) {
+        USER = aUSER;
+    }
+
+    /**
+     * @return the report1
+     */
+ 
+  
 }

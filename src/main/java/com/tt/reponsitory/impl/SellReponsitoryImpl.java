@@ -7,6 +7,7 @@ package com.tt.reponsitory.impl;
 
 import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
+import com.tt.pojos.Report;
 import com.tt.pojos.Sell;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.SellReponsitory;
@@ -18,6 +19,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,16 +55,16 @@ public class SellReponsitoryImpl implements SellReponsitory {
 
     @Override
     public List<Sell> getSellByIdAuction(int i) {
-       Auction a= auctionService.getAuctionByIdAuction(i).get(0);
-       List<Sell> list = a.getListsell();
-       Collections.sort(list, new Comparator<Sell>() {
-           @Override
-           public int compare(Sell o1, Sell o2) {
-               return o2.getId() - o1.getId();
-           }
-       });
-       return list;
+        Auction a = auctionService.getAuctionByIdAuction(i).get(0);
+        List<Sell> list = a.getListsell();
+        Collections.sort(list, new Comparator<Sell>() {
+            @Override
+            public int compare(Sell o1, Sell o2) {
+                return o2.getId() - o1.getId();
+            }
+        });
+        return list;
     }
-    
 
+   
 }

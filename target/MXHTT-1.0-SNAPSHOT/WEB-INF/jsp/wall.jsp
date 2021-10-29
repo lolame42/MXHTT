@@ -12,13 +12,22 @@
         <div class="info">
             <img class="img-fluid" src="<c:url value="${userwall.image}" />"alt="${userwall.full_name}"/>
             <h1>${userwall.full_name}</h1>
+            <c:if test="${userwall.user_name!=user.user_name}">
+                <c:if test="${check1==null}">
+                    <a class="otb nav-link" href="<c:url value="/report/${userwall.id}/1" />"onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do lời lẽ không chuẩn mực ?');">Lời lẽ không chuẩn mực <i class="far fa-comment"></i></a>
+                </c:if>
+                    
+                <c:if test="${check2==null}">
+                    <a class="otb nav-link" href="<c:url value="/report/${userwall.id}/2" />"onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do không thanh toán ?');">Không thanh toán  <i class="far fa-comment"></i></a>
+                </c:if>
+
+
+
+
+            </c:if>
         </div>
-        <c:if test="${userwall.user_name!=user.user_name}">
-            <button class="tc"><b>Tố cáo</b></button>
-        </c:if>
-        <c:if test="${userwall.user_name==user.user_name}">
-            <button class="cd"><b>Cài đặt thông tin<b/></button>
-        </c:if> 
+
+
     </div>
     <div class="infosb">
         <div class="info1">
@@ -29,20 +38,19 @@
                 <h4>Những phiên đấu giá của ${userwall.full_name}</h4>
             </c:if>
             <c:forEach var="auctionwall" items="${auctionwall}">
-                <img class="img-fluid1" src="<c:url value="${auctionwall.image}" />" alt="${auctionwall.content}"/>
+                <img class="img-fluidd" src="<c:url value="${auctionwall.image}" />" alt="${auctionwall.content}"/>
                 <div>${auctionwall.step}</div>
                 <div class="my-date">
                     <i>${auctionwall.date}</i>
                 </div>
-                <a class="otb1 nav-link" href="<c:url value="/auctionpart/${auctionwall.id}" />">Đấu Giá</a>
-
+                <a class="otb1 btn-primary nav-link" href="<c:url value="/auctionpart/${auctionwall.id}" />">Đấu Giá</a>
+                <hr/>
 
             </c:forEach>
         </div>
         <div class="info2">
-
             <c:if test="${userwall.id==user.id}">
-                <h4>Những bài đăng của bạn</h4>
+                <h4 class="text-center">Những bài đăng của bạn</h4>
             </c:if> 
             <c:if test="${userwall.id!=user.id}">
                 <h4>Những bài đăng của ${userwall.full_name}</h4>
@@ -54,26 +62,29 @@
                         <h5>${statuswall.login.full_name}</h5>
                         <i>${statuswall.date}</i>
                     </div>
-
                     <c:if test= "${statuswall.login.id==user.id}">
-                        <a class="otb nav-link" href="<c:url value="/setting/status/${statuswall.idStatus}" />" ><i class="far fa-comment"></i> Sửa</a>
-                        <a class="otb nav-link" href="<c:url value="/delete/status/${statuswall.idStatus}" />" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"><i class="far fa-comment"></i> Xóa</a>
-                    </c:if>
-                    <c:if test= "${statuswall.countlike!=0}">
-                        <h5>${statuswall.countlike} like</h5> 
+                        <div class="setting">
+                            <a  class="btn text-white" data-toggle="collapse" href="#noidung"><i class="fas fa-cog">Setting</i></a>
+                            <div id="noidung" class="collapses">
+                                <a class="otb nav-link text-dark" href="<c:url value="/setting/status/${allstatus.idStatus}" />"><b><i class="fas fa-pencil-alt"></i> Chỉnh sửa</b></a>
+                                <a class="otb nav-link text-dark" href="<c:url value="/delete/status/${allstatus.idStatus}" />"><b><i class="fas fa-trash-alt" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"></i> Xóa bài</b></a>
+                            </div>
+                        </div> 
                     </c:if>
                 </div>
-                <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />"><i class="far fa-comment"></i> Bình luận</a>
                 <div class="card-body">
-
                     <h5>${statuswall.content}</h5>
                     <c:if test="${statuswall.hashtag!=null}">
                         <h5>#${statuswall.hashtag}</h5>
                     </c:if>
                 </div>
+                <div class="icon">
+                    <c:if test= "${statuswall.countlike!=0}">
+                        <h5>${statuswall.countlike} <i class="far fa-thumbs-up"></i></h5> 
+                        </c:if>
+                    <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
+                </div>
                 <hr>
-
-
             </c:forEach>
         </div>
     </div>

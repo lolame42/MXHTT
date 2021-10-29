@@ -14,6 +14,7 @@ import com.tt.service.BillService;
 import com.tt.service.CommentService;
 import com.tt.service.LoginService;
 import com.tt.service.NotiService;
+import com.tt.service.ReportService;
 import com.tt.service.SellService;
 import com.tt.service.StatusService;
 import com.tt.service.UfeelService;
@@ -51,36 +52,13 @@ public class HomeController {
     private CommentService commentService;
     @Autowired
     private UfeelService ufeelService;
+    @Autowired
+    private ReportService reportService;
 
     @GetMapping("/")
     public String login(Model model, Principal principal) {
 
         return "login";
-    }
-
-    @GetMapping("/setting")
-    public String viewsetting(Model model, Principal principal) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        model.addAttribute("noti", notiService.getNotibyLogin(a));
-        //
-
-        return "setting";
-    }
-
-    @PostMapping("/setting")
-    public String changesetting(Model model, @ModelAttribute(value = "user") Login user, Principal principal) {
-        Login a = userService.getUserByUserName(principal.getName()).get(0);
-        model.addAttribute("user", a);
-        model.addAttribute("noti", notiService.getNotibyLogin(a));
-        if (userService.Update(a)) {
-            model.addAttribute("thongbao", "thay đổi thành công");
-        } else {
-            model.addAttribute("thongbao", "thay đổi thất bại");
-        }
-
-        return "setting";
-
     }
 
     @GetMapping("/setting/status/{idstatus}")
@@ -188,6 +166,12 @@ public class HomeController {
                     }
                 }
             }
+            if (reportService.check(a, list.get(0), 1)) {
+                model.addAttribute("check1", "mot");
+            }
+            if (reportService.check(a, list.get(0), 2)) {
+                model.addAttribute("check2", "hai");
+            }
 
             model.addAttribute("userwall", list.get(0));
             model.addAttribute("statuswall", allstatus);
@@ -196,6 +180,51 @@ public class HomeController {
         } else {
             return "error";
         }
+
+    }
+
+    @RequestMapping("/report/{iduser}/{type}")
+    public String report(Model model, Principal principal, @PathVariable(value = "iduser") String iduser, @PathVariable(value = "type") String type) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        model.addAttribute("user", a);
+        model.addAttribute("noti", notiService.getNotibyLogin(a));
+        //
+        List<Login> list = userService.getListUserbyId(Integer.parseInt(iduser));
+        if (!list.isEmpty()) {
+            if (sellService.Laso(type, 0)) {
+                int typeint = Integer.parseInt(type);
+                if ((typeint == 1 || typeint == 2) && !reportService.check(a, list.get(0), typeint)) {
+                    List<Status> allstatus = list.get(0).getStatus();
+                    if (a.getId() == list.get(0).getId()) {
+                        for (int i = 0; i < allstatus.size(); i++) {
+                            if (allstatus.get(i).getLogin().getId() == a.getId()) {
+                                allstatus.get(i).setCountlike(allstatus.get(i).getUfeel().size());
+                            }
+                        }
+                    }
+
+                    if (reportService.addreport(a, list.get(0), type)) {
+                        list = userService.getListUserbyId(Integer.parseInt(iduser));
+                        if (reportService.check(a, list.get(0), 1)) {
+                            model.addAttribute("check1", "mot");
+                        }
+                        if (reportService.check(a, list.get(0), 2)) {
+                            model.addAttribute("check2", "hai");
+                        }
+
+                        model.addAttribute("userwall", list.get(0));
+                        model.addAttribute("statuswall", allstatus);
+                        model.addAttribute("auctionwall", list.get(0).getAuction());
+                        
+                        return "wall";
+                    }
+
+                }
+
+            }
+
+        }
+        return "error";
 
     }
 
