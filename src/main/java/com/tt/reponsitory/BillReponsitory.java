@@ -6,7 +6,6 @@
 package com.tt.reponsitory;
 
 import com.tt.pojos.Bill;
-import com.tt.pojos.Check;
 import com.tt.pojos.Login;
 import java.util.List;
 
@@ -23,6 +22,10 @@ public interface BillReponsitory {
     List<Bill> getbillpay(Login login);
 
     List<Bill> getBillbyidBill(int i);
+    
+    boolean update(Bill bill,String code);
+    
+    boolean access(Bill bill, int type);
 
 
 }

@@ -11,12 +11,23 @@
 
 <div class="main">
     <c:url value="/check/${bill.id}" var="action" />
-    <form:form method="post" action="${action}" modelAttribute="newcheck" enctype="multipart/form-data" cssClass="ok">
 
-        <form:input type="text" id="codestr" path="codestr" cssClass="form-control" placeholder="mã giao dịch momo"/>
+    <c:if test= "${err!=null}">
+        <h2 class="alert-danger">${err}</h2>
+    </c:if>
+    <c:if test= "${err==null}">
+        <h5 class="alert-danger">Thanh toán số tiền ${bill.value}k VND cho số điện thoại ${bill.loginsell.phone} và nhập mã giao dịch để xác nhận đã thanh toán cho hóa đơn này</h5>
+    </c:if>
+
+    <c:if test= "${post!=null}">
+        <h2 class="alert-danger">${post}</h2>
+    </c:if>
+    <form:form method="post" action="${action}" modelAttribute="newbill" enctype="multipart/form-data" cssClass="ok">
+
+        <form:input type="text" id="codemomo" path="codemomo" cssClass="form-control" placeholder="mã giao dịch momo"/>
 
         <div class="form-group">
-            <input type="submit" value="Đăng" class="btn btn-primary"/>
+            <input type="submit" value="Xác nhận" class="btn btn-primary"/>
         </div>  
     </form:form>
 </div>

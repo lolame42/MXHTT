@@ -30,7 +30,6 @@ com\tt\reponsitory\impl\SellReponsitoryImpl.class
 com\tt\pojos\Auction.class
 com\tt\reponsitory\impl\UfeelReponsitoryImpl.class
 com\tt\configs\SpringSecurityConfig.class
-com\tt\pojos\Check.class
 com\tt\reponsitory\impl\LoginReponsitoryImpl.class
 com\tt\service\LoginService.class
 com\tt\reponsitory\UserReponsitory.class

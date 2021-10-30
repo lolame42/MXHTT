@@ -6,7 +6,6 @@
 package com.tt.service;
 
 import com.tt.pojos.Bill;
-import com.tt.pojos.Check;
 import com.tt.pojos.Login;
 import java.util.List;
 
@@ -23,7 +22,9 @@ public interface BillService {
     List<Bill> getbillpay(Login login);
 
     List<Bill> getBillbyidBill(int i);
-    
-    
-    
+
+    boolean update(Bill bill, String code);
+
+    boolean access(Bill bill, int i);
+
 }

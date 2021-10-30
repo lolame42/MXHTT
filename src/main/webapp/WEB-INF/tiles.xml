@@ -82,6 +82,10 @@ and open the template in the editor.
         <put-attribute name="title" value="Quản lý status"/>
         <put-attribute name="content" value="/WEB-INF/jsp/settingstatus.jsp"/>
     </definition>
+    <definition name="access" extends="baseLayout">
+        <put-attribute name="title" value="Xác nhận hóa đơn"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/access.jsp"/>
+    </definition>
     
     
     

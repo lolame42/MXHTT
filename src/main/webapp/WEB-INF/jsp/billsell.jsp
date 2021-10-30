@@ -10,6 +10,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<c:url value="/css/billsell.css"/>"/>
 
+<c:if test= "${err!=null}}">
+    <td>${err}</th>  
+</c:if>
 <h1 class="text-center text-info">Hóa Đơn</h1>
 <div class="container">
     <div class="row">
@@ -31,10 +34,13 @@
                             <td>chưa thanh toán</th>  
                         </c:if>
                         <c:if test= "${allbillsell.type==1}">
-                            <td><a>Xác nhận<a></th>  
+                             <td><a href="<c:url value="/check/${allbillsell.id}"/>">Xác nhận<a></th>   
                         </c:if>
                         <c:if test= "${allbillsell.type==2}">
-                            <td>Hoàn thành</th>  
+                            <td>thanh toán lại</th>  
+                        </c:if>
+                        <c:if test= "${allbillsell.type==3}">
+                            <td>Hoàn thành (<a href="<c:url value="/check/${allbillsell.id}"/>">Xem<a>)</th>  
                         </c:if>
                     </tr>
                 </c:forEach>
@@ -61,8 +67,11 @@
                         <c:if test= "${allbillpay.type==1}">
                             <td><a>Chờ xác nhận<a></th>  
                         </c:if>
+                        <c:if test= "${allbillpay.type==3}">
+                            <td>Hoàn thành (<a href="<c:url value="/check/${allbillpay.id}"/>">Xem<a>)</th>  
+                        </c:if>
                         <c:if test= "${allbillpay.type==2}">
-                            <td>Hoàn thành</th>  
+                             <td><a href="<c:url value="/check/${allbillpay.id}"/>">Thanh toán lại<a></th>  
                         </c:if>
                     </tr>
                 </c:forEach>

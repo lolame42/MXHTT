@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -30,6 +31,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "bill")
 public class Bill implements Serializable {
 
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idbill")
@@ -49,7 +51,10 @@ public class Bill implements Serializable {
     private Date date;
     @Column(name = "dateend")
     private Date dateend;
+    @Column(name = "codemomo")
+    private String codemomo;
    
+
     /**
      * @return the id
      */
@@ -148,5 +153,24 @@ public class Bill implements Serializable {
         this.dateend = dateend;
     }
 
-  
+    /**
+     * @return the codemomo
+     */
+    public String getCodemomo() {
+        return codemomo;
+    }
+
+    /**
+     * @param codemomo the codemomo to set
+     */
+    public void setCodemomo(String codemomo) {
+        this.codemomo = codemomo;
+    }
+
+    /**
+     * @return the codemomo
+     */
+   
+
+
 }

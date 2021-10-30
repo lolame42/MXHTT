@@ -47,9 +47,10 @@
                                         <h2 class="alert-danger">${errValue}</h2>
                                     </c:if>
                                 </div>  
-                                <h5>Giá tiền đấu giá lớn hơn đỉnh, không lớn hơn tối đa và chia hết cho bước nhảy</h5>
+                                
                                 <c:if test= "${check==null}">
                                     <div class="nut">
+                                        <h5>Giá tiền đấu giá lớn hơn đỉnh, không lớn hơn tối đa và chia hết cho bước nhảy</h5>
                                         <form:input type="step" id="step" path="step" cssClass="form-control" placeholder="Nhập số tiền đấu giá (ngàn VNĐ)"/>
                                         <input type="submit" value="Đấu giá" class="btn btn-primary"/> 
                                     </div>
@@ -66,8 +67,9 @@
                                 <h5>đã đấu giá ${allsell.value}</h5>
                             </div>
                         </c:forEach>
+                        <a class="btt nav-link text-white"  href="<c:url value="/billsell/${auction.id}"/>" onclick="return confirm('Bạn có chắc muốn dừng phiên đấu giá này ?');" >Dừng phiên đấu giá này </a>
                     </c:if>
-                    <a class="btt nav-link text-white"  href="<c:url value="/billsell/${auction.id}"/>" onclick="return confirm('Bạn có chắc muốn dừng phiên đấu giá này ?');" >Dừng phiên đấu giá này </a>
+                    
                     
                 </div>
             </div>

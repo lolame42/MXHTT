@@ -119,12 +119,12 @@ public class StatusController {
         String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         List<Status> liststatus = this.statusService.getStatus(1);
-         for (int i = 0; i < liststatus.size(); i++) {
+        for (int i = 0; i < liststatus.size(); i++) {
             if (liststatus.get(i).getLogin().getId() == a.getId()) {
                 liststatus.get(i).setCountlike(liststatus.get(i).getUfeel().size());
             }
         }
-        model.addAttribute("allstatus",liststatus );
+        model.addAttribute("allstatus", liststatus);
         model.addAttribute("countstt", this.statusService.getStatus().size());
         model.addAttribute("status", new Status());
 
@@ -132,15 +132,92 @@ public class StatusController {
 
     }
 
-    @GetMapping("/check/{idBill}")
-    public String check(Model model, Principal principal, @PathVariable(value = "idBill") String idBill) {
+    @GetMapping("/access/{idBill}")
+    public String access(Model model, Principal principal, @PathVariable(value = "idBill") String idBill) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        List<Bill> bill = billService.getBillbyidBill(Integer.parseInt(idBill));
+        if (bill.get(0).getLoginsell().getId() == a.getId()) {
+            if (bill.get(0).getType() == 1) {
+                billService.access(bill.get(0), 3);
+                a = userService.getUserByUserName(principal.getName()).get(0);
+                model.addAttribute("allbillsell", billService.getbillsell(a));
+                model.addAttribute("allbillpay", billService.getbillpay(a));
+                return "billsell";
+
+            }
+
+        }
 
         return "error";
+
+    }
+
+    @GetMapping("/request/{idBill}")
+    public String request(Model model, Principal principal, @PathVariable(value = "idBill") String idBill) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        List<Bill> bill = billService.getBillbyidBill(Integer.parseInt(idBill));
+        if (bill.get(0).getLoginsell().getId() == a.getId()) {
+            if (bill.get(0).getType() == 1) {
+                billService.access(bill.get(0), 2);
+                a = userService.getUserByUserName(principal.getName()).get(0);
+                model.addAttribute("allbillsell", billService.getbillsell(a));
+                model.addAttribute("allbillpay", billService.getbillpay(a));
+                return "billsell";
+
+            }
+
+        }
+
+        return "error";
+
+    }
+
+    @GetMapping("/check/{idBill}")
+    public String check(Model model, Principal principal, @PathVariable(value = "idBill") String idBill) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        List<Bill> bill = billService.getBillbyidBill(Integer.parseInt(idBill));
+        if (bill.get(0).getLoginpay().getId() == a.getId()) {
+            if (bill.get(0).getType() == 0 || bill.get(0).getType() == 2) {
+                model.addAttribute("bill", bill.get(0));
+                model.addAttribute("newbill", new Bill());
+                return "check";
+            }
+            if (bill.get(0).getType() == 3) {
+                model.addAttribute("bill", bill.get(0));
+                return "access";
+            }
+
+        }
+        if (bill.get(0).getLoginsell().getId() == a.getId()) {
+            if (bill.get(0).getType() == 1 || bill.get(0).getType() == 3) {
+                model.addAttribute("bill", bill.get(0));
+                return "access";
+            }
+        }
+        return "error";
+
     }
 
     @PostMapping("/check/{idBill}")
-    public String addcheck(Model model, Principal principal, @PathVariable(value = "idBill") String idBill, @ModelAttribute(value = "newcheck") Check newcheck) {
-        return "error";
+    public String addcheck(Model model, Principal principal, @PathVariable(value = "idBill") String idBill, @ModelAttribute(value = "newbill") Bill newbill) {
+        Login a = userService.getUserByUserName(principal.getName()).get(0);
+        List<Bill> bill = billService.getBillbyidBill(Integer.parseInt(idBill));
+        model.addAttribute("bill", bill.get(0));
+        model.addAttribute("newbill", new Bill());
+        if (!newbill.getCodemomo().isEmpty()) {
+            if (billService.update(bill.get(0), newbill.getCodemomo())) {
+                a = userService.getUserByUserName(principal.getName()).get(0);
+                model.addAttribute("err", "xác nhận thành công");
+                model.addAttribute("allbillsell", billService.getbillsell(a));
+                model.addAttribute("allbillpay", billService.getbillpay(a));
+
+                return "billsell";
+            }
+            model.addAttribute("err", "xác nhận không thành công");
+
+        }
+        model.addAttribute("err", "mã giao dịch định dạng không xác định");
+        return "check";
     }
 
     @GetMapping("/auction")

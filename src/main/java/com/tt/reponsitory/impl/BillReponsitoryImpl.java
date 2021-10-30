@@ -7,13 +7,13 @@ package com.tt.reponsitory.impl;
 
 import com.tt.pojos.Auction;
 import com.tt.pojos.Bill;
-import com.tt.pojos.Check;
 import com.tt.pojos.Login;
 import com.tt.pojos.Sell;
 import com.tt.pojos.Status;
 import com.tt.reponsitory.BillReponsitory;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -74,7 +74,6 @@ public class BillReponsitoryImpl implements BillReponsitory {
 
     }
 
-   
     @Override
     public List<Bill> getBillbyidBill(int i) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -89,6 +88,36 @@ public class BillReponsitoryImpl implements BillReponsitory {
         return q.getResultList();
     }
 
-   
+    @Override
+    public boolean update(Bill bill, String code) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            
+            Bill addcode = getBillbyidBill(bill.getId()).get(0);
+            addcode.setCodemomo(code);
+            addcode.setType(1);
+            addcode.setDateend(new Date());
+            session.update(addcode);
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean access(Bill bill, int i) {
+       Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            
+            Bill addcode = getBillbyidBill(bill.getId()).get(0);
+            addcode.setType(i);
+            session.update(addcode);
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
 
 }
