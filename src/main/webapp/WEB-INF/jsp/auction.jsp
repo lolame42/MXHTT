@@ -42,13 +42,13 @@
             <div class="status">
                 <div class="img"><img class="img-fluid" src="<c:url value="${allauction.image}" />"/></div>
                 <div class="text">
-                    <h5>Người đăng: ${allauction.login.full_name}</h5>
+                    <h5><b>Người đăng:</b> ${allauction.login.full_name}</h5>
                     <div class="my-date">
-                        <h5>Thời gian bắt đầu:</h5>
+                        <h5><b>Thời gian bắt đầu:</b></h5>
                         <i>${allauction.date}</i>
                     </div>
-                    <h5>Giới thiệu: ${allauction.content}</h5>
-                    <h5>Bước nhảy ${allauction.step}</h5>
+                        <h5><b>Giới thiệu:</b> ${allauction.content}</h5>
+                        <h5><b>Bước nhảy:</b> ${allauction.step}</h5>
                     <a class="otb1 nav-link" href="<c:url value="/auctionpart/${allauction.id}" />">Đấu Giá</a>
                 </div>     
             </div>

@@ -5,18 +5,18 @@
  */
 package com.tt.service.impl;
 
-import com.tt.reponsitory.AdminReponsitory;
 import com.tt.service.AdminService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.AdminRepository;
 
 
 @Service
 public class AdminServiceImpl implements AdminService{
     
     @Autowired
-    private AdminReponsitory adminReponsitory;
+    private AdminRepository adminReponsitory;
     
     @Override
     public List<Object[]> stthashtag() {

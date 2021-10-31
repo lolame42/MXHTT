@@ -9,12 +9,12 @@ import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
 import com.tt.pojos.Status;
 import com.tt.pojos.Ufeel;
-import com.tt.reponsitory.UfeelReponsitory;
-import com.tt.reponsitory.UserReponsitory;
 import com.tt.service.NotiService;
 import com.tt.service.UfeelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.UfeelRepository;
+import com.tt.reponsitory.UserRepository;
 
 /**
  *
@@ -23,9 +23,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UfeelServiceImpl implements UfeelService{
     @Autowired
-    UfeelReponsitory ufeelReponsitory;
+    UfeelRepository ufeelReponsitory;
     @Autowired
-    UserReponsitory userReponsitory;
+    UserRepository userReponsitory;
     @Autowired
     NotiService  notiService;
 

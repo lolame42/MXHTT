@@ -10,7 +10,6 @@ import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Status;
-import com.tt.reponsitory.StatusReponsitory;
 import com.tt.service.StatusService;
 import com.tt.service.UserService;
 import java.io.IOException;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.StatusRepository;
 
 /**
  *
@@ -30,7 +30,7 @@ public class StatusServiceImpl implements StatusService {
     @Autowired
     private Cloudinary Cloudinary;
     @Autowired
-    private StatusReponsitory statusReponsitory;
+    private StatusRepository statusReponsitory;
     @Autowired
     private UserService userService;
 

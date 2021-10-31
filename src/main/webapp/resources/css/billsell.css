@@ -1,0 +1,7 @@
+body{
+    background-color: #F5F7F4;
+}
+.mybill, .yourbill{
+    width: 48%;
+    border: 1px solid #D2D2D2;
+}

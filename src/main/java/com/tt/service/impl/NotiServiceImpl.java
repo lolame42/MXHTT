@@ -9,11 +9,11 @@ import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
 import com.tt.pojos.Status;
-import com.tt.reponsitory.NotiReponsitory;
 import com.tt.service.NotiService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.NotiRepository;
 
 /**
  *
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NotiServiceImpl implements NotiService{
     @Autowired
-    NotiReponsitory notiReponsitory;
+    NotiRepository notiReponsitory;
 
     @Override
     public boolean add(Noti noti, Login login, Status status, int type) {

@@ -13,11 +13,21 @@ import java.util.List;
  * @author Tu
  */
 public interface UserService {
+
     List<Login> getUsers();
+
     List<Login> getUsers(String kw);
+
     List<Login> getUserByUserName(String string);
+
     Login getUserById(int id);
+
     boolean Update(Login login);
+
     List<Login> getListUserbyId(int id);
-   
+
+    List<Login> getUserByPhone(String string);
+
+    List<Login> getUserByEmail(String string);
+
 }

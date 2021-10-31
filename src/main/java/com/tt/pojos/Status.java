@@ -57,6 +57,8 @@ public class Status implements Serializable {
     @Transient
     private int countlike;
     @Transient
+    private int countcmt;
+    @Transient
     private MultipartFile file;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "statuslike")
@@ -220,6 +222,20 @@ public class Status implements Serializable {
      */
     public void setCountlike(int countlike) {
         this.countlike = countlike;
+    }
+
+    /**
+     * @return the countcmt
+     */
+    public int getCountcmt() {
+        return countcmt;
+    }
+
+    /**
+     * @param countcmt the countcmt to set
+     */
+    public void setCountcmt(int countcmt) {
+        this.countcmt = countcmt;
     }
 
     /**

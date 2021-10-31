@@ -6,28 +6,31 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="<c:url value="/js/wall.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/css/wall.css"/>"/>
+
 <c:if test="${userwall!=null}">
     <div class="infosa">
         <div class="info">
             <img class="img-fluid" src="<c:url value="${userwall.image}" />"alt="${userwall.full_name}"/>
             <h1>${userwall.full_name}</h1>
             <c:if test="${userwall.user_name!=user.user_name}">
-                <c:if test="${check1==null}">
-                    <a class="otb nav-link" href="<c:url value="/report/${userwall.id}/1" />"onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do lời lẽ không chuẩn mực ?');">Lời lẽ không chuẩn mực <i class="far fa-comment"></i></a>
-                </c:if>
-                    
-                <c:if test="${check2==null}">
-                    <a class="otb nav-link" href="<c:url value="/report/${userwall.id}/2" />"onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do không thanh toán ?');">Không thanh toán  <i class="far fa-comment"></i></a>
-                </c:if>
+                <div class="reports">
+                    <a class="report nav-link" data-toggle="collapse" href="#noidung">Report</a>
 
-
-
-
+                    <div id="noidung" class="reporta">
+                        <c:if test="${check1==null}">
+                            <a class="otb nav-link text-dark" href="<c:url value="/report/${userwall.id}/1" />"
+                               onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do lời lẽ không chuẩn mực ?');"><i class="far fa-times-circle"></i> Lời lẽ không chuẩn mực</a>
+                        </c:if>                  
+                        <c:if test="${check2==null}">
+                            <a class="otb nav-link text-dark" href="<c:url value="/report/${userwall.id}/2" />"
+                               onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do không thanh toán ?');"><i class="far fa-times-circle"></i> Không thanh toán</a>
+                        </c:if>
+                    </div>
+                </div>
             </c:if>
         </div>
-
-
     </div>
     <div class="infosb">
         <div class="info1">
@@ -39,13 +42,12 @@
             </c:if>
             <c:forEach var="auctionwall" items="${auctionwall}">
                 <img class="img-fluidd" src="<c:url value="${auctionwall.image}" />" alt="${auctionwall.content}"/>
-                <div>${auctionwall.step}</div>
+                <div><b>Bước nhảy:</b> ${auctionwall.step}</div>
                 <div class="my-date">
-                    <i>${auctionwall.date}</i>
+                    <i> ${auctionwall.date}</i>
                 </div>
                 <a class="otb1 btn-primary nav-link" href="<c:url value="/auctionpart/${auctionwall.id}" />">Đấu Giá</a>
                 <hr/>
-
             </c:forEach>
         </div>
         <div class="info2">
@@ -64,10 +66,10 @@
                     </div>
                     <c:if test= "${statuswall.login.id==user.id}">
                         <div class="setting">
-                            <a  class="btn text-white" data-toggle="collapse" href="#noidung"><i class="fas fa-cog">Setting</i></a>
+                            <a class="nav-link" data-toggle="collapse" href="#noidung">&#9881;</a>
                             <div id="noidung" class="collapses">
-                                <a class="otb nav-link text-dark" href="<c:url value="/setting/status/${allstatus.idStatus}" />"><b><i class="fas fa-pencil-alt"></i> Chỉnh sửa</b></a>
-                                <a class="otb nav-link text-dark" href="<c:url value="/delete/status/${allstatus.idStatus}" />"><b><i class="fas fa-trash-alt" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"></i> Xóa bài</b></a>
+                                <a class="otb nav-link text-dark" href="<c:url value="/setting/status/${statuswall.idStatus}" />"><b><i class="fas fa-pencil-alt"></i> Chỉnh sửa</b></a>
+                                <a class="otb nav-link text-dark" href="<c:url value="/delete/status/${statuswall.idStatus}" />"><b><i class="fas fa-trash-alt" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"></i> Xóa bài</b></a>
                             </div>
                         </div> 
                     </c:if>
@@ -78,26 +80,20 @@
                         <h5>#${statuswall.hashtag}</h5>
                     </c:if>
                 </div>
-                <div class="icon">
+                <div class="icons">
                     <c:if test= "${statuswall.countlike!=0}">
                         <h5>${statuswall.countlike} <i class="far fa-thumbs-up"></i></h5> 
-                        </c:if>
-                    <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
+                    </c:if>
+                    <c:if test= "${statuswall.countcmt!=0}">
+                        <h5>${statuswall.countcmt} comment<i class="far fa-thumbs-up"></i></h5> 
+                    </c:if>
+                    <a class="otb nav-link" href="<c:url value="/status/${statuswall.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
+                    <a class="otbb nav-link">Chia sẻ <i class="fas fa-share"></i></a>
                 </div>
                 <hr>
             </c:forEach>
         </div>
     </div>
-    <script>
-        window.onload = function () {
-            let dates = document.querySelectorAll(".my-date>i")
-            for (let i = 0; i < dates.length; i++)
-            {
-                let d = dates[i]
-                d.innerText = moment(d.innerText).fromNow()
-            }
-        }
-    </script>
     <c:forEach var="allcomment" items="${allcomment}">
         <div>
             <h1>${allcomment.content}</h1>

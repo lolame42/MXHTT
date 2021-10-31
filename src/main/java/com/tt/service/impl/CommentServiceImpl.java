@@ -9,18 +9,18 @@ import com.tt.pojos.Comment;
 import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
 import com.tt.pojos.Status;
-import com.tt.reponsitory.CommentReponsitory;
 import com.tt.service.CommentService;
 import com.tt.service.NotiService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.CommentRepository;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
-    CommentReponsitory commentReponsitory;
+    CommentRepository commentReponsitory;
     @Autowired
     NotiService notiService;
 

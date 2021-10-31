@@ -8,7 +8,6 @@ package com.tt.service.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
-import com.tt.reponsitory.LoginReponsitory;
 import com.tt.service.LoginService;
 import java.io.IOException;
 import java.util.HashSet;
@@ -22,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.LoginRepository;
 
 /**
  *
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    private LoginReponsitory loginReponsitory;
+    private LoginRepository loginReponsitory;
     @Autowired
     private UserServiceImpl userServiceImpl;
     @Autowired

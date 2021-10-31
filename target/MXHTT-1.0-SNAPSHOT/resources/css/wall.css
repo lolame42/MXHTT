@@ -47,6 +47,15 @@ body{   background-color: #F0F2F5;}
     width: 34.5%;
     text-align: center;
 }
+.img-fluidd{
+    width: 350px;
+    height: 200px;
+}
+.otb1{
+    width: 100px;
+    margin-left: 135px;
+    margin-top: 10px;
+}
 .info2{
     width: 64.5%;
     margin-left: 10px;
@@ -56,22 +65,96 @@ body{   background-color: #F0F2F5;}
     height: 50px;
     border-radius: 50%;
 }
-.info2a{    display: flex;}
-.my-date i{ font-size: 16px;}
+.info2a{
+    display: flex;
+    background-color: #F7F7F7;
+    border: 1px solid #D2D2D2;
+    padding: 5px;
+}
+.my-date i{ 
+    font-size: 16px;
+    background-color: #F7F7F7;
+}
 .info1, .info2{
     border: #F0F2F5 solid 1px;
     background-color: white;
     padding: 5px;
     border-radius: 10px;
 }
-.img-fluidd{
-    width: 350px;
-    height: 150px;
+
+.card-body{
+    border: 1px solid #D2D2D2;
+    margin-top: -1px;
 }
-.otb1{
-    width: 100px;
-    margin-left: 135px;
+.card-body h5{
+    margin: -10px;
+    padding: 5px;
+    color: black;
 }
-.icon{
+.card-body h5:last-child{
+    color: #17A2B8;
+}
+.setting{
+    position: absolute;
+    right: 22.5%;
+    margin-top: -4px;
+}
+.setting > a:first-child{
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    
+}
+.setting > a:first-child:hover{
+    border: 1px solid #F0F2F5;
+    background-color: #F7F7F7;
+    height: 0px;
+    z-index: 99;
+}
+.collapses{
+    width: 130px;  
+    position: absolute;
+    right: 1%;
+    background-color: #F5F7F4;
+    border: 1px solid #F0F2F5;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.collapses a:hover{
+    border-radius: 10%;
+}
+.collapses i{
+    font-size: 16px;
+    background-color: #F5F7F4;
+}
+.icons{
+    background-color: #F7F7F7;
     display: flex;
+    border: 1px solid #D2D2D2;
+    margin-top: -5px;
+}
+.icons h5, .otbb{
+    margin-left: 15.5%;
+    color: black;
+    font-size: 18px;
+}
+.icons h5{
+     margin-top: 8px;
+}
+.report{
+    position: absolute;
+    right: 21.5%;
+    background-color: #D2D2D2;
+    border: 2px solid #F7F7F7;
+    font-size: 20px;
+    border-radius: 10%;
+}
+.reporta{
+    width: 250px;
+    background-color: #F7F7F7;
+    position: absolute;
+    right: 21.5%;
+    top: 15.5%;
+    font-size: 17px;
+    border-radius: 5%;
 }

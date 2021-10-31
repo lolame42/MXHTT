@@ -8,7 +8,6 @@ package com.tt.service.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tt.pojos.Login;
-import com.tt.reponsitory.UserReponsitory;
 import com.tt.service.UserService;
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +16,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.UserRepository;
 
 /**
  *
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserReponsitory userReponsitory;
+    private UserRepository userReponsitory;
 
     @Override
     public List<Login> getUsers() {
@@ -57,5 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Login> getListUserbyId(int i) {
         return userReponsitory.getListUserByid(i);
+    }
+
+    @Override
+    public List<Login> getUserByPhone(String string) {
+        return userReponsitory.getUserByPhone(string);
+    }
+
+    @Override
+    public List<Login> getUserByEmail(String string) {
+        return userReponsitory.getUserByEmail(string);
     }
 }

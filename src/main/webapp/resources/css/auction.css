@@ -7,7 +7,10 @@ body{
     margin-bottom: 20px;
     margin-top: 20px;
 }
-.form-group h3{padding: 5px;}
+.form-group h3{
+    padding: 5px;
+    font-family: Cambria;
+}
 .form-control{
     width: 100.2%;
     margin: -1px;
@@ -34,9 +37,29 @@ body{
     color: white;
     border-radius: 10%;
 }
+.text h5{
+    font-family: Cambria;
+}
 .my-date{display: flex; font-size: 20px;}
 .my-date i{margin-left: 5px; font-size: 18px;}
 .ul{
     list-style-type: none;
     width: 65px;
+}
+.notification{
+    display: flex;
+}
+.notification img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+}
+.notification > .text a{
+    width: 270px;
+    height: 60px;
+    font-size: 18px;
+    margin-top: -40px;
+    margin-left: -40px;
+    background-color: #F2F2F2;
 }

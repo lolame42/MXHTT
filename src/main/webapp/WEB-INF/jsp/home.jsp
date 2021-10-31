@@ -8,7 +8,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="<c:url value="/js/like.js"/>"></script>
+<script src="<c:url value="/js/home.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/css/home.css"/>"/>
 
 <div class="main">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="hashtag">
                     <c:if test= "${errhashtag!=null}">
-                        <h2 class="alert-danger">${errhashtag}</h2>
+                        <h2>${errhashtag}</h2>
                     </c:if>
                     <form:input type="hashtag" id="hashtag" path="hashtag" cssClass="form-control" placeholder="Hashtag"/>
                 </div>  
@@ -50,11 +50,13 @@
                         <div class="name">
                             <h5>${allstatus.login.full_name}</h5>
                             <c:if test= "${allstatus.login.id==user.id}">
-                                <div class="setting">
+                                <div class="setting" onclick="">
                                     <a  class="btn text-white" data-toggle="collapse" href="#noidung"><i class="fas fa-cog"></i></a>
                                     <div id="noidung" class="collapses">
-                                        <a class="otb nav-link text-dark" href="<c:url value="/setting/status/${allstatus.idStatus}" />"><b><i class="fas fa-pencil-alt"></i> Chỉnh sửa</b></a>
-                                        <a class="otb nav-link text-dark" href="<c:url value="/delete/status/${allstatus.idStatus}" />"><b><i class="fas fa-trash-alt" onclick="return confirm('Bạn có chắc muốn xóa bài đăng này ?');"></i> Xóa bài</b></a>
+                                        <a class="otb nav-link text-dark" href="<c:url value="/setting/status/${allstatus.idStatus}" />">
+                                            <b><i class="fas fa-pencil-alt"></i> Chỉnh sửa</b></a>
+                                        <a class="delete otb nav-link text-dark" href="<c:url value="/delete/status/${allstatus.idStatus}"/>"
+                                           onclick="return confirm('Bạn có chắc muốn dừng phiên đấu giá này ?');"><b><i class="fas fa-trash-alt"></i> Xóa bài</b></a>
                                     </div>
                                 </div>                               
                             </c:if>
@@ -72,13 +74,18 @@
                     <div class="nut">     
                         <c:if test= "${user.id!=allstatus.login.id}">
                             <c:if test= "${allstatus.check==0}">
-                                <input id="${allstatus.idStatus}" class="hihi${allstatus.idStatus} " type="button" value="&#128077; Thích" onclick="addlike(${allstatus.idStatus},${user.id})"/>
+                                <input id="${allstatus.idStatus}" class="otb hihi${allstatus.idStatus} " type="button" value="Thích &#128077;" onclick="addlike(${allstatus.idStatus},${user.id})"/>
                             </c:if> 
                         </c:if>
                         <c:if test= "${allstatus.countlike!=0}">
-                            <h5>${allstatus.countlike} <i class="far fa-thumbs-up"></i></h5> 
+                            <h5 class="nuber">${allstatus.countlike} <i class="far fa-thumbs-up"></i></h5> 
                         </c:if>
+                        <c:if test= "${allstatus.countcmt!=0}">
+                            <h5 class="nuber">${allstatus.countcmt} comment <i class="far fa-thumbs-up"></i></h5> 
+                        </c:if>
+                          
                         <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
+                        <a class="otb nav-link">Chia sẻ <i class="fas fa-share"></i></a>
                     </div>
                 </div>
             </c:forEach>
@@ -86,18 +93,7 @@
                 <c:forEach begin="1" end="${Math.ceil(countstt/30)}" var = "page">
                     <li class="page-item"><a class="page-link" href=" <c:url value="/home" />?page=${page}">${page}</a></li>
                     </c:forEach>
-            </ul>
-            <script>
-                window.onload = function () {
-                    let dates = document.querySelectorAll(".my-date>p")
-                    for (let i = 0; i < dates.length; i++)
-                    {
-                        let d = dates[i]
-                        d.innerText = moment(d.innerText).fromNow()
-                    }
-                    
-                }
-            </script>
+            </ul>         
         </div>
     </div>
 </div>

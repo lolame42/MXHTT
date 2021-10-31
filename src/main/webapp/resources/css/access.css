@@ -1,0 +1,20 @@
+body{
+    background-color: #F5F7F4;
+}
+.bill{
+    width: 400px;
+    position: relative;
+    left: 31.5%;
+    border: 2px double #D2D2D2;
+    background-color: white;
+    padding: 15px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.button{
+    display: flex;
+    margin: 5%;
+}
+.button a{
+    margin-left: 5%;
+}

@@ -25,7 +25,8 @@ i{
 .nav-black img{
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 50%; 
+    border: 3px solid #D2D2D2;
 }
 .nav-black a, .nut_dropdown button, .nut_dropdown, .navbar-brand, .input-group button:hover{
     background-color: #FFFF;;
@@ -52,7 +53,6 @@ i{
   position: relative;
   display: inline-block;
 }
-
 .noidung_dropdown {
     width: 340px;
     height: 600px;
@@ -72,20 +72,21 @@ i{
   text-decoration: none;
   display: block;
 }
+.notification{
+    display: flex;
+}
+.notification img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+}
 .input-group button{
     height: 38px;
 }
 .hienThi{
   display:block;
 }
-.notification{
-    display: flex
-}
-.notification img{
-    width: 60px;
-    height: 60px;
-    padding: 5px;}
-
 .text hr{
     width: 260px;
     margin-left: -20px;

@@ -11,12 +11,11 @@
 
 <div class="main">
     <c:url value="/check/${bill.id}" var="action" />
-
     <c:if test= "${err!=null}">
         <h2 class="alert-danger">${err}</h2>
     </c:if>
     <c:if test= "${err==null}">
-        <h5 class="alert-danger">Thanh toán số tiền ${bill.value}k VND cho số điện thoại ${bill.loginsell.phone} và nhập mã giao dịch để xác nhận đã thanh toán cho hóa đơn này</h5>
+        <h4 class="text-danger text-center">Thanh toán số tiền ${bill.value}k VND cho số điện thoại ${bill.loginsell.phone} và nhập mã giao dịch để xác nhận đã thanh toán cho hóa đơn này</h4>
     </c:if>
 
     <c:if test= "${post!=null}">

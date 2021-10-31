@@ -8,13 +8,13 @@ package com.tt.service.impl;
 import com.tt.pojos.Bill;
 import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
-import com.tt.reponsitory.BillReponsitory;
-import com.tt.reponsitory.NotiReponsitory;
 import com.tt.service.BillService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.BillRepository;
+import com.tt.reponsitory.NotiRepository;
 
 /**
  *
@@ -23,9 +23,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class BillServiceImpl implements BillService{
     @Autowired
-    BillReponsitory billReponsitory;
+    BillRepository billReponsitory;
     @Autowired
-    NotiReponsitory notiReponsitory;
+    NotiRepository notiReponsitory;
 
     @Override
     public boolean addbill(Login loginsell, Login loginpay, int tien) {

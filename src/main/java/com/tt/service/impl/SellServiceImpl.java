@@ -10,13 +10,13 @@ import com.tt.pojos.Login;
 import com.tt.pojos.Noti;
 import com.tt.pojos.Report;
 import com.tt.pojos.Sell;
-import com.tt.reponsitory.SellReponsitory;
 import com.tt.service.NotiService;
 import com.tt.service.SellService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.tt.reponsitory.SellRepository;
 
 /**
  *
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class SellServiceImpl implements SellService {
 
     @Autowired
-    SellReponsitory sellReponsitory;
+    SellRepository sellReponsitory;
     @Autowired
     NotiService notiService;
 

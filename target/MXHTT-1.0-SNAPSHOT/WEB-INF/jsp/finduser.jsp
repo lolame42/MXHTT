@@ -14,12 +14,11 @@
     <div class="row">
         <c:forEach var="userfind" items="${userfind}">
             <div class="card col-md-12" style="width:400px">
-
                 <div class="card-body">
                     <c:if test="${userfind.image!=null}">
                         <div class="info">
                             <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
-                                <img class="img-fluid" src="<c:url value="${userfind.image}" />"alt="${userfind.full_name}"/> </a>
+                                <img class="img-fluid" src="<c:url value="${userfind.image}" />"alt="${userfind.full_name}"/></a>
                             <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
                                 <div class="card-body">
                                     <h4 class="card-title">${userfind.full_name}</h4>
@@ -27,11 +26,10 @@
                             </a>
                         </div>
                     </c:if>
-
                     <c:if test="${userfind.image==null}">
                         <div class="info">
                             <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
-                                <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${userfind.full_name}"/>      </a>
+                                <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${userfind.full_name}"/></a>
 
                             <div class="card-body">
                                 <h4 class="card-title">${userfind.full_name}</h4>

@@ -17,7 +17,17 @@ body{
 }
 .info2{
     font-size: 20px;
-    padding: 30px;
+    padding: 20px;
+}
+.info2 h4{
+    padding: 5px;
+    margin-left: 10%;
+}
+.img-fluida{
+    width: 80%;
+    height: 388px;
+    margin-left: 10%;
+    border: 3px double black;
 }
 hr{margin-top: -10px;}
 .auction{
@@ -49,3 +59,13 @@ hr{margin-top: -10px;}
     text-align: center;
 }
 .btt:hover{background-color: coral;}
+.cmt{
+    width: 400px;
+    height: 40px;
+    background-color: #F0F2F5;
+    margin: 5px;
+    border-radius: 20px;
+}
+.cmt h5{
+    padding: 9px;
+}

@@ -13,8 +13,9 @@
 <c:if test= "${err!=null}}">
     <td>${err}</th>  
 </c:if>
-<h1 class="text-center text-info">Hóa Đơn</h1>
+
 <div class="container">
+    <h1 class="text-center text-danger">Hóa Đơn</h1>
     <div class="row">
         <div class="mybill col-md-6 col-xs-12"> 
             <h2 class="text-center text-info">Hóa đơn bạn chờ thanh toán</h2>
