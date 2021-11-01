@@ -12,6 +12,12 @@ import java.util.List;
  * @author DAVADO
  */
 public interface AdminRepository {
+
     List<Object[]> stthashtag();
+
+    List<Object[]> auctionstt();
+    
+    List<Object[]> userreport();
+    
     
 }

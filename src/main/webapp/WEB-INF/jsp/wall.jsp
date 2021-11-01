@@ -84,11 +84,10 @@
                     <c:if test= "${statuswall.countlike!=0}">
                         <h5>${statuswall.countlike} <i class="far fa-thumbs-up"></i></h5> 
                     </c:if>
+                    <a class="otbb nav-link" href="<c:url value="/status/${statuswall.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
                     <c:if test= "${statuswall.countcmt!=0}">
-                        <h5>${statuswall.countcmt} comment<i class="far fa-thumbs-up"></i></h5> 
+                        <h5>${statuswall.countcmt} <b>Bình luận</b> <i class="far fa-comment-dots"></i></h5> 
                     </c:if>
-                    <a class="otb nav-link" href="<c:url value="/status/${statuswall.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
-                    <a class="otbb nav-link">Chia sẻ <i class="fas fa-share"></i></a>
                 </div>
                 <hr>
             </c:forEach>

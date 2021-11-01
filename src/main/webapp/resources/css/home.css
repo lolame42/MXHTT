@@ -94,7 +94,7 @@ a{
     border: none;
     background-color: #F7F7F7;
     font-size: 20px;
-    margin-left: 12%;
+    margin-left: 25%;
 }
 .nut input:hover{   color: #6495ED;}
 .nut a > i {
@@ -103,7 +103,7 @@ a{
 .otb{
     color: #000;
     font-size: 20px;
-    margin-left: 20%;
+    margin-left: 25%;
 }
 .nut a:hover{   
     background-color: #F7F7F7;}

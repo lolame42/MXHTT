@@ -25,9 +25,9 @@ public interface UserRepository {
     List<Login> getUserByEmail(String string);
 
     Login getUserById(int id);
-
-    boolean Update(Login login);
     
     List<Login> getListUserByid(int id);
+    
+    boolean xoa(int id);
 
 }

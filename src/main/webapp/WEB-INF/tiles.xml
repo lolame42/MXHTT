@@ -101,7 +101,16 @@ and open the template in the editor.
     </definition>
     <definition name="stthashtag" extends="baseAdminLayout">
         <put-attribute name="title" value="Thống kê bài đăng theo hashtag"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/admin/stthashtag.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/stthashtag.jsp"/>      
+    </definition>
+      <definition name="auctionstt" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê phiên đấu giá theo trạng thái"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/auctionstt.jsp"/>
+         
+    </definition>
+    <definition name="userreport" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê tài khoản bị tố cáo"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/userreport.jsp"/>
          
     </definition>
      

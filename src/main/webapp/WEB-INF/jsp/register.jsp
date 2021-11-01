@@ -52,9 +52,7 @@
                 <form:input type="file" id="file" path="file" cssClass="form-control" />
                 <form:errors path="file" cssClass="alert" element="div"/>
             </div>
-            <div class="form-group">
-                <form:textarea type="text" id="description" path="description" cssClass="form-control" placeholder="Giới thiệu bản thân"/>
-            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Đăng Ký" class="btn btn-primary"/>
             </div>  

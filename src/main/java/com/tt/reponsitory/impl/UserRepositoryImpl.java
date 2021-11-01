@@ -75,6 +75,7 @@ public class UserRepositoryImpl implements UserRepository {
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+
     @Override
     public List<Login> getUserByPhone(String string) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
@@ -95,7 +96,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<Login> getUserByEmail(String string) {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Login> query = builder.createQuery(Login.class);
         Root root = query.from(Login.class);
@@ -110,7 +111,6 @@ public class UserRepositoryImpl implements UserRepository {
         Query q = session.createQuery(query);
         return q.getResultList();
     }
-    
 
     @Override
     public Login getUserById(int id) {
@@ -121,21 +121,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean Update(Login login) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-     
-        try {
-
-            session.update(login);
-            return true;
-        } catch (Exception e) {
-        }
-        return false;
-    }
-
-    @Override
     public List<Login> getListUserByid(int id) {
-        
+
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Login> query = builder.createQuery(Login.class);
@@ -148,6 +135,18 @@ public class UserRepositoryImpl implements UserRepository {
         return q.getResultList();
     }
 
-    
+    @Override
+    public boolean xoa(int i) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Login list = getUserById(i);
 
-}
+        try {
+            session.delete(list);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+        }
+
+    }

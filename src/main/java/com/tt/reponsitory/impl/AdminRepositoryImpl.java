@@ -5,6 +5,8 @@
  */
 package com.tt.reponsitory.impl;
 
+import com.tt.pojos.Bill;
+import com.tt.pojos.Report;
 import com.tt.pojos.Status;
 import java.util.List;
 import javax.persistence.Query;
@@ -31,17 +33,45 @@ public class AdminRepositoryImpl implements AdminRepository {
 
     @Override
     public List<Object[]> stthashtag() {
-        Session session =  this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder b =session.getCriteriaBuilder();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
-            
+
         Root root = q.from(Status.class);
-        
-        q.multiselect(root.get("hashtag"),b.count(root.get("hashtag")));
+
+        q.multiselect(root.get("hashtag"), b.count(root.get("hashtag")));
         q.groupBy(root.get("hashtag"));
-        Query query =session.createQuery(q);
+        Query query = session.createQuery(q);
         return query.getResultList();
-        
+
+    }
+
+    @Override
+    public List<Object[]> auctionstt() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root root = q.from(Bill.class);
+
+        q.multiselect(root.get("type"), b.count(root.get("type")));
+        q.groupBy(root.get("type"));
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> userreport() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root root = q.from(Report.class);
+
+        q.multiselect(root.get("loginbidong"), b.count(root.get("loginbidong")));
+        q.groupBy(root.get("loginbidong"));
+        Query query = session.createQuery(q);
+        return query.getResultList();
     }
 
 }

@@ -22,12 +22,13 @@ public interface UserService {
 
     Login getUserById(int id);
 
-    boolean Update(Login login);
-
     List<Login> getListUserbyId(int id);
 
     List<Login> getUserByPhone(String string);
 
     List<Login> getUserByEmail(String string);
+    
+    boolean xoa(int id );
+    
 
 }

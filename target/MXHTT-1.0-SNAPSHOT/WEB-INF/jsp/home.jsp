@@ -71,21 +71,19 @@
                             <p class="text-info">#${allstatus.hashtag}</p>
                         </c:if>
                     </div>
-                    <div class="nut">     
+                    <div class="nut">    
+                        <c:if test= "${allstatus.countlike!=0}">
+                            <h5 class="nuber">${allstatus.countlike} <i class="far fa-thumbs-up"></i></h5> 
+                        </c:if>                        
+                        <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
                         <c:if test= "${user.id!=allstatus.login.id}">
                             <c:if test= "${allstatus.check==0}">
                                 <input id="${allstatus.idStatus}" class="otb hihi${allstatus.idStatus} " type="button" value="Thích &#128077;" onclick="addlike(${allstatus.idStatus},${user.id})"/>
                             </c:if> 
                         </c:if>
-                        <c:if test= "${allstatus.countlike!=0}">
-                            <h5 class="nuber">${allstatus.countlike} <i class="far fa-thumbs-up"></i></h5> 
-                        </c:if>
                         <c:if test= "${allstatus.countcmt!=0}">
-                            <h5 class="nuber">${allstatus.countcmt} comment <i class="far fa-thumbs-up"></i></h5> 
+                            <h5 class="nuber">${allstatus.countcmt} Bình luận <i class="far fa-comment-dots"></i></h5> 
                         </c:if>
-                          
-                        <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
-                        <a class="otb nav-link">Chia sẻ <i class="fas fa-share"></i></a>
                     </div>
                 </div>
             </c:forEach>

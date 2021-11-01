@@ -48,11 +48,6 @@ public class UserServiceImpl implements UserService {
         return this.userReponsitory.getUserById(id);
     }
 
-    @Override
-    public boolean Update(Login login) {
-
-        return userReponsitory.Update(login);
-    }
 
     @Override
     public List<Login> getListUserbyId(int i) {
@@ -68,4 +63,11 @@ public class UserServiceImpl implements UserService {
     public List<Login> getUserByEmail(String string) {
         return userReponsitory.getUserByEmail(string);
     }
+
+    @Override
+    public boolean xoa(int i) {
+        return userReponsitory.xoa(i);
+    }
+
+   
 }

@@ -14,4 +14,6 @@ import java.util.List;
 
 public interface AdminService {
     public List<Object[]> stthashtag();
+    public List<Object[]> auctionstt();
+    public List<Object[]> userreport();
 }

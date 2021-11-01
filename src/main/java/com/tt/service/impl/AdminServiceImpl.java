@@ -23,5 +23,15 @@ public class AdminServiceImpl implements AdminService{
         return this.adminReponsitory.stthashtag();
         
     }
+    @Override
+    public List<Object[]> auctionstt() {
+        return this.adminReponsitory.auctionstt();
+        
+    }
+
+    @Override
+    public List<Object[]> userreport() {
+       return this.adminReponsitory.userreport();
+    }
     
 }
