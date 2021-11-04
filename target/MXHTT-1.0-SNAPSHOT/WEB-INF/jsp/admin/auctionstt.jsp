@@ -7,6 +7,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <h1 class="text-center text-danger">Thống kê phiên đấu giá theo trạng thái</h1>
+<script src="<c:url value="/js/auction.js"/>"></script>
+
 <table class="table">
     <tr>
         <th>Trạng thái</th>
@@ -18,20 +20,34 @@
         <tr>
             <c:if test= "${c[0]==0}">
                 <td>Chưa thanh toán</th>
-            </c:if>
-            <c:if test= "${c[0]==1}">
+                </c:if>
+                <c:if test= "${c[0]==1}">
                 <td>Chờ xác nhận</th>
-            </c:if>
-            <c:if test= "${c[0]==2}">
+                </c:if>
+                <c:if test= "${c[0]==2}">
                 <td>Yêu cầu thanh toán lại</th>
-            </c:if>
-            <c:if test= "${c[0]==3}">
+                </c:if>
+                <c:if test= "${c[0]==3}">
                 <td>Hoàn thành</th>
-            </c:if>
-          
+                </c:if>
+
             <td>${c[1]}</th>
 
         </tr>
     </c:forEach>
+    <div>
+        <canvas id="myChartAuctionStt"></canvas>
+    </div>
 </tr>
 </table>
+<script>
+    let auctionLabels = [], auctionInfo = [];
+    <c:forEach  items="${auctionstt}" var="c">
+    auctionLabels.push('${c[0]}')
+    auctionInfo.push(${c[1]})
+    </c:forEach>
+
+    window.onload = function () {
+        auctionstt("myChartAuctionStt", auctionLabels, auctionInfo)
+    }
+</script>

@@ -11,16 +11,19 @@
     <!-- Links -->
     <ul class="navbar-nav">
         <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/admin/userreport"/>">Thống kê tài khoản bị report</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="<c:url value="/admin/stthashtag"/>">Thống kê bài đăng theo hashtag</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/admin/userreport"/>">Thống kê tài khoản bị block</a>
+            <a class="nav-link" href="<c:url value="/admin/statustime"/>">Thống kê bài đăng theo thời gian</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Thống kê bài đăng theo thời gian</a>
+            <a class="nav-link" href="<c:url value="/admin/auctionstt"/>">Thống kê các phiên đấu giá theo tỉ lệ đã thanh toán</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/admin/auctionstt"/>">Thống kê tỉ lệ đã thanh toán các phiên đấu giá</a>
+            <a class="nav-link" href="<c:url value="/admin/auctiontime"/>">Thống kê các phiên đấu giá chưa kết thúc theo thời gian</a>
         </li>
     </ul>
 

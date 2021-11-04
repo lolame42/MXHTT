@@ -5,15 +5,22 @@
  */
 package com.tt.service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author DAVADO
  */
-
 public interface AdminService {
-    public List<Object[]> stthashtag();
+
+    public List<Object[]> stthashtag(String kw);
+
     public List<Object[]> auctionstt();
+
     public List<Object[]> userreport();
+
+    public List<Object[]> auctionMonth();
+
+    public List<Object[]> stttime ();
 }

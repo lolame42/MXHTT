@@ -5,6 +5,7 @@
  */
 package com.tt.reponsitory;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,11 +14,14 @@ import java.util.List;
  */
 public interface AdminRepository {
 
-    List<Object[]> stthashtag();
+    List<Object[]> stthashtag(String kw);
 
     List<Object[]> auctionstt();
-    
+
     List<Object[]> userreport();
-    
-    
+
+    List<Object[]> auctionMonth();
+
+    List<Object[]> stttime();
+
 }

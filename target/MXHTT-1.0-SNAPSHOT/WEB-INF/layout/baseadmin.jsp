@@ -18,17 +18,14 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js
-
-
-
-        "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
         <h1 class="text-center text-info">Trang thống kê của admin</h1>
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-xs-12"> 
+                <div class="col-md-4 col-xs-12 bg-light"> 
                     <!<!-- HEADER -->
                     <tiles:insertAttribute name="left"/>
                 </div>

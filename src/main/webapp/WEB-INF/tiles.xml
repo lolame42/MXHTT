@@ -113,6 +113,16 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/admin/userreport.jsp"/>
          
     </definition>
+     <definition name="auctiontime" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê bài đấu giá theo tháng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/auctiontime.jsp"/>
+         
+    </definition>
+    <definition name="statustime" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thống kê bài đấu giá theo tháng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/statustime.jsp"/>
+         
+    </definition>
      
 </tiles-definitions>
 

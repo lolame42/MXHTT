@@ -10,28 +10,39 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tt.reponsitory.AdminRepository;
-
+import java.util.Date;
 
 @Service
-public class AdminServiceImpl implements AdminService{
-    
+public class AdminServiceImpl implements AdminService {
+
     @Autowired
     private AdminRepository adminReponsitory;
-    
+
     @Override
-    public List<Object[]> stthashtag() {
-        return this.adminReponsitory.stthashtag();
-        
+    public List<Object[]> stthashtag(String kw) {
+        return this.adminReponsitory.stthashtag(kw);
+
     }
+
     @Override
     public List<Object[]> auctionstt() {
         return this.adminReponsitory.auctionstt();
-        
+
     }
 
     @Override
     public List<Object[]> userreport() {
-       return this.adminReponsitory.userreport();
+        return this.adminReponsitory.userreport();
     }
-    
+
+    @Override
+    public List<Object[]> auctionMonth() {
+        return this.adminReponsitory.auctionMonth();
+    }
+
+    @Override
+    public List<Object[]> stttime() {
+        return this.adminReponsitory.stttime();
+    }
+
 }
