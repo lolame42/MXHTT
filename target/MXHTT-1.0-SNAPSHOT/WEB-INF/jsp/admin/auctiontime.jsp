@@ -7,6 +7,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <h1 class="text-center text-danger">Thống kê những phiên đấu giá chưa kết thúc theo tháng</h1>
 <script src="<c:url value="/js/auction.js"/>"></script>
+<form action="">
+    <div class="form-group">
+        <label>Từ thời điểm</label>
+        <input type="date" name="fromDate"  class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Đến thời điểm</label>
+        <input type="date" name="toDate" class="form-control">
+    </div>
+    <div>
+        <input type="submit" value="Tìm" class="btn btn-success">
+    </div>
+</form> 
+<h5 class="text-center text-info">biểu đồ 5 mốc thời gian có số lượng đấu giá cao nhất</h5>
+<div>
+    <canvas id="myChartAuctiontime"></canvas>
+</div>
 <table class="table">
     <tr>
         <th>Thời gian</th>
@@ -23,3 +40,14 @@
     </c:forEach>
 </tr>
 </table>
+<script>
+    let auctiontimeLabels = [], auctiontimeInfo = [];
+    <c:forEach  items="${auctiontime}" var="c" begin="0" end="4" >
+    auctiontimeLabels.push('${c[0]}/${c[1]}')
+    auctiontimeInfo.push(${c[2]})
+    </c:forEach>
+
+    window.onload = function () {
+        AuctionTime("myChartAuctiontime", auctiontimeLabels, auctiontimeInfo)
+    }
+</script>

@@ -7,16 +7,17 @@
 <form action="">
     <div class="form-group">
         <label>Từ thời điểm</label>
-        <input type="date" name="fromDate" class="form-control">
+        <input type="date" name="fromDate"  class="form-control">
     </div>
     <div class="form-group">
         <label>Đến thời điểm</label>
         <input type="date" name="toDate" class="form-control">
     </div>
     <div>
-        <input type="submit" value="Tìm" class="btn btn-success"
+        <input type="submit" value="Tìm" class="btn btn-success">
     </div>
 </form> 
+<h5 class="text-center text-info">biểu đồ 5 mốc thời gian có số lượng đăng cao nhất</h5>
 <div>
     <canvas id="myChartStatustime"></canvas>
 </div>
@@ -36,9 +37,10 @@
     </c:forEach>
 </tr>
 </table>
+
 <script>
     let statustimeLabels = [], statustimeInfo = [];
-    <c:forEach  items="${statustime}" var="c" >
+    <c:forEach  items="${statustime}" var="c" begin="0" end="4" >
     statustimeLabels.push('${c[0]}/${c[1]}')
     statustimeInfo.push(${c[2]})
     </c:forEach>

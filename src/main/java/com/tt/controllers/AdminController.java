@@ -10,6 +10,7 @@ import com.tt.pojos.Status;
 import com.tt.service.AdminService;
 import com.tt.service.UserService;
 import java.security.Principal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,54 +53,44 @@ public class AdminController {
     }
 
     @GetMapping("/statustime")
-    public String thongketrangthaitheothoigian(Model model, @RequestParam(required = false) Map<String, String> params) {
-        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-        Date fromDate = null;
-        String from = params.getOrDefault("fromDate", null);
-        Date toDate = null;
-        String to = params.getOrDefault("toDate", null);
+    public String thongketrangthaitheothoigian(Model model, @RequestParam(required = false) Map<String, String> params) throws ParseException {
+        String from = params.getOrDefault("fromDate", "0001-01-01");
+        String to = params.getOrDefault("toDate", "3000-01-01");
         List<Object[]> list = adminService.stttime();
-        try {
-            if (from != null) {
-                fromDate = f.parse(from);
-            }
-        } catch (Exception e) {
+        List<Object[]> list1 = null;
+        int frommonth, fromyear, tomonth, toyear;
+        frommonth = fromyear = tomonth = toyear = -1;
+        if (!from.isEmpty()) {
+            String[] parts = from.split("-");
+            frommonth = Integer.parseInt(parts[1]);
+            fromyear = Integer.parseInt(parts[0]);
         }
-        try {
-            if (to != null) {
-                toDate = f.parse(to);
-            }
-        } catch (Exception e) {
+        if (!to.isEmpty()) {
+            String[] parts1 = to.split("-");
+            tomonth = Integer.parseInt(parts1[1]);
+            toyear = Integer.parseInt(parts1[0]);
         }
-        boolean check;
-
-        for (int i = 0; i < 1; i++) {
-            check = true;
-
-            if (fromDate != null) {
-                System.out.println("from");
-                System.out.println(list.get(i)[0]);
-                System.out.println(fromDate.getMonth());
-                if ((int) list.get(i)[0] < fromDate.getMonth()) {
+        for (int i = 0; i < list.size(); i++) {
+            int month = (int) list.get(i)[0];
+            int year = (int) list.get(i)[1];
+            boolean check = true;
+            if (frommonth != -1) {
+                if (fromyear > year || (fromyear == year && frommonth > month)) {
+                    check = false;
+                }
+            }
+            if (tomonth != -1) {
+                if (toyear < year || (toyear == year && tomonth < month)) {
                     check = false;
 
                 }
             }
-            if (toDate != null) {
-                System.out.println("to");
-                System.out.println(list.get(i)[0]);
-                System.out.println(toDate.getMonth());
-                if ((int) list.get(i)[0] > toDate.getMonth()) {
 
-                    check = false;
-                }
-            }
             if (check == false) {
                 list.remove(i);
                 i--;
 
             }
-
         }
 
         model.addAttribute("statustime", list);
@@ -107,8 +98,47 @@ public class AdminController {
     }
 
     @GetMapping("/auctiontime")
-    public String thongkephiendaugiatheothang(Model model) {
-        model.addAttribute("auctiontime", this.adminService.auctionMonth());
+    public String thongkephiendaugiatheothang(Model model, @RequestParam(required = false) Map<String, String> params) {
+        String from = params.getOrDefault("fromDate", "0001-01-01");
+        String to = params.getOrDefault("toDate", "3000-01-01");
+        List<Object[]> list = this.adminService.auctionMonth();
+        List<Object[]> list1 = null;
+        int frommonth, fromyear, tomonth, toyear;
+        frommonth = fromyear = tomonth = toyear = -1;
+        if (!from.isEmpty()) {
+            String[] parts = from.split("-");
+            frommonth = Integer.parseInt(parts[1]);
+            fromyear = Integer.parseInt(parts[0]);
+        }
+        if (!to.isEmpty()) {
+            String[] parts1 = to.split("-");
+            tomonth = Integer.parseInt(parts1[1]);
+            toyear = Integer.parseInt(parts1[0]);
+        }
+        for (int i = 0; i < list.size(); i++) {
+            int month = (int) list.get(i)[0];
+            int year = (int) list.get(i)[1];
+            boolean check = true;
+            if (frommonth != -1) {
+                if (fromyear > year || (fromyear == year && frommonth > month)) {
+                    check = false;
+                }
+            }
+            if (tomonth != -1) {
+                if (toyear < year || (toyear == year && tomonth < month)) {
+                    check = false;
+
+                }
+            }
+
+            if (check == false) {
+                list.remove(i);
+                i--;
+
+            }
+        }
+
+        model.addAttribute("auctiontime", list);
         return "auctiontime";
     }
 

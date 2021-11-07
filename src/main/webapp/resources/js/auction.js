@@ -72,7 +72,7 @@ function StatusTime(id, statustimeLabels = [], statustimeInfo = []) {
     const data = {
         labels: statustimeLabels,
         datasets: [{
-                label: 'Thống kê status theo thời gian',
+                label: statustimeLabels,
                 data: statustimeInfo,
                 backgroundColor: [
                     'rgb(255, 99, 132)',
@@ -87,7 +87,7 @@ function StatusTime(id, statustimeLabels = [], statustimeInfo = []) {
     };
 
     const config = {
-        type: 'line',
+        type: 'bar',
         data: data,
         options: {
             scales: {
@@ -103,4 +103,40 @@ function StatusTime(id, statustimeLabels = [], statustimeInfo = []) {
 
 
 }
+function AuctionTime(id, auctiontimeLabels = [], auctiontimeInfo = []) {
+    const data = {
+        labels: auctiontimeLabels,
+        datasets: [{
+                label: auctiontimeLabels ,
+                data: auctiontimeInfo,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(201, 203, 207)',
+                    'rgb(52, 74, 48)'
+
+                ],
+                hoverOffset: 5
+            }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+
+    };
+    let ctx = document.getElementById(id).getContext("2d")
+    new Chart(ctx, config)
+
+
+}
+
 
