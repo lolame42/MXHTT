@@ -139,14 +139,16 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean xoa(int i) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         Login list = getUserById(i);
+        if (list.getUserrole() == "ROLE_USER") {
+            try {
+                session.delete(list);
+                return true;
+            } catch (Exception e) {
+                
+            }
 
-        try {
-            session.delete(list);
-            return true;
-        } catch (Exception e) {
-            return false;
         }
-
-        }
-
+        return false;
     }
+
+}

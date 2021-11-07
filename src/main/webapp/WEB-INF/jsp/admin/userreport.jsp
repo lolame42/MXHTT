@@ -12,7 +12,7 @@
     <tr>
         <c:forEach items="${userreport}" var="c">
         <tr>
-            <td>${c[0].full_name}</th>
+            <td><a class="otb" href="<c:url value="/wall/${c[0].id}"/>"> ${c[0].full_name}</a></th>
             <td>${c[1]}</th>
             <td><a class="delete otb nav-link text-dark" href="<c:url value="/admin/lock/${c[0].id}"/>"
                    onclick="return confirm('Bạn có chắc muốn xóa tài khoản này ?');"><b><i class="fas fa-trash-alt"></i> Xóa tài khoản</b></a>

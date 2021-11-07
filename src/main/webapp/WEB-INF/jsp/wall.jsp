@@ -27,8 +27,12 @@
                             <a class="otb nav-link text-dark" href="<c:url value="/report/${userwall.id}/2" />"
                                onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do không thanh toán ?');"><i class="far fa-times-circle"></i> Không thanh toán</a>
                         </c:if>
+
                     </div>
                 </div>
+            </c:if>
+            <c:if test="${countrp!=null}">
+                <h5>số lần bị tố cáo : ${countrp}</h5>
             </c:if>
         </div>
     </div>
@@ -83,11 +87,11 @@
                 <div class="icons">
                     <c:if test= "${statuswall.countlike!=0}">
                         <h5>${statuswall.countlike} <i class="far fa-thumbs-up"></i></h5> 
-                    </c:if>
+                        </c:if>
                     <a class="otbb nav-link" href="<c:url value="/status/${statuswall.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
-                    <c:if test= "${statuswall.countcmt!=0}">
+                        <c:if test= "${statuswall.countcmt!=0}">
                         <h5>${statuswall.countcmt} <b>Bình luận</b> <i class="far fa-comment-dots"></i></h5> 
-                    </c:if>
+                        </c:if>
                 </div>
                 <hr>
             </c:forEach>

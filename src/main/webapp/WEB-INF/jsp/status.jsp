@@ -31,24 +31,30 @@
         </div>
         <div class="formregister">
             <c:url value="/status/${idstt}" var="action" />
-            <form:form method="post" action="${action}" modelAttribute="newcmt" enctype="multipart/form-data">
-                <hr/>
-                <div class="nut">
-                    <c:if test= "${status.check==0}">
-                         <input id="${status.idStatus}" class="otb hihi${status.idStatus} " type="button" value="Thích &#128077;" onclick="addlike(${status.idStatus},${user.id})"/>
-                    </c:if>
-                    <input type="submit" value="Bình Luận" class="btn btn-primary"/>
-                </div>
-                <hr />
-                <c:if test = "${errMsg!=null}">
-                    <div> <h8 class="text-center alert-danger"><b>${errMsg}</b></h8> </div> 
-                            </c:if> 
-                <div class="post">
-                    <a class="otb" href="<c:url value="/wall/${status.login.id}"/>">
-                        <img class="img-fluid" src="<c:url value="${user.image}" />" alt="${user.full_name}"/></a>
-                        <form:input type="text" id="content" path="content" cssClass="form-control" placeholder="Viết bình luận"/>
-                </div>
-            </form:form>
+            <c:if test= "${report==null}">
+                <form:form method="post" action="${action}" modelAttribute="newcmt" enctype="multipart/form-data">
+                    <hr/>
+                    <div class="nut">
+                        <c:if test= "${status.check==0}">
+                            <input id="${status.idStatus}" class="otb hihi${status.idStatus} " type="button" value="Thích &#128077;" onclick="addlike(${status.idStatus},${user.id})"/>
+                        </c:if>
+                        <input type="submit" value="Bình Luận" class="btn btn-primary"/>
+                    </div>
+                    <hr />
+                    <c:if test = "${errMsg!=null}">
+                        <div> <h8 class="text-center alert-danger"><b>${errMsg}</b></h8> </div> 
+                                </c:if> 
+                    <div class="post">
+                        <a class="otb" href="<c:url value="/wall/${status.login.id}"/>">
+                            <img class="img-fluid" src="<c:url value="${user.image}" />" alt="${user.full_name}"/></a>
+                            <form:input type="text" id="content" path="content" cssClass="form-control" placeholder="Viết bình luận"/>
+                    </div>
+                </form:form>
+            </c:if>
+            <c:if test= "${report!=null}">
+                <h5>${report}</h5>
+            </c:if>
+
         </div>
         <c:forEach var="allcomment" items="${allcomment}">
             <div class="comments">

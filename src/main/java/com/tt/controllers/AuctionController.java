@@ -10,6 +10,7 @@ import com.tt.pojos.Login;
 import com.tt.pojos.Sell;
 import com.tt.service.BillService;
 import com.tt.service.NotiService;
+import com.tt.service.ReportService;
 import com.tt.service.SellService;
 import com.tt.service.StatusService;
 import com.tt.service.UfeelService;
@@ -41,8 +42,8 @@ public class AuctionController {
     NotiService notiService;
     @Autowired
     SellService sellService;
-   
-
+    @Autowired
+    ReportService reportService;
 
     @ModelAttribute
     public void ahihi(Model model, Principal principal) {
@@ -119,7 +120,7 @@ public class AuctionController {
     @GetMapping("/auctionpart/{idauc}")
     public String auctionpart(Model model, @PathVariable(value = "idauc") String idauc, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
-       
+
         //
         model.addAttribute("newsell", new Sell());
 
@@ -129,8 +130,12 @@ public class AuctionController {
             model.addAttribute("auction", auction);
             List<Sell> allsell = sellService.getSellByIdAuction(Integer.parseInt(idauc));
             double top = 0;
-            if (auction.getLogin().getId() == a.getId()) {
+            if (auction.getLogin().getId() == a.getId()||a.getUserrole().equals("ROLE_ADMIN")) {
                 model.addAttribute("my", "a");
+            } else {
+                if ( reportService.check(auction.getLogin(), a, 2)) {
+                    model.addAttribute("check", "Bạn đã bị hạn chế từ chủ phiên đấu giá này");
+                }
             }
             if (!allsell.isEmpty()) {
                 Sell topSell = allsell.get(0);
@@ -145,6 +150,7 @@ public class AuctionController {
                     if (topSell.getLoginsell().getId() == a.getId()) {
                         model.addAttribute("check", "Bạn đang là người ra giá cao nhất");
                     }
+
                 }
 
             }
@@ -159,7 +165,7 @@ public class AuctionController {
     @PostMapping("/auctionpart/{idauc}")
     public String addsell(Model model, @ModelAttribute(value = "newsell") Sell newsell, @PathVariable(value = "idauc") String idauc, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
-       
+
         //
         model.addAttribute("newsell", new Sell());
         Auction auction = statusService.getAuctionByIdAuction(Integer.parseInt(idauc)).get(0);

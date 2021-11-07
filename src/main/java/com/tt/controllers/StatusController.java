@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.tt.reponsitory.BillRepository;
+import com.tt.service.ReportService;
 
 /**
  *
@@ -50,6 +51,8 @@ public class StatusController {
     BillRepository billReponsitory;
     @Autowired
     CommentService commentService;
+    @Autowired
+    ReportService reportService;
 
     @ModelAttribute
     public void ahihi(Model model, Principal principal) {
@@ -80,6 +83,9 @@ public class StatusController {
                     status.get(0).setCheck(2);
                 }
             }
+            if(reportService.check(status.get(0).getLogin(), a, 1))
+                model.addAttribute("report","Bạn bị hạn chế bình luận từ chủ bài đăng");
+             
             model.addAttribute("status", status.get(0));
             model.addAttribute("newcmt", new Comment());
 

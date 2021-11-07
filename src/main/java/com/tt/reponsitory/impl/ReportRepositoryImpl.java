@@ -67,4 +67,9 @@ public class ReportRepositoryImpl implements ReportRepository {
         return false;
     }
 
+    @Override
+    public int countrp(Login login) {
+        return login.getReportbidong().size();
+    }
+
 }

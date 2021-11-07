@@ -47,4 +47,9 @@ public class ReportServiceImpl implements ReportService {
         return reportRepository.check(login, login1, i);
     }
 
+    @Override
+    public int countrp(Login login) {
+        return reportRepository.countrp(login);
+    }
+
 }

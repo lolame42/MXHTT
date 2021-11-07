@@ -57,11 +57,15 @@ public class UserController {
         model.addAttribute("user", a);
         model.addAttribute("noti", notiService.getNotibyLogin(a));
         //
-
+       
         List<Login> list = userService.getListUserbyId(Integer.parseInt(user_name));
 
         if (!list.isEmpty()) {
             List<Status> allstatus = list.get(0).getStatus();
+             if(reportService.countrp(list.get(0))>0)
+             {
+                 model.addAttribute("countrp",reportService.countrp(list.get(0)));
+             }
             if (a.getId() == list.get(0).getId()) {
                 for (int i = 0; i < allstatus.size(); i++) {
                     if (allstatus.get(i).getLogin().getId() == a.getId()||a.getUserrole().trim().equals("ROLE_ADMIN")) {
