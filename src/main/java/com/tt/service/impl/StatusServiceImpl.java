@@ -6,16 +6,9 @@
 package com.tt.service.impl;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-import com.tt.pojos.Auction;
-import com.tt.pojos.Login;
 import com.tt.pojos.Status;
 import com.tt.service.StatusService;
-import com.tt.service.UserService;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tt.reponsitory.StatusRepository;
@@ -27,17 +20,15 @@ import com.tt.reponsitory.StatusRepository;
 @Service
 public class StatusServiceImpl implements StatusService {
 
-    @Autowired
-    private Cloudinary Cloudinary;
-    @Autowired
-    private StatusRepository statusReponsitory;
-    @Autowired
-    private UserService userService;
-
     @Override
     public boolean add(Status status, int i) {
         return statusReponsitory.add(status, i);
     }
+
+    @Autowired
+    private Cloudinary Cloudinary;
+    @Autowired
+    private StatusRepository statusReponsitory;
 
     @Override
     public List<Status> getStatus() {
@@ -60,43 +51,12 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
-    public boolean addauc(Auction auction, Login login) {
-        return statusReponsitory.addauc(auction, login);
-    }
-
-    @Override
-    public List<Auction> getAuction() {
-        return statusReponsitory.getAuction();
-    }
-
-    @Override
-    public List<Auction> getAuctionByIduser(int i) {
-        return statusReponsitory.getAuctionByIduser(i);
-    }
-
-    @Override
-    public List<Auction> getAuctionByIdAuction(int id) {
-        return statusReponsitory.getAuctionByIdAuction(id);
-    }
-
-    @Override
-    public List<Auction> getAuction(int page) {
-        return statusReponsitory.getAuction(page);
-    }
-
-    @Override
     public boolean deletestt(int id) {
         return statusReponsitory.deletestt(id);
     }
-
     @Override
-    public boolean deleteauc(int id) {
-        return statusReponsitory.deleteauc(id);
-    }
-
-    @Override
-    public boolean update(int i, String string) {
-        return statusReponsitory.update(i, string);
+    public boolean update(int i, String string, String string1) {
+        return statusReponsitory.update(i, string, string1);
     }
 
 }

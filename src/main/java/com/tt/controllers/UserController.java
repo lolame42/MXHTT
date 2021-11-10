@@ -56,7 +56,6 @@ public class UserController {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
         model.addAttribute("user", a);
         model.addAttribute("noti", notiService.getNotibyLogin(a));
-        //
        
         List<Login> list = userService.getListUserbyId(Integer.parseInt(user_name));
 
@@ -88,7 +87,6 @@ public class UserController {
         } else {
             return "error";
         }
-
     }
 
     @RequestMapping("/report/{iduser}/{type}")
@@ -126,14 +124,9 @@ public class UserController {
 
                         return "wall";
                     }
-
                 }
-
             }
-
         }
         return "error";
-
     }
-    
 }

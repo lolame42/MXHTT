@@ -50,8 +50,9 @@ a{
     border-radius: 50%;
     margin: 4px;
 }
-
-.name h5{   margin-top: 5px;}
+.name h5{   
+    margin-top: 5px;
+}
 .my-date p{
     color: graytext;
     font-size:small;
@@ -96,7 +97,9 @@ a{
     font-size: 20px;
     margin-left: 25%;
 }
-.nut input:hover{   color: #6495ED;}
+.nut input:hover{   
+    color: #6495ED;
+}
 .nut a > i {
     font-size: 26px;
 }
@@ -141,6 +144,7 @@ a{
     font-size: larger;
     border: #D2D2D2 solid 1px;
 }
+
 
 
 

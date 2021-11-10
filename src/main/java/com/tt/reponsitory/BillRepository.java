@@ -14,7 +14,6 @@ import java.util.List;
  * @author DAVADO
  */
 public interface BillRepository {
-
     boolean addbill(Bill bill);
 
     List<Bill> getbillsell(Login login);
@@ -26,6 +25,5 @@ public interface BillRepository {
     boolean update(Bill bill,String code);
     
     boolean access(Bill bill, int type);
-
 
 }

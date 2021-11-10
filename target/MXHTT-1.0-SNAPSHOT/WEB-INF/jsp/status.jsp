@@ -3,6 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <link rel="stylesheet" href="<c:url value="/css/status.css"/>"/>
 <script src="<c:url value="/js/home.js"/>"></script>
+<script src="<c:url value="/js/status.js"/>"></script>
 
 <div class="mains">
     <div class="full">
@@ -20,13 +21,14 @@
                 <c:if test="${status.hashtag!=null}">
                     <h5>#${status.hashtag}</h5>
                 </c:if>
-                <c:if test= "${countlike!=null}">
-                    <h5 class="nuber">${countlike} <i class="far fa-thumbs-up"></i></h5> 
+                <div class="icon">
+                    <c:if test= "${countlike!=null}">
+                        <h5 class="nuber">${countlike} Thích <i class="far fa-thumbs-up"></i></h5> 
                     </c:if>
                     <c:if test= "${countcmt!=null}">
-                    <h5 class="nuber">${countcmt} comment <i class="far fa-thumbs-up"></i></h5> 
+                        <h5 class="nuber">${countcmt} Bình luận <i class="far fa-comment-dots"></i></h5> 
                     </c:if>
-
+                </div>
             </div>
         </div>
         <div class="formregister">
@@ -36,7 +38,8 @@
                     <hr/>
                     <div class="nut">
                         <c:if test= "${status.check==0}">
-                            <input id="${status.idStatus}" class="otb hihi${status.idStatus} " type="button" value="Thích &#128077;" onclick="addlike(${status.idStatus},${user.id})"/>
+                            <input id="${status.idStatus}" class="otb hihi${status.idStatus} " type="button" value="Thích &#128077;" 
+                                   onclick="addlike(${status.idStatus},${user.id})"/>
                         </c:if>
                         <input type="submit" value="Bình Luận" class="btn btn-primary"/>
                     </div>
@@ -52,9 +55,8 @@
                 </form:form>
             </c:if>
             <c:if test= "${report!=null}">
-                <h5>${report}</h5>
+                <h4 class="text-danger text-center">${report}</h4>
             </c:if>
-
         </div>
         <c:forEach var="allcomment" items="${allcomment}">
             <div class="comments">
@@ -71,13 +73,4 @@
         </c:forEach>
     </div>
 </div>
-<script>
-    window.onload = function () {
-        let dates = document.querySelectorAll(".tgcmt>p")
-        for (let i = 0; i < dates.length; i++)
-        {
-            let d = dates[i]
-            d.innerText = moment(d.innerText).fromNow()
-        }
-    }
-</script>
+

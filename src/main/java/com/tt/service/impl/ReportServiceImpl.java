@@ -51,5 +51,4 @@ public class ReportServiceImpl implements ReportService {
     public int countrp(Login login) {
         return reportRepository.countrp(login);
     }
-
 }

@@ -13,6 +13,9 @@ import com.tt.pojos.Login;
  */
 public interface ReportService {
     boolean addreport(Login login, Login login1,String type);
+    
     boolean check(Login login, Login login1,int type);
+    
     int countrp(Login login);
+    
 }

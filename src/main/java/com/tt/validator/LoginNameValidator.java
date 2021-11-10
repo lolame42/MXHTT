@@ -29,6 +29,5 @@ public class LoginNameValidator implements Validator{
             errors.rejectValue("email", "login.email.Err");
         if(login.getFile().isEmpty())
             errors.rejectValue("file", "login.file.Err");
-    }
-    
+    }   
 }

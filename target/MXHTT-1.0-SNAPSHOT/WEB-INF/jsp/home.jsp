@@ -78,7 +78,8 @@
                         <a class="otb nav-link" href="<c:url value="/status/${allstatus.idStatus}" />">Bình luận <i class="far fa-comment"></i></a>
                         <c:if test= "${user.id!=allstatus.login.id}">
                             <c:if test= "${allstatus.check==0}">
-                                <input id="${allstatus.idStatus}" class="otb hihi${allstatus.idStatus} " type="button" value="Thích &#128077;" onclick="addlike(${allstatus.idStatus},${user.id})"/>
+                                <input id="${allstatus.idStatus}" class="otb hihi${allstatus.idStatus} " type="button" value="Thích &#128077;" 
+                                       onclick="addlike(${allstatus.idStatus},${user.id})"/>
                             </c:if> 
                         </c:if>
                         <c:if test= "${allstatus.countcmt!=0}">
@@ -90,7 +91,7 @@
             <ul>
                 <c:forEach begin="1" end="${Math.ceil(countstt/30)}" var = "page">
                     <li class="page-item"><a class="page-link" href=" <c:url value="/home" />?page=${page}">${page}</a></li>
-                    </c:forEach>
+                </c:forEach>
             </ul>         
         </div>
     </div>

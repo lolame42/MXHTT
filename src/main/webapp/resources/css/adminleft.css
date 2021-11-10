@@ -1,0 +1,21 @@
+.navbar{
+    width: 400px;
+    height: 100%;
+    background-color: #000;
+    position: absolute;
+    top:0px;
+    left: 0px;
+}
+.navbar-nav{
+    position: absolute;
+    top: 0px;
+}
+.navbar-nav a{
+    height: 40px;
+}
+.navbar a:hover{
+    background-color: #6495ED;
+}
+hr{
+    color: #D2D2D2;
+}

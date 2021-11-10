@@ -10,6 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <link rel="stylesheet" href="<c:url value="/css/auction.css"/>"/>
+<script src="<c:url value="/js/auction.js"/>"></script>
 
 <c:url value="/auction" var="action" />
 <div class="main">
@@ -38,6 +39,8 @@
             </div>  
         </form:form>
     </div>
+    <div class="auc">
+        <h1 class="text-center text-danger">Danh sách sản phẩm đấu giá</h1>
         <c:forEach var="allauction" items="${allauction}">
             <div class="status">
                 <div class="img"><img class="img-fluid" src="<c:url value="${allauction.image}" />"/></div>
@@ -52,19 +55,11 @@
                     <a class="otb1 nav-link" href="<c:url value="/auctionpart/${allauction.id}" />">Đấu Giá</a>
                 </div>     
             </div>
-        </c:forEach>       
-        <ul class="ul">
-            <c:forEach begin="1" end="${Math.ceil(countauc/30)}" var = "page">
-                <li class="page-item"><a class="page-link" href=" <c:url value="/auction" />?page=${page}">${page}</a></li>
-            </c:forEach>
-        </ul>
-        <script>
-            window.onload = function () {
-                let dates = document.querySelectorAll(".my-date>i")
-                for (let i = 0; i < dates.length; i++) {
-                    let d = dates[i]
-                    d.innerText = moment(d.innerText).fromNow()
-                }
-            }
-        </script>
+        </c:forEach>
+    </div>
+    <ul class="ul">
+        <c:forEach begin="1" end="${Math.ceil(countauc/30)}" var = "page">
+            <li class="page-item"><a class="page-link" href=" <c:url value="/auction" />?page=${page}">${page}</a></li>
+        </c:forEach>
+    </ul>
 </div>

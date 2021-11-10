@@ -69,7 +69,4 @@ public class SellServiceImpl implements SellService {
             }
         }
     }
-
-   
-
 }

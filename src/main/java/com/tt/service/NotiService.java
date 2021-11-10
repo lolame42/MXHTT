@@ -17,6 +17,9 @@ import java.util.List;
  */
 public interface NotiService {
     boolean add(Noti noti, Login login, Status status, int type);
+    
     boolean addnotiauc(Noti noti,Login login, Auction auction,int type);
+    
     List<Noti> getNotibyLogin(Login i);
+    
 }

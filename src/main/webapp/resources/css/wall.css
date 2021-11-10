@@ -1,4 +1,6 @@
-body{   background-color: #F0F2F5;}
+body{   
+    background-color: #F0F2F5;
+}
 .img-fluid{
     border-radius: 50%;
     width: 150px;
@@ -18,27 +20,9 @@ body{   background-color: #F0F2F5;}
     display: flex;
     padding: 10px;
 }
-.info h1{margin-top: 30px;}
-.tc{
-    width: 100px;
-    height: 40px;
-    position: absolute;
-    right: 21.5%;
-    top: 13%;
-    border: 1px #F0F2F5 solid;
-    border-radius: 7%;
+.info h1{
+    margin-top: 30px;
 }
-.tc:hover{  background-color: darkgray;}
-.cd{
-    width: 150px;
-    height: 40px;
-    position: absolute;
-    right: 21.5%;
-    top: 13%;
-    border: 1px #F0F2F5 solid;
-    border-radius: 7%;
-}
-.cd:hover{  background-color: darkgray;}
 .infosb{
     width: 100%;
     display: flex;
@@ -81,7 +65,6 @@ body{   background-color: #F0F2F5;}
     padding: 5px;
     border-radius: 10px;
 }
-
 .card-body{
     border: 1px solid #D2D2D2;
     margin-top: -1px;
@@ -102,8 +85,7 @@ body{   background-color: #F0F2F5;}
 .setting > a:first-child{
     width: 30px;
     height: 30px;
-    font-size: 24px;
-    
+    font-size: 24px;   
 }
 .setting > a:first-child:hover{
     border: 1px solid #F0F2F5;
@@ -158,4 +140,9 @@ body{   background-color: #F0F2F5;}
     top: 15.5%;
     font-size: 17px;
     border-radius: 5%;
+}
+.countrp{
+    position: absolute;
+    top: 27%;
+    right: 22%;
 }

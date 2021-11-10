@@ -16,6 +16,7 @@ import java.util.List;
  */
 public interface CommentService {
     boolean addcmt(Login login,Status status, Comment comment);
+    
     List<Comment> getCmtByIdStatus(int i) ;
     
 }

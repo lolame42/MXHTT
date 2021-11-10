@@ -13,7 +13,6 @@ import java.util.List;
  * @author DAVADO
  */
 public interface AdminService {
-
     public List<Object[]> stthashtag(String kw);
 
     public List<Object[]> auctionstt();

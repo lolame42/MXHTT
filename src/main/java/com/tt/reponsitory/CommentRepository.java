@@ -14,5 +14,7 @@ import java.util.List;
  */
 public interface CommentRepository {
     boolean addcmt(Comment cmt);
+    
     List<Comment> getCmtByIdStatus(int i) ;
+    
 }

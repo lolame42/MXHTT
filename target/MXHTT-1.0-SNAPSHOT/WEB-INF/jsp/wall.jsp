@@ -17,7 +17,6 @@
             <c:if test="${userwall.user_name!=user.user_name}">
                 <div class="reports">
                     <a class="report nav-link" data-toggle="collapse" href="#noidung">Report</a>
-
                     <div id="noidung" class="reporta">
                         <c:if test="${check1==null}">
                             <a class="otb nav-link text-dark" href="<c:url value="/report/${userwall.id}/1" />"
@@ -27,13 +26,14 @@
                             <a class="otb nav-link text-dark" href="<c:url value="/report/${userwall.id}/2" />"
                                onclick="return confirm('Bạn có chắc muốn tố cáo ${userwall.full_name} với lý do không thanh toán ?');"><i class="far fa-times-circle"></i> Không thanh toán</a>
                         </c:if>
-
                     </div>
                 </div>
             </c:if>
-            <c:if test="${countrp!=null}">
-                <h5>số lần bị tố cáo : ${countrp}</h5>
-            </c:if>
+            <div class="countrp">
+                <c:if test="${countrp!=null}">
+                    <h5>Số lần bị tố cáo : ${countrp}</h5>
+                </c:if>
+            </div>
         </div>
     </div>
     <div class="infosb">

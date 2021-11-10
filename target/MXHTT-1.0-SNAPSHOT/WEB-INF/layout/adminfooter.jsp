@@ -6,5 +6,5 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <footer>
-    <span>Trang quan tri he thong mang xa hoi - &copy; 2021</span>
+    <span class="text-center">Trang quản trị hệ thống mạng xã hội - &copy; 2021</span>
 </footer>

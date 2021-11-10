@@ -16,27 +16,21 @@ import java.util.List;
  */
 public interface StatusRepository {
     boolean add(Status status, int id);
+    
     List<Status> getStatus();
+    
     List<Status> getStatusByIduser(int id);
+    
     List<Status> getStatusByIdStatus(int id);
+    
     List<Status> getStatus(int page);
+    
     boolean deletestt(int id);
-    boolean update(int id,String string);
+    
+    boolean update(int id,String string,String string1);
     
     
     
-    
-    boolean addauc(Auction auction,Login login);
-    List<Auction> getAuction();
-    List<Auction> getAuctionByIduser(int id);
-    List<Auction> getAuctionByIdAuction(int id);
-    List<Auction> getAuction(int page);
-    boolean deleteauc(int id);
-    
-    
-    
-            
-    
-    
- 
+   
+     
 }

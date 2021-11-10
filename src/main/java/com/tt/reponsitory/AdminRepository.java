@@ -13,7 +13,6 @@ import java.util.List;
  * @author DAVADO
  */
 public interface AdminRepository {
-
     List<Object[]> stthashtag(String kw);
 
     List<Object[]> auctionstt();

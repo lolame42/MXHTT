@@ -58,7 +58,6 @@ public class BillRepositoryImpl implements BillRepository {
             }
         });
         return list;
-
     }
 
     @Override
@@ -71,7 +70,6 @@ public class BillRepositoryImpl implements BillRepository {
             }
         });
         return list;
-
     }
 
     @Override
@@ -100,7 +98,7 @@ public class BillRepositoryImpl implements BillRepository {
             session.update(addcode);
             return true;
         } catch (Exception e) {
-
+            
         }
         return false;
     }
@@ -119,5 +117,4 @@ public class BillRepositoryImpl implements BillRepository {
         }
         return false;
     }
-
 }

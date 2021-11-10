@@ -116,77 +116,7 @@ public class StatusRepositoryImpl implements StatusRepository {
         return q.getResultList();
     }
 
-    @Override
-    public boolean addauc(Auction auction, Login login) {
 
-        try {
-            Session session = sessionFactory.getObject().getCurrentSession();
-
-            if (auction.getFile() != null) {
-                Map r = this.Cloudinary.uploader().upload(auction.getFile().getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-                auction.setImage((String) r.get("secure_url"));
-            }
-            auction.setDate(new Date());
-            auction.setLogin(login);
-
-            session.save(auction);
-            return true;
-
-        } catch (IOException ex) {
-            Logger.getLogger(StatusRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
-    @Override
-    public List<Auction> getAuction() {
-
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("From Auction");
-        return q.getResultList();
-
-    }
-
-    @Override
-    public List<Auction> getAuctionByIduser(int i) {
-        Session session = sessionFactory.getObject().getCurrentSession();
-        Login login = session.get(Login.class, i);
-        List<Auction> test = login.getAuction();
-        return test;
-    }
-
-    @Override
-    public List<Auction> getAuctionByIdAuction(int id) {
-
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
-        Root root = query.from(Auction.class);
-        query = query.select(root);
-        Predicate p = builder.equal(root.get("idauction"), id);
-        query = query.where(p);
-
-        Query q = session.createQuery(query);
-        return q.getResultList();
-    }
-
-    @Override
-    public List<Auction> getAuction(int page) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Auction> query = builder.createQuery(Auction.class);
-        Root root = query.from(Auction.class);
-        query = query.select(root);
-        query = query.orderBy(builder.desc(root.get("idauction")));
-
-        Query q = session.createQuery(query);
-
-        int max = 30;
-        q.setMaxResults(max);
-        q.setFirstResult((page - 1) * max);
-        return q.getResultList();
-    }
 
     @Override
     public boolean deletestt(int id) {
@@ -195,38 +125,23 @@ public class StatusRepositoryImpl implements StatusRepository {
             Status status = getStatusByIdStatus(id).get(0);
             session.delete(status);
             return true;
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
         return false;
     }
-
     @Override
-    public boolean deleteauc(int id) {
+    public boolean update(int id, String string, String string1) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            Auction auction = getAuctionByIdAuction(id).get(0);
-            session.delete(auction);
-            return true;
-        } catch (Exception e) {
-
-        }
-        return false;
-    }
-
-    @Override
-    public boolean update(int id,String string) {
-       Session session = this.sessionFactory.getObject().getCurrentSession();
-        try {
-            
             Status status = getStatusByIdStatus(id).get(0);
-            status.setContent(string);
+            if (!string.equals("trong")) {
+                status.setContent(string);
+            }
+            if(!string1.equals("trong"))
+                status.setHashtag(string1);
             session.update(status);
             return true;
         } catch (Exception e) {
-
         }
         return false;
     }
-
 }

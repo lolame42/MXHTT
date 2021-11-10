@@ -39,7 +39,6 @@ public class UfeelRepositoryImpl implements UfeelRepository {
             System.err.println(ex.getMessage());
         }
         return false;
-
     }
 
     @Override
@@ -52,5 +51,4 @@ public class UfeelRepositoryImpl implements UfeelRepository {
         }
         return false;
     }
-
 }

@@ -48,8 +48,6 @@ public class NotiRepositoryImpl implements NotiRepository {
             System.err.println(ex.getMessage());
         }
         return false;
-        
-
     }
 
     @Override
@@ -66,8 +64,7 @@ public class NotiRepositoryImpl implements NotiRepository {
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
-        return false;
-        
+        return false;       
     }
 
     @Override
@@ -82,5 +79,4 @@ public class NotiRepositoryImpl implements NotiRepository {
        });
        return list;
     }
-
 }

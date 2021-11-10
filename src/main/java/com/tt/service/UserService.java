@@ -13,7 +13,6 @@ import java.util.List;
  * @author Tu
  */
 public interface UserService {
-
     List<Login> getUsers();
 
     List<Login> getUsers(String kw);
@@ -30,5 +29,4 @@ public interface UserService {
     
     boolean xoa(int id );
     
-
 }

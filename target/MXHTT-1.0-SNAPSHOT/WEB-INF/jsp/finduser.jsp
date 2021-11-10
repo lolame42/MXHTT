@@ -10,7 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<c:url value="/css/finduser.css"/>"/>
 <ul>
-    <h1 class="text-center text-dark">Những tài khoản gần giống tên bạn tìm</h1>
+    <h1 class="text-center text-danger">Những tài khoản gần giống tên bạn tìm</h1>
     <div class="row">
         <c:forEach var="userfind" items="${userfind}">
             <div class="card col-md-12" style="width:400px">
@@ -30,7 +30,6 @@
                         <div class="info">
                             <a class="otb" href="<c:url value="/wall/${userfind.id}"/>">
                                 <img class="img-fluid" src="<c:url value="images/logo.png" />"alt="${userfind.full_name}"/></a>
-
                             <div class="card-body">
                                 <h4 class="card-title">${userfind.full_name}</h4>
                             </div>

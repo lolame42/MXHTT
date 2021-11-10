@@ -18,6 +18,7 @@
     </div>
     <div class="formregister">
         <form:form method="post" action="${action}" modelAttribute="login" enctype="multipart/form-data">
+            
             <h3 class="text-center text-dark"><b>Đăng Ký Tài Khoản</b></h3>
             <div class="form-group">
                 <form:input type="text" id="full_name" path="full_name" cssClass="form-control" placeholder="Họ và tên"/>
@@ -51,11 +52,11 @@
             <div class="form-group">
                 <form:input type="file" id="file" path="file" cssClass="form-control" />
                 <form:errors path="file" cssClass="alert" element="div"/>
-            </div>
-            
+            </div>           
             <div class="form-group">
                 <input type="submit" value="Đăng Ký" class="btn btn-primary"/>
-            </div>  
+            </div>
+            
         </form:form>
     </div>
 </div>

@@ -27,10 +27,6 @@ public class SpringValidator implements Validator{
         if (login.getEmail().contains("@gmail.com"))
             errors.rejectValue("email","login.email.Err" );
         if(login.getFile()==null)
-            errors.rejectValue("file","login.file.Err" );
-            
-            
-    }
-    
-    
+            errors.rejectValue("file","login.file.Err" );       
+    }    
 }

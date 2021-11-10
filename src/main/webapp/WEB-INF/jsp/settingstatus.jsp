@@ -10,6 +10,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="<c:url value="/css/settingstatus.css"/>"/>
+
 <div class="main">
     <h1 class="text-center">Sửa bài đăng</h1>
     <c:url value="/setting/status/${status.idStatus}" var="action" />

@@ -20,8 +20,8 @@
             <c:url value="/find" var="find"/>
         <form action="${find}">
             <div class="input-group">
-                <input type="text" class="form-control rounded bg-light" name="kw" placeholder="Nhập tên muốn tìm" aria-label="Search"
-                       aria-describedby="search-addon" />
+                <input type="text" class="form-control rounded bg-light" name="kw" 
+                       placeholder="Nhập tên muốn tìm" aria-label="Search" aria-describedby="search-addon" />
                 <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
             </div>
         </form>      
@@ -46,36 +46,43 @@
                                     <div class="text">
                                         <c:if test = "${noti.type==1}">
                                              <c:if test = "${noti.statusnoti.idStatus!=null}">
-                                                <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bình luận bài viết của bạn</a>
+                                                <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark">
+                                                    <b>${noti.name}</b> đã bình luận bài viết của bạn</a>
                                                 <hr />
                                             </c:if> 
                                             <c:if test = "${noti.statusnoti.idStatus==null}">
-                                                <a href="<c:url value="/status/0"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bình luận bài viết của bạn</a>
+                                                <a href="<c:url value="/status/0"/>" class="nav-link text-dark">
+                                                    <b>${noti.name}</b> đã bình luận bài viết của bạn</a>
                                                 <hr />
                                             </c:if>
                                         </c:if>
                                         <c:if test = "${noti.type==2}">
                                             <c:if test = "${noti.statusnoti.idStatus!=null}">
-                                                <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã thích bài viết của bạn</a>
+                                                <a href="<c:url value="/status/${noti.statusnoti.idStatus}"/>" class="nav-link text-dark">
+                                                    <b>${noti.name}</b> đã thích bài viết của bạn</a>
                                                 <hr />
                                             </c:if> 
                                             <c:if test = "${noti.statusnoti.idStatus==null}">
-                                                <a href="<c:url value="/status/0"/>" class="nav-link text-dark"><b>${noti.name}</b>đã thích bài viết của bạn</a>
+                                                <a href="<c:url value="/status/0"/>" class="nav-link text-dark">
+                                                    <b>${noti.name}</b>đã thích bài viết của bạn</a>
                                                 <hr />
                                             </c:if>
                                         </c:if> 
                                         <c:if test = "${noti.type==3}">
                                             <c:if test = "${noti.auctionnoti.id==null}">
-                                                <a href="<c:url value="/auctionpart/0"/>" class="nav-link text-dark"><b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
+                                                <a href="<c:url value="/auctionpart/0"/>" class="nav-link text-dark">
+                                                    <b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
                                                 <hr />
                                             </c:if> 
                                             <c:if test = "${noti.auctionnoti.id!=null}">
-                                                <a href="<c:url value="/auctionpart/${noti.auctionnoti.id}"/>" class="nav-link text-dark"><b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
+                                                <a href="<c:url value="/auctionpart/${noti.auctionnoti.id}"/>" class="nav-link text-dark">
+                                                    <b>${noti.name}</b> đã đấu giá sản phẩm của bạn</a>
                                                 <hr />
                                             </c:if>
                                         </c:if>   
                                         <c:if test = "${noti.type==4}">
-                                            <a href="<c:url value="/billsell/0"/>" class="nav-link text-dark"><b>${noti.name}</b> đã bán sản phẩm cho bạn</a>
+                                            <a href="<c:url value="/billsell/0"/>" class="nav-link text-dark">
+                                                <b>${noti.name}</b> đã bán sản phẩm cho bạn</a>
                                             <hr />
                                         </c:if> 
                                     </div>
@@ -94,7 +101,8 @@
                 </c:if>
                 <c:if test="${pageContext.request.userPrincipal.name!=null}">
                     <li class="nav-black">
-                        <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><img class="img-fluid" src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  </a>
+                        <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><img class="img-fluid" 
+                                        src="<c:url value="${user.image}" />"alt="${user.full_name}"/>  </a>
                         <a href="<c:url value="/wall/${user.id}"/>" class="nav-link text-dark"><h4>${user.full_name}</h4></a>                  
                     </li>
                     <li class="nav-item active">

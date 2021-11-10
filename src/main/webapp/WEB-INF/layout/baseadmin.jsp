@@ -22,25 +22,20 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
-        <h1 class="text-center text-info">Trang thống kê của admin</h1>
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-xs-12 bg-light"> 
+                <div class="col-md-4 col-xs-12"> 
                     <!<!-- HEADER -->
                     <tiles:insertAttribute name="left"/>
-                </div>
-            
+                </div>           
                 <div class="col-md-8 col-xs-12">
                     <!<!-- CONTENT -->
                     <tiles:insertAttribute name="content"/>
                 </div>
             </div>
-
-
-            <!<!-- FOOTER -->
-            <tiles:insertAttribute name="footer"/>
         </div>
-
-
     </body>
+    <footer class="text-center"><!<!-- FOOTER -->
+            <tiles:insertAttribute name="footer"/>
+    </footer>
 </html>

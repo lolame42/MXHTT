@@ -47,7 +47,5 @@ public class APIcontroller {
         if (ufeelService.check(status, a.getId()) == false) {
             ufeelService.add(status, a.getId());
         }
-    }
-
-    
+    }   
 }

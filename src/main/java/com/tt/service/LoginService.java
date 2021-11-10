@@ -14,11 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author DAVADO
  */
 public interface LoginService extends UserDetailsService {
-
     List<Login> getLogins(String user_name);
 
     boolean addOrUpdate(Login login);
     
-   
-
 }

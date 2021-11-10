@@ -82,17 +82,13 @@ public class AdminController {
             if (tomonth != -1) {
                 if (toyear < year || (toyear == year && tomonth < month)) {
                     check = false;
-
                 }
             }
-
             if (check == false) {
                 list.remove(i);
                 i--;
-
             }
         }
-
         model.addAttribute("statustime", list);
         return "statustime";
     }
@@ -127,14 +123,11 @@ public class AdminController {
             if (tomonth != -1) {
                 if (toyear < year || (toyear == year && tomonth < month)) {
                     check = false;
-
                 }
             }
-
             if (check == false) {
                 list.remove(i);
                 i--;
-
             }
         }
 
@@ -161,6 +154,5 @@ public class AdminController {
             }
         }
         return "error";
-
     }
 }

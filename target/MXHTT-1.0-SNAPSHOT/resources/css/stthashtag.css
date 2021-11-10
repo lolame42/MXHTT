@@ -1,0 +1,20 @@
+.formm{
+    margin-left: 3%;
+}
+.formm, .form-group{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.formm input{
+    width: 250px;
+}
+.form-group label{
+    margin-top: 5px;
+    margin: 5px;
+}
+.btn{
+    position: absolute;
+    top: 19%;
+    right: 18%;
+}

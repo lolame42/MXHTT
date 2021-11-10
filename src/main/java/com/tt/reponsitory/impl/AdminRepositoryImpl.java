@@ -92,11 +92,11 @@ public class AdminRepositoryImpl implements AdminRepository {
         Root root = q.from(Auction.class);
         Predicate p;
 
-        q.multiselect(b.function("MONTH", Integer.class, root.get("date")), b.function("YEAR", Integer.class, root.get("date")), b.count(b.function("MONTH", Integer.class, root.get("date"))));
+        q.multiselect(b.function("MONTH", Integer.class, root.get("date")), b.function("YEAR", Integer.class, root.get("date")), 
+                b.count(b.function("MONTH", Integer.class, root.get("date"))));
         q.groupBy(b.function("MONTH", Integer.class, root.get("date")), b.function("YEAR", Integer.class, root.get("date")));
         Query query = session.createQuery(q);
         return query.getResultList();
-
     }
 
     @Override
@@ -109,14 +109,11 @@ public class AdminRepositoryImpl implements AdminRepository {
         Root root = q.from(Status.class);
         Predicate p;
 
-    
-
-        q.multiselect(b.function("MONTH", Integer.class, root.get("date")), b.function("YEAR", Integer.class, root.get("date")), b.count(b.function("MONTH", Integer.class, root.get("date"))));
+        q.multiselect(b.function("MONTH", Integer.class, root.get("date")), b.function("YEAR", Integer.class, root.get("date")), 
+                b.count(b.function("MONTH", Integer.class, root.get("date"))));
         q.groupBy(b.function("MONTH", Integer.class, root.get("date")), b.function("YEAR", Integer.class, root.get("date")));
         Query query = session.createQuery(q);
         
         return query.getResultList();
-
     }
-
 }

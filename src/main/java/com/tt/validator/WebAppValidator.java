@@ -33,8 +33,7 @@ public class WebAppValidator implements Validator{
         for(ConstraintViolation<Object> obj: bean)
             errors.rejectValue(obj.getPropertyPath().toString(),
                     obj.getMessageTemplate(), obj.getMessage());
-        
-        
+              
         for(Validator v: this.springValidators)
             v.validate(target, errors);
     }
@@ -44,6 +43,5 @@ public class WebAppValidator implements Validator{
      */
     public void setSpringValidators(Set<Validator> springValidators) {
         this.springValidators = springValidators;
-    }
-    
+    }   
 }

@@ -65,7 +65,6 @@ public class StatusController {
     public String status(Model model, @PathVariable(value = "idstt") String idstt, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
 
-        //
         List<Status> status = statusService.getStatusByIdStatus(Integer.parseInt(idstt));
         if (!status.isEmpty()) {
             if (a.getId() == status.get(0).getLogin().getId() || a.getUserrole().trim().equals("ROLE_ADMIN")) {
@@ -84,8 +83,7 @@ public class StatusController {
                 }
             }
             if(reportService.check(status.get(0).getLogin(), a, 1))
-                model.addAttribute("report","Bạn bị hạn chế bình luận từ chủ bài đăng");
-             
+                model.addAttribute("report","Bạn bị hạn chế bình luận từ chủ bài đăng");            
             model.addAttribute("status", status.get(0));
             model.addAttribute("newcmt", new Comment());
 
@@ -93,7 +91,6 @@ public class StatusController {
             return "status";
         }
         return "error";
-
     }
 
     @PostMapping("/status/{idstt}")
@@ -103,7 +100,6 @@ public class StatusController {
     ) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
 
-        //
         List<Status> status = statusService.getStatusByIdStatus(Integer.parseInt(idstt));
         if (!status.isEmpty()) {
             model.addAttribute("status", status.get(0));
@@ -142,9 +138,7 @@ public class StatusController {
                 }
             }
         }
-
         return "status";
-
     }
 
     @GetMapping("/setting/status/{idstatus}")
@@ -153,7 +147,6 @@ public class StatusController {
     ) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
 
-        //
         List<Status> liststatus = statusService.getStatusByIdStatus(Integer.parseInt(idstatus));
         if (!liststatus.isEmpty()) {
             Status status = liststatus.get(0);
@@ -162,9 +155,7 @@ public class StatusController {
                 model.addAttribute("newstatus", new Status());
                 return "settingstatus";
             }
-
         }
-
         return "error";
     }
 
@@ -174,22 +165,31 @@ public class StatusController {
             @PathVariable(value = "idstatus") String idstatus
     ) {
 
-        //
         Status status = statusService.getStatusByIdStatus(Integer.parseInt(idstatus)).get(0);
         int dem = 0;
-        if (newstatus.getContent().length() > 4999 || newstatus.getContent().length() == 0) {
+        if (newstatus.getContent().length() > 4999) {
             dem++;
             model.addAttribute("errcontent", "nội dung không hợp lệ");
+        }
+        else
+        {
+            if(newstatus.getContent().length() == 0)
+                newstatus.setContent("trong");
         }
         if (newstatus.getHashtag().length() > 20) {
             dem++;
             model.addAttribute("errhashtag", "hashtag độ dài tối đa 20 kí tự");
         }
+        else
+        {
+            if(newstatus.getHashtag().length() == 0)
+                newstatus.setHashtag("trong");
+        }
         if (dem == 0) {
-            if (statusService.update(status.getIdStatus(), newstatus.getContent())) {
-                model.addAttribute("err", "Sửa thành công");
-            } else {
+            if (!statusService.update(status.getIdStatus(), newstatus.getContent(),newstatus.getHashtag())||( newstatus.getContent().equals("trong")&& newstatus.getHashtag().equals("trong"))) {
                 model.addAttribute("err", "Sửa không thành công");
+            } else {
+                model.addAttribute("err", "Sửa thành công");
             }
         } else {
             model.addAttribute("err", "Sửa không thành công");
@@ -198,7 +198,6 @@ public class StatusController {
         model.addAttribute("status", status1);
         model.addAttribute("newstatus", new Status());
         return "settingstatus";
-
     }
 
     @RequestMapping("/delete/status/{idstatus}")
@@ -207,7 +206,6 @@ public class StatusController {
     ) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
 
-        //
         List<Status> liststatus = statusService.getStatusByIdStatus(Integer.parseInt(idstatus));
         if (!liststatus.isEmpty()) {
             Status status = liststatus.get(0);
@@ -231,10 +229,7 @@ public class StatusController {
 
                 return "home";
             }
-
         }
-
         return "error";
     }
-
 }

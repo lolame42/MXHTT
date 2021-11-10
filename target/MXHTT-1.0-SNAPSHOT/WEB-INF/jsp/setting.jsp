@@ -20,6 +20,6 @@
     </div>
     <div class="form-group">
         <input type="submit" value="Cập nhật" class="btn btn-primary"/>
-    </div> 
-
+    </div>
+        
 </form:form>

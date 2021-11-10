@@ -17,7 +17,6 @@ import java.util.List;
  * @author DAVADO
  */
 public interface NotiRepository {
-
     boolean add(Noti noti, Login login, Status status, int type);
 
     boolean addnotiauc(Noti noti, Login login, Auction auction, int type);

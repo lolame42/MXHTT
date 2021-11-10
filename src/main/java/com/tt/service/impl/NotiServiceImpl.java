@@ -37,6 +37,5 @@ public class NotiServiceImpl implements NotiService{
     @Override
     public List<Noti> getNotibyLogin(Login login) {
         return notiReponsitory.getNotibyLogin(login);
-    }
-    
+    }   
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 public interface LoginRepository {
     List<Login> getLogins(String user_name);
-    boolean addOrUpdate(Login login);
+    
+    boolean addOrUpdate(Login login);  
     
 }

@@ -14,6 +14,7 @@ import com.tt.pojos.Ufeel;
  */
 public interface UfeelService {
     boolean add(Status status, int id);
+    
     boolean check(Status status,int id);
     
 }

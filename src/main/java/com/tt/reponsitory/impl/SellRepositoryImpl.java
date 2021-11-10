@@ -26,6 +26,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.tt.reponsitory.SellRepository;
+import com.tt.service.AuctionService;
 
 /**
  *
@@ -38,7 +39,7 @@ public class SellRepositoryImpl implements SellRepository {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
-    private StatusService auctionService;
+    private AuctionService auctionService;
 
     @Override
     public boolean addsell(Sell sell) {
@@ -50,7 +51,6 @@ public class SellRepositoryImpl implements SellRepository {
         } catch (Exception e) {
         }
         return false;
-
     }
 
     @Override
@@ -64,7 +64,5 @@ public class SellRepositoryImpl implements SellRepository {
             }
         });
         return list;
-    }
-
-   
+    }  
 }

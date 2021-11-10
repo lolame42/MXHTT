@@ -50,8 +50,6 @@ public class BillServiceImpl implements BillService{
         return billReponsitory.getbillpay(login);
     }
 
-   
-
     @Override
     public List<Bill> getBillbyidBill(int i) {
        return billReponsitory.getBillbyidBill(i);

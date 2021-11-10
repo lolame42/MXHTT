@@ -7,20 +7,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script src="<c:url value="/js/like.js"/>"></script>
+<script src="<c:url value="/js/auctionpart.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/css/autionpart.css"/>"/>
 
 <div class="mains">
         <div class="status">
             <div class="info">
                 <div class="info1">
-                    <a class="otb" href="<c:url value="/wall/${auction.login.id}"/>"><img class="img-fluid" src="<c:url value="${auction.login.image}" />" alt="${auction.login.full_name}"/></a>
+                    <a class="otb" href="<c:url value="/wall/${auction.login.id}"/>"><img class="img-fluid" 
+                            src="<c:url value="${auction.login.image}" />" alt="${auction.login.full_name}"/>
+                    </a>
                     <div class="tgcmt">
                         <h5>${auction.login.full_name}</h5>
                         <p><i>${auction.date}</i></p>
                     </div>
                 </div>
-                    <hr>
+                    <hr/>
                 <div class="info2">
                     <p>${auction.content}</p>
                     <div> <img class="img-fluida" src="<c:url value="${auction.image}" />"/> </div>
@@ -62,23 +64,15 @@
                         <c:forEach var="allsell" items="${allsell}">
                             <div class="cmt">
                                 <a href="<c:url value="/wall/${allsell.loginsell.id}"/>"><h5>${allsell.loginsell.full_name}</h5></a>
-                                <h5>đã đấu giá ${allsell.value}</h5>
+                                <h5>đã đấu giá ${allsell.value}00 VND</h5>
                             </div>
                         </c:forEach>
-                        <a class="btt nav-link text-white"  href="<c:url value="/billsell/${auction.id}"/>" onclick="return confirm('Bạn có chắc muốn dừng phiên đấu giá này ?');" >Dừng phiên đấu giá này </a>
+                        <a class="btt nav-link text-white"  href="<c:url value="/billsell/${auction.id}"/>" 
+                           onclick="return confirm('Bạn có chắc muốn dừng phiên đấu giá này ?');" >Dừng phiên đấu giá này </a>
                     </c:if> 
                 </div>
             </div>
         </div>
 </div>
-<script>
-    window.onload = function () {
-        let dates = document.querySelectorAll(".tgcmt>p")
-        for (let i = 0; i < dates.length; i++)
-        {
-            let d = dates[i]
-            d.innerText = moment(d.innerText).fromNow()
-        }
-    }
-</script>
+
 

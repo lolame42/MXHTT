@@ -43,15 +43,15 @@ i{
     margin-left: 50px;
 }
 .nut_dropdown {
-  background-color: #FFF;
-  color: white;
-  font-size: 26px;
-  border: none;
-  margin-top: 8px;
+    background-color: #FFF;
+    color: white;
+    font-size: 26px;
+    border: none;
+    margin-top: 8px;
 }
 .dropdown {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 .noidung_dropdown {
     width: 340px;
@@ -67,10 +67,10 @@ i{
     z-index: 1;
 }
 .noidung_dropdown a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 .notification{
     display: flex;
@@ -85,7 +85,7 @@ i{
     height: 38px;
 }
 .hienThi{
-  display:block;
+    display:block;
 }
 .text hr{
     width: 260px;

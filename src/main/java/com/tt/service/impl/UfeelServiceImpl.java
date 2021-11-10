@@ -41,16 +41,11 @@ public class UfeelServiceImpl implements UfeelService{
         addnoti.setName(login.getFull_name());
         notiService.add(addnoti, status.getLogin(), status, 2);
         
-        return ufeelReponsitory.add(ufeel);
-        
-        
-        
+        return ufeelReponsitory.add(ufeel);       
     }
 
     @Override
     public boolean check(Status status, int i) {
         return this.ufeelReponsitory.check(status, i);
-    }
-    
-    
+    }   
 }

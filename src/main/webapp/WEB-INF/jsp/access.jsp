@@ -22,7 +22,7 @@
     <div><b>Số điện thoại người thanh toán:</b> ${bill.loginpay.phone} </div>
     <div><b>Số điện thoại người nhận:</b> ${bill.loginsell.phone} </div>
     <div><b>Số tiền thanh toán:</b> ${bill.value}k VND</div>
-    <div><b>Mã giao dịch phiên thanh toán bằng momo:</b> ${bill.codemomo}</div>
+    <div><b>Mã giao dịch phiên thanh toán momo:</b> ${bill.codemomo}</div>
     <c:if test= "${bill.type==1}">
         <div class="button">
             <a class="btn btn-primary" href="<c:url value="/access/${bill.id}"/>">Xác nhận</a>

@@ -55,10 +55,8 @@ public class CommentRepositoryImpl implements CommentRepository {
             @Override
             public int compare(Comment o1, Comment o2) {
                return o2.getId()-o1.getId();
-            }
-           
+            }          
         });
         return list;
     }
-
 }

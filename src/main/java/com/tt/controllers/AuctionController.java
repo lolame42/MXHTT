@@ -8,6 +8,7 @@ package com.tt.controllers;
 import com.tt.pojos.Auction;
 import com.tt.pojos.Login;
 import com.tt.pojos.Sell;
+import com.tt.service.AuctionService;
 import com.tt.service.BillService;
 import com.tt.service.NotiService;
 import com.tt.service.ReportService;
@@ -39,6 +40,8 @@ public class AuctionController {
     @Autowired
     StatusService statusService;
     @Autowired
+    AuctionService auctionService;
+    @Autowired
     NotiService notiService;
     @Autowired
     SellService sellService;
@@ -55,12 +58,11 @@ public class AuctionController {
     @GetMapping("/auction")
     public String auction(Model model, Principal principal, @RequestParam(required = false) Map<String, String> params) {
 
-        //
         String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
 
-        model.addAttribute("allauction", this.statusService.getAuction(page));
-        model.addAttribute("countauc", this.statusService.getAuction().size());
+        model.addAttribute("allauction", this.auctionService.getAuction(page));
+        model.addAttribute("countauc", this.auctionService.getAuction().size());
         model.addAttribute("auction", new Auction());
 
         return "auction";
@@ -92,12 +94,11 @@ public class AuctionController {
                 dem++;
                 model.addAttribute("errstep", "Bước không định dạng");
             }
-
         }
 
         if (dem == 0) {
             auction.setStep(Double.parseDouble(auction.getStepstr()));
-            if (statusService.addauc(auction, a) == true) {
+            if (auctionService.addauc(auction, a) == true) {
                 model.addAttribute("err", "Thêm thành công");
 
             } else {
@@ -109,22 +110,20 @@ public class AuctionController {
         String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
 
-        model.addAttribute("allauction", this.statusService.getAuction(page));
-        model.addAttribute("countauc", this.statusService.getAuction().size());
+        model.addAttribute("allauction", this.auctionService.getAuction(page));
+        model.addAttribute("countauc", this.auctionService.getAuction().size());
         model.addAttribute("auction", new Auction());
 
         return "auction";
-
     }
 
     @GetMapping("/auctionpart/{idauc}")
     public String auctionpart(Model model, @PathVariable(value = "idauc") String idauc, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
 
-        //
         model.addAttribute("newsell", new Sell());
 
-        List<Auction> listauction = statusService.getAuctionByIdAuction(Integer.parseInt(idauc));
+        List<Auction> listauction = auctionService.getAuctionByIdAuction(Integer.parseInt(idauc));
         if (!listauction.isEmpty()) {
             Auction auction = listauction.get(0);
             model.addAttribute("auction", auction);
@@ -150,25 +149,20 @@ public class AuctionController {
                     if (topSell.getLoginsell().getId() == a.getId()) {
                         model.addAttribute("check", "Bạn đang là người ra giá cao nhất");
                     }
-
                 }
-
             }
-
             return "auctionpart";
         } else {
             return "error";
         }
-
     }
 
     @PostMapping("/auctionpart/{idauc}")
     public String addsell(Model model, @ModelAttribute(value = "newsell") Sell newsell, @PathVariable(value = "idauc") String idauc, Principal principal) {
         Login a = userService.getUserByUserName(principal.getName()).get(0);
 
-        //
         model.addAttribute("newsell", new Sell());
-        Auction auction = statusService.getAuctionByIdAuction(Integer.parseInt(idauc)).get(0);
+        Auction auction = auctionService.getAuctionByIdAuction(Integer.parseInt(idauc)).get(0);
         model.addAttribute("auction", auction);
         List<Sell> allsell = sellService.getSellByIdAuction(Integer.parseInt(idauc));
         double top = 0;
@@ -179,9 +173,7 @@ public class AuctionController {
         if (!allsell.isEmpty()) {
             topSell = allsell.get(0);
             if (topSell.getValue() == auction.getStep() * 20) {
-
                 model.addAttribute("an", "Sản phẩm này đã được mua với giá cao nhất");
-
             } else {
                 model.addAttribute("allsell", allsell);
                 top = topSell.getValue();
@@ -190,8 +182,8 @@ public class AuctionController {
                     model.addAttribute("check", "Bạn đang là người ra giá cao nhất");
                 }
             }
-
         }
+        
         if (sellService.Laso(newsell.getStep(), 0)) {
             if ((Integer.parseInt(newsell.getStep()) % auction.getStep() != 0)) {
                 model.addAttribute("errValue", "Giá tiền không hợp lệ, phải chia hết cho bước nhảy");
@@ -210,15 +202,13 @@ public class AuctionController {
                         top = topSell.getValue();
                         model.addAttribute("top", top);
                         model.addAttribute("errValue", "Đấu giá thành công");
-
                     }
-
                 }
-
             }
         } else {
             model.addAttribute("errValue", "Giá tiền không định dạng");
         }
+        
         if (!allsell.isEmpty()) {
             if (topSell.getLoginsell().getId() == a.getId()) {
                 model.addAttribute("check", "Bạn đang là người ra giá cao nhất");
@@ -226,12 +216,8 @@ public class AuctionController {
             }
             if (topSell.getValue() == auction.getStep() * 20) {
                 model.addAttribute("an", "Sản phẩm này đã được mua với giá cao nhất");
-
             }
         }
-
         return "auctionpart";
-
     }
-
 }

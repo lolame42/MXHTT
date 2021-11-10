@@ -1,10 +1,10 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+window.onload = function () {
+    let dates = document.querySelectorAll(".my-date > i")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        d.innerText = moment(d.innerText).fromNow()
+    }
+}
 
 function auctionstt(id, auctionLabels = [], auctionInfo = []) {
     const data = {
@@ -22,7 +22,6 @@ function auctionstt(id, auctionLabels = [], auctionInfo = []) {
                     'rgb(54, 162, 235)',
                     'rgb(255, 205, 86)',
                     'rgb(201, 203, 207)'
-
                 ],
                 hoverOffset: 4
             }]
@@ -46,12 +45,10 @@ function StatusChart(id, statusLabels = [], statusInfo = []) {
                     'rgb(255, 205, 86)',
                     'rgb(201, 203, 207)',
                     'rgb(52, 74, 48)'
-
                 ],
                 hoverOffset: 5
             }]
     };
-
     const config = {
         type: 'bar',
         data: data,
@@ -65,8 +62,6 @@ function StatusChart(id, statusLabels = [], statusInfo = []) {
     };
     let ctx = document.getElementById(id).getContext("2d")
     new Chart(ctx, config)
-
-
 }
 function StatusTime(id, statustimeLabels = [], statustimeInfo = []) {
     const data = {
@@ -80,12 +75,10 @@ function StatusTime(id, statustimeLabels = [], statustimeInfo = []) {
                     'rgb(255, 205, 86)',
                     'rgb(201, 203, 207)',
                     'rgb(52, 74, 48)'
-
                 ],
                 hoverOffset: 5
             }]
     };
-
     const config = {
         type: 'bar',
         data: data,
@@ -131,12 +124,9 @@ function AuctionTime(id, auctiontimeLabels = [], auctiontimeInfo = []) {
                 }
             }
         },
-
     };
     let ctx = document.getElementById(id).getContext("2d")
     new Chart(ctx, config)
-
-
 }
 
 

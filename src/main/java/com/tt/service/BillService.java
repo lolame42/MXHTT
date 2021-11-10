@@ -14,7 +14,6 @@ import java.util.List;
  * @author DAVADO
  */
 public interface BillService {
-
     boolean addbill(Login loginsell, Login loginpay, int tien);
 
     List<Bill> getbillsell(Login login);

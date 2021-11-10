@@ -56,7 +56,6 @@ public class RegisterController {
                 if (!userServiceImpl.getUserByEmail(login.getEmail()).isEmpty()) {
                     model.addAttribute("erremail", "Địa chỉ email đã được sử dụng");
                 }
-
             }
         }
         return "register";

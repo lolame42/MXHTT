@@ -77,7 +77,4 @@ public class LoginServiceImpl implements LoginService {
 
         return new org.springframework.security.core.userdetails.User(login.getUser_name(), login.getUser_password(), auth);
     }
-
-   
-
 }

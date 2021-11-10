@@ -16,8 +16,7 @@ import java.util.List;
  */
 public interface SellRepository {
     boolean addsell(Sell sell);
+    
     List<Sell> getSellByIdAuction(int i) ;
-    
-    
-    
+       
 }

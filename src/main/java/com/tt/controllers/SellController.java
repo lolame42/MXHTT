@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.tt.reponsitory.BillRepository;
+import com.tt.service.AuctionService;
 
 /**
  *
@@ -47,7 +48,7 @@ public class SellController {
     @Autowired
     BillService billService;
     @Autowired
-    BillRepository billReponsitory;
+    AuctionService auctionService;
 
     @ModelAttribute
     public void ahihi(Model model, Principal principal) {
@@ -63,7 +64,7 @@ public class SellController {
         model.addAttribute("noti", notiService.getNotibyLogin(a));
         //
         if (kind != null) {
-            List<Auction> listauction = statusService.getAuctionByIdAuction(Integer.parseInt(kind));
+            List<Auction> listauction = auctionService.getAuctionByIdAuction(Integer.parseInt(kind));
             if (!listauction.isEmpty()) {
                 Auction auction = listauction.get(0);
                 if (auction.getLogin().getId() == a.getId()) {
@@ -71,7 +72,7 @@ public class SellController {
                     if (!sell.isEmpty()) {
                         billService.addbill(auction.getLogin(), sell.get(0).getLoginsell(), (int) sell.get(0).getValue());
                     }
-                    statusService.deleteauc(auction.getId());
+                    auctionService.deleteauc(auction.getId());
 
                 }
             }

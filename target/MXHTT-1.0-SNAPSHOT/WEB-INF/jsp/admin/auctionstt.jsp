@@ -6,14 +6,13 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h1 class="text-center text-danger">Thống kê phiên đấu giá theo trạng thái</h1>
 <script src="<c:url value="/js/auction.js"/>"></script>
 
+<h1 class="text-center text-danger">Thống kê phiên đấu giá theo trạng thái</h1>
 <table class="table">
     <tr>
         <th>Trạng thái</th>
         <th>Số lượng phiên</th>
-
     </tr>
     <tr>
         <c:forEach items="${auctionstt}" var="c">
@@ -30,15 +29,13 @@
                 <c:if test= "${c[0]==3}">
                 <td>Hoàn thành</th>
                 </c:if>
-
             <td>${c[1]}</th>
-
         </tr>
-    </c:forEach>
+        </c:forEach>
     <div>
         <canvas id="myChartAuctionStt"></canvas>
     </div>
-</tr>
+    </tr>
 </table>
 <script>
     let auctionLabels = [], auctionInfo = [];

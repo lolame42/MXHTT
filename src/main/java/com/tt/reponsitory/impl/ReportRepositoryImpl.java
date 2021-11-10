@@ -32,17 +32,12 @@ public class ReportRepositoryImpl implements ReportRepository {
 
     @Override
     public boolean addreport(Report report) {
-
         Session session = sessionFactory.getObject().getCurrentSession();
-
         try {
             session.save(report);
             return true;
-        } catch (HibernateException ex) {
-            System.err.println(ex.getMessage());
-        }
+        } catch (HibernateException ex) { }
         return false;
-
     }
 
     @Override
@@ -62,7 +57,6 @@ public class ReportRepositoryImpl implements ReportRepository {
                     }
                 }
             }
-
         }
         return false;
     }
@@ -71,5 +65,4 @@ public class ReportRepositoryImpl implements ReportRepository {
     public int countrp(Login login) {
         return login.getReportbidong().size();
     }
-
 }

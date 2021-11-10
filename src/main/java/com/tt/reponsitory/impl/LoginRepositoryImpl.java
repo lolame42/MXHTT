@@ -50,6 +50,7 @@ public class LoginRepositoryImpl implements LoginRepository{
         Query q= session.createQuery(query);
         return q.getResultList();
     }
+    
     @Override
     public boolean addOrUpdate(Login login) {
         Session session=sessionFactory.getObject().getCurrentSession();
@@ -59,9 +60,6 @@ public class LoginRepositoryImpl implements LoginRepository{
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
-        return false;
-        
+        return false;      
     }
-
-    
 }

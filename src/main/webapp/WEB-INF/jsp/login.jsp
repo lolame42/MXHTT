@@ -8,7 +8,7 @@
 <c:url value="/" var="action"/>
 <c:if test="${param.error!=null}">
     <div class="alert alert-danger">
-        Đã có lỗi xảy ra
+        Thông tin tài khoản sai !!!!
     </div>
 </c:if>
 <c:if test="${param.accessDenied!=null}">
@@ -34,12 +34,10 @@
             </div>
             <div class="form-group">
                 <input type="submit" class="login text-white" value="Đăng Nhập"/>
-
             </div>
         </form>
             <hr />
-            <a href="<c:url value="/register"/>" class="nav-link text-dark text-center">Bạn chưa có tài khoản? &#128073; <b>Đăng ký ngay!!!</b></a>
-         
+            <a href="<c:url value="/register"/>" class="nav-link text-dark text-center">Bạn chưa có tài khoản? &#128073; <b>Đăng ký ngay!!!</b></a>        
     </div>
 </div>
         
